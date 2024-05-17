@@ -12,3 +12,8 @@
     #include <stdlib.h>
     #include <stdio.h>
     #include <stdbool.h>
+
+#include "./structs.h"
+
+// MOVE FUNCTIONS
+int move_player(player_t *player, int side);
