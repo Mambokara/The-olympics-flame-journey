@@ -15,12 +15,11 @@ CSFML_FLAGS    = -lcsfml-graphics -lcsfml-window -lcsfml-system -lcsfml-audio
 
 CFLAGS += -g
 
-all:	$(NAME)
+all:
+	$(MAKE) -k --shuffle -j $(shell nproc) $(NAME)
 
 $(NAME):	$(OBJ)
-		gcc -g -o $(NAME) $(OBJ) -lcsfml-graphics -lcsfml-window \
-		-lcsfml-system \
-		-lcsfml-audio -lcsfml-network -lm
+		gcc -g -o $(NAME) $(OBJ) $(CSFML_FLAGS)
 
 clean:
 	rm -f $(OBJ)
