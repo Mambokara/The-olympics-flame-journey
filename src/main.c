@@ -9,8 +9,6 @@
 #include "../include/structs.h"
 #include <SFML/Graphics/RenderWindow.h>
 #include <SFML/System/Vector2.h>
-#include <SFML/Window/VideoMode.h>
-#include <SFML/Window/WindowBase.h>
 #include <stdbool.h>
 
 static player_t *init_player(void)
