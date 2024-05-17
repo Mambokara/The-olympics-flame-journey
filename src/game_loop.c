@@ -5,7 +5,8 @@
 ** game_loop
 */
 
-#include "../include/flame.h"
+#include "../include/functions.h"
+#include "../include/structs.h"
 #include <SFML/Graphics/Color.h>
 #include <SFML/Graphics/RenderWindow.h>
 #include <SFML/Window/Event.h>

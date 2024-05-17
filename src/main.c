@@ -5,7 +5,8 @@
 ** main
 */
 
-#include "../include/flame.h"
+#include "../include/functions.h"
+#include "../include/structs.h"
 #include <SFML/Graphics/RenderWindow.h>
 #include <SFML/System/Vector2.h>
 #include <SFML/Window/VideoMode.h>
