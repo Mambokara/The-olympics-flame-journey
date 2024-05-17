@@ -12,6 +12,8 @@
     #include <stdio.h>
     #include <stdbool.h>
     #define MOVE_SPEED 7
+    #define LEFT 0
+    #define RIGHT 1
 
 typedef struct player_s {
     sfSprite *runner;
