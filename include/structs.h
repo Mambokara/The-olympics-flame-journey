@@ -12,6 +12,7 @@
     #include <stdio.h>
     #include <stdbool.h>
     #define MOVE_SPEED 7
+    #define WINDOW flame->game_win
 
 typedef struct player_s {
     sfSprite *runner;
@@ -24,4 +25,6 @@ typedef struct player_s {
 typedef struct flame_s {
     player_t *player;
     sfRenderWindow *game_win;
-} flame_t ;
+} flame_t;
+
+void game_loop(flame_t *flame);
