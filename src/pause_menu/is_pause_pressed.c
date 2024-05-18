@@ -27,7 +27,7 @@ void is_pause_pressed(flame_t *flame)
     } else
         sfText_setOutlineThickness(flame->pause_menu->main_menu, 5);
     if (is_over(flame->pause_menu->resume, mouse)) {
-        flame->status = IN_GAME;
+        flame->status = flame->buffer;
         flame->pause_menu->is_displayed = 0;
     } else
         sfText_setOutlineThickness(flame->pause_menu->resume, 5);

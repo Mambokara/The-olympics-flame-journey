@@ -13,7 +13,6 @@ void display_pause_menu(flame_t *flame)
         return;
     over_pause_text(flame);
     if (flame->pause_menu->is_displayed == 1) {
-        flame->status = PAUSE_MENU;
         sfRenderWindow_drawText(WINDOW, flame->pause_menu->resume, NULL);
         sfRenderWindow_drawText(WINDOW, flame->pause_menu->main_menu, NULL);
         sfRenderWindow_drawText(WINDOW, flame->pause_menu->quit, NULL);
