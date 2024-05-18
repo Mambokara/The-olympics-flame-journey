@@ -14,8 +14,8 @@
     #define WINDOW flame->game_win
     #define PLAYER flame->player->runner
     #define VIEW flame->view
-    #define MAP "assets/main_menu_background.jpg"
-    #define UNDERMAP "assets/back_map.png"
+    #define MAP "assets/levels/level1_map.png"
+    #define UNDERMAP "assets/levels/level1_collision.png"
     #define LVL1 "assets/map-1.png"
     #define PORTAL "assets/portal.png"
     #define WINDOW flame->game_win
