@@ -29,7 +29,7 @@ static sfSprite *setup_sprite(sfTexture *texture, sfVector2f pos)
 static player_t *init_player(void)
 {
     player_t *player = malloc(sizeof(player_t));
-    sfVector2f position = {960, 540};
+    sfVector2f position = {100, 100};
 
     player->can_move = 0;
     player->is_jumping = false;
@@ -60,7 +60,7 @@ flame_t *init_flame(void)
 {
     flame_t *flame = malloc(sizeof(flame_t));
     sfVideoMode mode = {1920, 1080, 32};
-    sfTexture *texture = get_texture(UNDERMAP);
+    sfTexture *texture = get_texture(MAP);
 
     flame->status = MAIN_MENU;
     flame->back = create_sprite((sfVector2f) {0, 0}, "./assets/background.png",
