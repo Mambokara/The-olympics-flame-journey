@@ -25,7 +25,8 @@ void close_detect(sfRenderWindow *window, sfEvent *event)
 static void update_resolution(flame_t *flame)
 {
     sfVector2u size_new = sfRenderWindow_getSize(WINDOW);
-    float target = (float)SETTINGS->resolution.x / (float)SETTINGS->resolution.y;
+    float target = (float)SETTINGS->resolution.x /
+        (float)SETTINGS->resolution.y;
     float actual = (float)size_new.x / (float)size_new.y;
 
     sfRenderWindow_setView(WINDOW, VIEW);
@@ -42,6 +43,8 @@ void analyse_events(flame_t *flame)
             case sfEvtKeyReleased:
                 close_detect(WINDOW, event);
                 break;
+            case sfEvtMouseButtonPressed:
+                is_pressed(flame);
             case sfEvtResized:
                 // update_resolution(flame);
                 break;
