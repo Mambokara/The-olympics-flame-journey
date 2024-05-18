@@ -89,6 +89,7 @@ typedef struct flame_s {
     sfRenderWindow *game_win;
     settings_t *settings;
     menu_t *menu;
+    portal_t *portal;
     pause_menu_t *pause_menu;
     sfSprite *back;
     sfClock *clock;
