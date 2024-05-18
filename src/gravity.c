@@ -33,6 +33,11 @@ void check_gravity(flame_t *flame)
         flame->player->is_jumping = 0;
         return;
     }
+    if (((color.r == 0 && color.g == 0 && color.b == 255) ||
+        (color2.r == 0 && color2.g == 0 && color2.b == 255))){
+        sfSprite_setPosition(flame->player->runner, (sfVector2f){100, 1000});
+        return;
+    }
     sfSprite_move(flame->player->runner, (sfVector2f){0, 1});
     sfText_move(flame->fps, (sfVector2f){0, 1});
     move_pause_menu(flame, (sfVector2f){0, 1});
