@@ -49,6 +49,13 @@ typedef struct menu_s {
     sfText *option;
     sfText *play;
     sfText *credit;
+    int condic;
+    int condio;
+    int condip;
+    int condiq;
+    sfText *txtcredit;
+    sfText *lucas;
+    sfRectangleShape *back;
 } menu_t;
 
 typedef struct pause_menu_s {
