@@ -18,6 +18,7 @@
     #define UNDERMAP "assets/levels/level1_collision.png"
     #define LVL1 "assets/map-1.png"
     #define PORTAL "assets/portal.png"
+    #define WMAP "assets/level_selection/level_selection.png"
     #define WINDOW flame->game_win
     #define SETTINGS flame->settings
     #define POURCENT_MAP map->size

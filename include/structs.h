@@ -21,6 +21,11 @@ enum game_status {
     LEVEL_SELECTION
 };
 
+typedef struct w_map_s {
+    sfSprite *map;
+    sfVector2f *level_position;
+} w_map_t;
+
 typedef struct player_s {
     int can_move;
     sfSprite *runner;
@@ -82,6 +87,8 @@ typedef struct level_s {
 
 typedef struct flame_s {
     enum game_status status;
+    enum game_status buffer;
+    w_map_t *world;
     sfImage *undermap;
     player_t *player;
     sfSprite *map;

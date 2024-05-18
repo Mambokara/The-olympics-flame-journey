@@ -24,9 +24,11 @@ void jump_player(flame_t *flame, float deltaTime, sfVector2f *velocity,
 /* Game loop functions */
 
 void game_loop(flame_t *flame);
-sfVector2f get_universal_mouse_position(flame_t*flame);
+sfVector2f get_universal_mouse_position(flame_t *flame);
+
 /* Init functions */
 
+w_map_t *init_level_selector(void);
 menu_t *init_menu(void);
 void display_menu(flame_t *flame);
 
