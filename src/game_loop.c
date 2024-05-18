@@ -28,6 +28,8 @@ sfVector2f get_universal_mouse_position(flame_t*flame)
 
 void close_detect(sfRenderWindow *window, sfEvent *event, flame_t *flame)
 {
+    if (flame->status != IN_GAME && flame->status != PAUSE_MENU)
+        return;
     if (event->key.code == sfKeyEscape) {
         flame->pause_menu->is_displayed =
             (flame->pause_menu->is_displayed == 0) ? 1 : 0;

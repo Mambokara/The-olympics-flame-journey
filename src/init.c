@@ -62,6 +62,7 @@ flame_t *init_flame(void)
     sfVideoMode mode = {1920, 1080, 32};
     sfTexture *texture = get_texture(UNDERMAP);
 
+    flame->status = MAIN_MENU;
     flame->back = create_sprite((sfVector2f) {0, 0}, "./assets/background.png",
         (sfVector2f) {1, 1});
     flame->player = init_player();
