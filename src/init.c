@@ -78,6 +78,7 @@ flame_t *init_flame(void)
     sfTexture *texture = get_texture(MAP);
 
     flame->status = MAIN_MENU;
+    flame->buffer = MAIN_MENU;
     flame->back = create_sprite((sfVector2f) {0, 0}, "./assets/background.png",
         (sfVector2f) {1, 1});
     flame->player = init_player();
@@ -88,6 +89,7 @@ flame_t *init_flame(void)
     flame->menu = init_menu();
     flame->portal = init_portal();
     flame->pause_menu = init_pause_menu();
+    flame->world = init_level_selector();
     flame->game_win = sfRenderWindow_create(mode, "Flame",
         sfClose | sfResize | sfDefaultStyle, NULL);
     flame->fps = create_fps();
