@@ -34,6 +34,7 @@ typedef struct portal_s {
     portal_pos_t **portal_pos;
     int nbr_portal;
 } portal_t;
+
 typedef struct settings_s {
     unsigned int mvolume;
     unsigned int svolume;
@@ -42,8 +43,17 @@ typedef struct settings_s {
     sfBool is_fullscreen;
 } settings_t;
 
+typedef struct menu_s {
+    sfText *quit;
+    sfText *option;
+    sfText *play;
+    sfText *credit;
+} menu_t;
+
 typedef struct flame_s {
     player_t *player;
     sfRenderWindow *game_win;
     settings_t *settings;
+    menu_t *menu;
+    sfSprite *back;
 } flame_t;
