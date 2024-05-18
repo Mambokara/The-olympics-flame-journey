@@ -15,6 +15,7 @@
     #define WINDOW flame->game_win
     #define SETTINGS flame->settings
     #define PLAYER flame->player
+    #define POURCENT_MAP map->size
 
 typedef struct player_s {
     sfSprite *runner;
@@ -43,6 +44,9 @@ typedef struct settings_s {
     sfBool is_fullscreen;
 } settings_t;
 
+typedef struct map_s {
+    int size;
+} map_t;
 typedef struct menu_s {
     sfText *quit;
     sfText *option;
