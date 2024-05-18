@@ -29,10 +29,12 @@ void is_pressed(flame_t *flame)
         sfText_setOutlineThickness(flame->menu->option, 5);
     if (is_over(flame->menu->play, mouse)) {
         sfText_setOutlineThickness(flame->menu->play, 10);
+        flame->player->can_move = 1;
     } else
         sfText_setOutlineThickness(flame->menu->play, 5);
     if (is_over(flame->menu->quit, mouse)) {
         sfText_setOutlineThickness(flame->menu->quit, 10);
+        closed_window(flame);
     } else
         sfText_setOutlineThickness(flame->menu->quit, 5);
 }
