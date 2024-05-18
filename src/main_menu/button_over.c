@@ -11,5 +11,5 @@
 void over_text(flame_t *flame)
 {
     sfFloatRect bound = sfText_getGlobalBounds(flame->menu->credit);
-    sfVector2i mouse = sfMouse_getPosition(WINDOW);
+    sfVector2i mouse = sfMouse_getPositionRenderWindow(WINDOW);
 }
