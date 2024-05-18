@@ -16,6 +16,7 @@
     #define SETTINGS flame->settings
     #define PLAYER flame->player
     #define POURCENT_MAP map->size
+    #define VIEW flame->view
 
 typedef struct player_s {
     sfSprite *runner;
@@ -57,6 +58,7 @@ typedef struct menu_s {
 typedef struct flame_s {
     player_t *player;
     sfRenderWindow *game_win;
+    sfView *view;
     settings_t *settings;
     menu_t *menu;
     sfSprite *back;
