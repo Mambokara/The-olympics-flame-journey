@@ -13,6 +13,8 @@
     #include <stdbool.h>
     #define MOVE_SPEED 7
     #define WINDOW flame->game_win
+    #define SETTINGS flame->settings
+    #define PLAYER flame->player
 
 typedef struct player_s {
     sfSprite *runner;
@@ -32,9 +34,16 @@ typedef struct portal_s {
     portal_pos_t **portal_pos;
     int nbr_portal;
 } portal_t;
+typedef struct settings_s {
+    unsigned int mvolume;
+    unsigned int svolume;
+    sfVector2u resolution;
+    unsigned int framerate;
+    sfBool is_fullscreen;
+} settings_t;
+
 typedef struct flame_s {
     player_t *player;
     sfRenderWindow *game_win;
+    settings_t *settings;
 } flame_t;
-
-void game_loop(flame_t *flame);
