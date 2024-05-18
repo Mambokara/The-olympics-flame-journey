@@ -25,10 +25,17 @@ void game_loop(flame_t *flame);
 
 /* Init functions */
 
+/* MENU FUNCTIONS */
+
 menu_t *init_menu(void);
+void display_menu(flame_t *flame);
+
+/* !MENU FUNCTION */
+
+void over_text(flame_t *flame);
+void is_pressed(flame_t *flame);
 settings_t *init_settings(void);
 static player_t *init_player(void);
-void display_menu(flame_t *flame);
 sfText *create_text(char *str, sfFont *font, sfVector2f position,
     unsigned int Size);
 sfSprite *create_sprite(sfVector2f pos, char *file, sfVector2f scale);
