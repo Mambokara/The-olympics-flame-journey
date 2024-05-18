@@ -22,7 +22,7 @@ void check_gravity(flame_t *flame);
 /* Game loop functions */
 
 void game_loop(flame_t *flame);
-
+sfVector2f get_universal_mouse_position(flame_t*flame);
 /* Init functions */
 
 /* MENU FUNCTIONS */

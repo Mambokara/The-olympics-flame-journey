@@ -17,6 +17,15 @@
 #include <SFML/Window/Keyboard.h>
 #include <stdio.h>
 
+sfVector2f get_universal_mouse_position(flame_t*flame)
+{
+    sfVector2i mouse = sfMouse_getPositionRenderWindow(WINDOW);
+    sfView const *view = sfRenderWindow_getView(WINDOW);
+    sfVector2u window_size = sfRenderWindow_getSize(WINDOW);
+
+    return sfRenderWindow_mapPixelToCoords(WINDOW, mouse, view);
+}
+
 void close_detect(sfRenderWindow *window, sfEvent *event, flame_t *flame)
 {
     if (event->key.code == sfKeyEscape) {
