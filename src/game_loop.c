@@ -27,7 +27,8 @@ static void update_resolution(flame_t *flame, sfEvent *event)
 {
     sfVector2u size_new = sfRenderWindow_getSize(WINDOW);
     sfVector2f center = sfView_getCenter(VIEW);
-
+    
+    return;
     sfView_setCenter(VIEW, center);
     sfRenderWindow_setView(WINDOW, VIEW);
 }
