@@ -18,14 +18,14 @@
 
 int move_player(flame_t *flame, int side);
 void check_gravity(flame_t *flame);
+void jump_player(flame_t *flame, float deltaTime, sfVector2f *velocity,
+    int jump_height);
 
 /* Game loop functions */
 
 void game_loop(flame_t *flame);
 sfVector2f get_universal_mouse_position(flame_t*flame);
 /* Init functions */
-
-/* MENU FUNCTIONS */
 
 menu_t *init_menu(void);
 void display_menu(flame_t *flame);
