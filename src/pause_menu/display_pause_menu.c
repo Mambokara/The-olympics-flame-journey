@@ -9,7 +9,7 @@
 
 void display_pause_menu(flame_t *flame)
 {
-    if (flame->status != IN_GAME && flame->status != PAUSE_MENU)
+    if (flame->status == MAIN_MENU)
         return;
     over_pause_text(flame);
     if (flame->pause_menu->is_displayed == 1) {
