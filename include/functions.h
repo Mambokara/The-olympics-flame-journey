@@ -9,21 +9,32 @@
 #pragma once
     #include <SFML/Graphics.h>
     #include <SFML/Graphics/Types.h>
+    #include "structs.h"
     #include <stdlib.h>
     #include <stdio.h>
     #include <stdbool.h>
-
-#include "./structs.h"
-
-// INIT FUNCTIONS
-
-static sfTexture *get_texture(char *str);
-static sfSprite *setup_sprite(sfTexture *texture, sfVector2f pos);
-static player_t *init_player(void);
-static sfView *init_view(player_t *player);
-flame_t *init_flame(void);
 
 // MOVE FUNCTIONS
 
 int move_player(flame_t *flame, int side);
 void check_gravity(flame_t *flame);
+
+/* Game loop functions */
+
+void game_loop(flame_t *flame);
+
+/* Init functions */
+
+menu_t *init_menu(void);
+settings_t *init_settings(void);
+static player_t *init_player(void);
+void display_menu(flame_t *flame);
+sfText *create_text(char *str, sfFont *font, sfVector2f position,
+    unsigned int Size);
+sfSprite *create_sprite(sfVector2f pos, char *file, sfVector2f scale);
+sfRectangleShape *create_rectangle(sfVector2f size, sfVector2f pos,
+    sfColor outline, sfColor fill);
+static sfTexture *get_texture(char *str);
+static sfSprite *setup_sprite(sfTexture *texture, sfVector2f pos);
+static sfView *init_view(player_t *player);
+flame_t *init_flame(void);
