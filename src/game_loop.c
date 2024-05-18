@@ -19,10 +19,23 @@
 #include <stdio.h>
 #include <time.h>
 
-void close_detect(sfRenderWindow *window, sfEvent *event)
+sfVector2f get_universal_mouse_position(flame_t*flame)
 {
-    if (event->key.code == sfKeyEscape)
-        sfRenderWindow_close(window);
+    sfVector2i mouse = sfMouse_getPositionRenderWindow(WINDOW);
+    sfView const *view = sfRenderWindow_getView(WINDOW);
+    sfVector2u window_size = sfRenderWindow_getSize(WINDOW);
+
+    return sfRenderWindow_mapPixelToCoords(WINDOW, mouse, view);
+}
+
+void close_detect(sfRenderWindow *window, sfEvent *event, flame_t *flame)
+{
+    if (flame->status != IN_GAME && flame->status != PAUSE_MENU)
+        return;
+    if (event->key.code == sfKeyEscape) {
+        flame->pause_menu->is_displayed =
+            (flame->pause_menu->is_displayed == 0) ? 1 : 0;
+    }
 }
 
 static void update_resolution(flame_t *flame, sfEvent *event)
@@ -44,10 +57,11 @@ void analyse_events(flame_t *flame)
             case sfEvtClosed:
                 sfRenderWindow_close(WINDOW);
             case sfEvtKeyReleased:
-                close_detect(WINDOW, event);
+                close_detect(WINDOW, event, flame);
                 break;
             case sfEvtMouseButtonPressed:
                 is_pressed(flame);
+                is_pause_pressed(flame);
             case sfEvtResized:
                 update_resolution(flame, event);
                 break;
@@ -58,7 +72,7 @@ void analyse_events(flame_t *flame)
 
 void update(flame_t *flame, float deltaTime, sfVector2f velocity)
 {
-    if (flame->player->can_move == 1) {
+    if (flame->player->can_move == 1 && flame->pause_menu->is_displayed == 0) {
         check_gravity(flame);
         if (sfKeyboard_isKeyPressed(sfKeySpace) &&
             flame->player->is_jumping == 0)
@@ -78,12 +92,13 @@ void draw(flame_t *flame)
     if (flame->player->can_move == 1) {
         sfRenderWindow_drawSprite(WINDOW, flame->map, NULL);
         sfRenderWindow_drawSprite(WINDOW, PLAYER, NULL);
-        sfRenderWindow_setView(WINDOW, VIEW);
     }
     if (flame->player->can_move == 0) {
         sfRenderWindow_drawSprite(WINDOW, flame->back, NULL);
         display_menu(flame);
     }
+    sfRenderWindow_setView(WINDOW, VIEW);
+    display_pause_menu(flame);
     sfRenderWindow_display(WINDOW);
     return;
 }

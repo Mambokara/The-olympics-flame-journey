@@ -13,6 +13,13 @@
     #include <stdbool.h>
     #include "macros.h"
 
+enum game_status {
+    MAIN_MENU = 0,
+    IN_GAME,
+    PAUSE_MENU,
+    LEVEL_SELECTION
+};
+
 typedef struct player_s {
     int can_move;
     sfSprite *runner;
@@ -49,9 +56,24 @@ typedef struct menu_s {
     sfText *option;
     sfText *play;
     sfText *credit;
+    int condic;
+    int condio;
+    int condip;
+    int condiq;
+    sfText *txtcredit;
+    sfText *lucas;
+    sfRectangleShape *back;
 } menu_t;
 
+typedef struct pause_menu_s {
+    int is_displayed;
+    sfText *quit;
+    sfText *resume;
+    sfText *main_menu;
+} pause_menu_t;
+
 typedef struct flame_s {
+    enum game_status status;
     sfImage *undermap;
     player_t *player;
     sfSprite *map;
@@ -59,5 +81,6 @@ typedef struct flame_s {
     sfRenderWindow *game_win;
     settings_t *settings;
     menu_t *menu;
+    pause_menu_t *pause_menu;
     sfSprite *back;
 } flame_t;

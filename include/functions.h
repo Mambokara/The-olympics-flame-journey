@@ -24,7 +24,7 @@ void jump_player(flame_t *flame, float deltaTime, sfVector2f *velocity,
 /* Game loop functions */
 
 void game_loop(flame_t *flame);
-
+sfVector2f get_universal_mouse_position(flame_t*flame);
 /* Init functions */
 
 menu_t *init_menu(void);
@@ -40,9 +40,22 @@ static player_t *init_player(void);
 sfText *create_text(char *str, sfFont *font, sfVector2f position,
     unsigned int Size);
 sfSprite *create_sprite(sfVector2f pos, char *file, sfVector2f scale);
+sfSprite *create_sprite_portal(portal_t *portal, sfVector2f pos,
+    char *file, sfVector2f scale);
 sfRectangleShape *create_rectangle(sfVector2f size, sfVector2f pos,
     sfColor outline, sfColor fill);
 static sfTexture *get_texture(char *str);
 static sfSprite *setup_sprite(sfTexture *texture, sfVector2f pos);
 static sfView *init_view(player_t *player);
+void create_portal(portal_t *portal);
+void link_portal(portal_t *portal, int src, int dest);
 flame_t *init_flame(void);
+pause_menu_t *init_pause_menu(void);
+void display_pause_menu(flame_t *flame);
+void is_pause_pressed(flame_t *flame);
+void over_pause_text(flame_t *flame);
+void move_pause_menu(flame_t *flame, sfVector2f move);
+char *my_strcat(char *dest, char *src);
+int my_strlen(char const *str);
+void display_credits(flame_t *flame);
+
