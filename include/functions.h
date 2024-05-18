@@ -40,9 +40,13 @@ static player_t *init_player(void);
 sfText *create_text(char *str, sfFont *font, sfVector2f position,
     unsigned int Size);
 sfSprite *create_sprite(sfVector2f pos, char *file, sfVector2f scale);
+sfSprite *create_sprite_portal(portal_t *portal, sfVector2f pos,
+    char *file, sfVector2f scale);
 sfRectangleShape *create_rectangle(sfVector2f size, sfVector2f pos,
     sfColor outline, sfColor fill);
 static sfTexture *get_texture(char *str);
 static sfSprite *setup_sprite(sfTexture *texture, sfVector2f pos);
 static sfView *init_view(player_t *player);
+void create_portal(portal_t *portal);
+void link_portal(portal_t *portal, int src, int dest);
 flame_t *init_flame(void);
