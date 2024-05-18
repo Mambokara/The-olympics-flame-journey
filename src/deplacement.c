@@ -7,18 +7,26 @@
 
 #include "../include/structs.h"
 #include "../include/functions.h"
-#include <SFML/Graphics/Color.h>
-#include <SFML/Graphics/Sprite.h>
-#include <SFML/Graphics/View.h>
-#include <SFML/System/Vector2.h>
-#include <stdio.h>
+
+int check_color_red(sfVector2f po, sfFloatRect re, flame_t *fla)
+{
+    sfColor colo = sfImage_getPixel(fla->undermap, (po.x), (po.y + re.height));
+    sfColor colo2 = sfImage_getPixel(fla->undermap, (po.x + re.width),
+        (po.y + re.height));
+
+    if ((colo.r == 255 && colo.g == 0 && colo.b == 0) ||
+        (colo2.r == 255 && colo2.g == 0 && colo2.b == 0)) {
+        return 1;
+    }
+    return 0;
+}
 
 void jump_player(flame_t *fla, float deltaTime, sfVector2f *velocity,
     int jump_height)
 {
     sfVector2f po = sfSprite_getPosition(fla->player->runner);
     const sfFloatRect re = sfSprite_getGlobalBounds(fla->player->runner);
-    sfColor colo;    static float pos = 0;
+    static float pos = 0;
     static int up = 0;
 
     if (fla->player->is_jumping == 1) {
@@ -29,8 +37,7 @@ void jump_player(flame_t *fla, float deltaTime, sfVector2f *velocity,
         } else
             velocity->y += 700 * deltaTime;
         po.y += velocity->y;
-        colo = sfImage_getPixel(fla->undermap, (po.x), (po.y + re.height));
-        if (colo.r == 255 && colo.g == 0 && colo.b == 0) {
+        if (check_color_red(po, re, fla) == 1) {
             up = 0;
             pos = 0;
             fla->player->is_jumping = 0;

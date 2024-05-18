@@ -16,6 +16,7 @@ void check_gravity(flame_t *flame)
 {
     sfVector2f center_view;
     sfColor color;
+    sfColor color2;
     const sfFloatRect rect = sfSprite_getGlobalBounds(flame->player->runner);
 
     if (flame->player->is_jumping == 1) {
@@ -24,7 +25,10 @@ void check_gravity(flame_t *flame)
     center_view = sfView_getCenter(flame->view);
     color = sfImage_getPixel(flame->undermap, center_view.x,
                     center_view.y + rect.height);
-    if (color.r == 255 && color.g == 0 && color.b == 0 &&
+    color2 = sfImage_getPixel(flame->undermap, center_view.x + rect.width,
+                    center_view.y + rect.height);
+    if (((color.r == 255 && color.g == 0 && color.b == 0) ||
+        (color2.r == 255 && color2.g == 0 && color2.b == 0)) &&
         sfFloatRect_contains(&rect, center_view.x, center_view.y) == sfTrue){
         flame->player->is_jumping = 0;
         return;
