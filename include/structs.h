@@ -8,6 +8,7 @@
 #pragma once
     #include <SFML/Graphics.h>
     #include <SFML/Graphics/Types.h>
+    #include <SFML/Audio.h>
     #include <stdlib.h>
     #include <stdio.h>
     #include <stdbool.h>
@@ -72,6 +73,13 @@ typedef struct pause_menu_s {
     sfText *main_menu;
 } pause_menu_t;
 
+typedef struct level_s {
+    sfSprite *ground;
+    sfSprite *background;
+    sfImage *undermap;
+    sfMusic *music;
+} level_t;
+
 typedef struct flame_s {
     enum game_status status;
     sfImage *undermap;
@@ -83,4 +91,6 @@ typedef struct flame_s {
     menu_t *menu;
     pause_menu_t *pause_menu;
     sfSprite *back;
+    sfClock *clock;
+    sfText *fps;
 } flame_t;
