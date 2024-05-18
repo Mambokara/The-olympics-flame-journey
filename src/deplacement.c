@@ -18,8 +18,7 @@ void jump_player(flame_t *fla, float deltaTime, sfVector2f *velocity,
 {
     sfVector2f po = sfSprite_getPosition(fla->player->runner);
     const sfFloatRect re = sfSprite_getGlobalBounds(fla->player->runner);
-    sfColor colo = sfImage_getPixel(fla->undermap, (po.x), (po.y + re.height));
-    static float pos = 0;
+    sfColor colo;    static float pos = 0;
     static int up = 0;
 
     if (fla->player->is_jumping == 1) {
@@ -30,6 +29,7 @@ void jump_player(flame_t *fla, float deltaTime, sfVector2f *velocity,
         } else
             velocity->y += 700 * deltaTime;
         po.y += velocity->y;
+        colo = sfImage_getPixel(fla->undermap, (po.x), (po.y + re.height));
         if (colo.r == 255 && colo.g == 0 && colo.b == 0) {
             up = 0;
             pos = 0;
