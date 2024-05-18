@@ -40,6 +40,8 @@ void update(flame_t *flame)
 void draw(flame_t *flame)
 {
     sfRenderWindow_clear(WINDOW, sfWhite);
+    sfRenderWindow_drawSprite(WINDOW, flame->back, NULL);
+    display_menu(flame);
     sfRenderWindow_display(WINDOW);
     return;
 }
