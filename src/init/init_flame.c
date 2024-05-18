@@ -24,6 +24,6 @@ flame_t *init_flame(void)
     flame->game_win = sfRenderWindow_create(mode, "Flame",
         sfClose | sfResize | sfDefaultStyle, NULL);
     flame->view = sfView_createFromRect((sfFloatRect){0, 0, 1920, 1080});
-    sfRenderWindow_setView(WINDOW, VIEW);
+   sfRenderWindow_setView(WINDOW, VIEW);
     return flame;
 }
