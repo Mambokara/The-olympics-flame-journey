@@ -56,12 +56,14 @@ int move_player(flame_t *flame, int side)
         if (check_coll_left(flame) == 1)
             return 0;
         sfSprite_move(flame->player->runner, (sfVector2f){-MOVE_SPEED, 0});
+        move_pause_menu(flame, (sfVector2f){-MOVE_SPEED, 0});
         flame->player->pos = sfSprite_getPosition(flame->player->runner);
         sfView_setCenter(flame->view, flame->player->pos);
     } else {
         if (check_coll_right(flame) == 1)
             return 0;
         sfSprite_move(flame->player->runner, (sfVector2f){MOVE_SPEED, 0});
+        move_pause_menu(flame, (sfVector2f){MOVE_SPEED, 0});
         flame->player->pos = sfSprite_getPosition(flame->player->runner);
         sfView_setCenter(flame->view, flame->player->pos);
     }

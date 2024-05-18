@@ -17,10 +17,12 @@
 #include <SFML/Window/Keyboard.h>
 #include <stdio.h>
 
-void close_detect(sfRenderWindow *window, sfEvent *event)
+void close_detect(sfRenderWindow *window, sfEvent *event, flame_t *flame)
 {
-    if (event->key.code == sfKeyEscape)
-        sfRenderWindow_close(window);
+    if (event->key.code == sfKeyEscape) {
+        flame->pause_menu->is_displayed =
+            (flame->pause_menu->is_displayed == 0) ? 1 : 0;
+    }
 }
 
 static void update_resolution(flame_t *flame, sfEvent *event)
@@ -42,10 +44,11 @@ void analyse_events(flame_t *flame)
             case sfEvtClosed:
                 sfRenderWindow_close(WINDOW);
             case sfEvtKeyReleased:
-                close_detect(WINDOW, event);
+                close_detect(WINDOW, event, flame);
                 break;
             case sfEvtMouseButtonPressed:
                 is_pressed(flame);
+                is_pause_pressed(flame);
             case sfEvtResized:
                 update_resolution(flame, event);
                 break;
@@ -56,7 +59,7 @@ void analyse_events(flame_t *flame)
 
 void update(flame_t *flame)
 {
-    if (flame->player->can_move == 1) {
+    if (flame->player->can_move == 1 && flame->pause_menu->is_displayed == 0) {
         check_gravity(flame);
         if (sfKeyboard_isKeyPressed(sfKeyQ))
             move_player(flame, LEFT);
@@ -76,6 +79,7 @@ void draw(flame_t *flame)
     }
     sfRenderWindow_drawSprite(WINDOW, flame->back, NULL);
     display_menu(flame);
+    display_pause_menu(flame);
     sfRenderWindow_display(WINDOW);
     return;
 }

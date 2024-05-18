@@ -46,3 +46,8 @@ static sfTexture *get_texture(char *str);
 static sfSprite *setup_sprite(sfTexture *texture, sfVector2f pos);
 static sfView *init_view(player_t *player);
 flame_t *init_flame(void);
+pause_menu_t *init_pause_menu(void);
+void display_pause_menu(flame_t *flame);
+void is_pause_pressed(flame_t *flame);
+void over_pause_text(flame_t *flame);
+void move_pause_menu(flame_t *flame, sfVector2f move);

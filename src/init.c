@@ -69,6 +69,7 @@ flame_t *init_flame(void)
     flame->undermap = init_undermap();
     flame->settings = init_settings();
     flame->menu = init_menu();
+    flame->pause_menu = init_pause_menu();
     flame->game_win = sfRenderWindow_create(mode, "Flame",
         sfClose | sfResize | sfDefaultStyle, NULL);
     return flame;
