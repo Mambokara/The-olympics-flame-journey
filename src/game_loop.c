@@ -15,6 +15,7 @@
 #include <SFML/System/Vector2.h>
 #include <SFML/Window/Event.h>
 #include <SFML/Window/Keyboard.h>
+#include <stdio.h>
 
 void close_detect(sfRenderWindow *window, sfEvent *event)
 {
@@ -22,13 +23,13 @@ void close_detect(sfRenderWindow *window, sfEvent *event)
         sfRenderWindow_close(window);
 }
 
-static void update_resolution(flame_t *flame)
+static void update_resolution(flame_t *flame, sfEvent *event)
 {
     sfVector2u size_new = sfRenderWindow_getSize(WINDOW);
-    float target = (float)SETTINGS->resolution.x /
-        (float)SETTINGS->resolution.y;
-    float actual = (float)size_new.x / (float)size_new.y;
-
+    sfVector2f center = sfView_getCenter(VIEW);
+    
+    return;
+    sfView_setCenter(VIEW, center);
     sfRenderWindow_setView(WINDOW, VIEW);
 }
 
@@ -46,7 +47,7 @@ void analyse_events(flame_t *flame)
             case sfEvtMouseButtonPressed:
                 is_pressed(flame);
             case sfEvtResized:
-                // update_resolution(flame);
+                update_resolution(flame, event);
                 break;
             default:
                 break;
