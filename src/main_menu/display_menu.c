@@ -15,4 +15,8 @@ void display_menu(flame_t *flame)
     sfRenderWindow_drawText(WINDOW, flame->menu->option, NULL);
     sfRenderWindow_drawText(WINDOW, flame->menu->play, NULL);
     sfRenderWindow_drawText(WINDOW, flame->menu->quit, NULL);
+    if (flame->menu->condic == 1)
+       display_credits(flame);
+    if (flame->menu->condiq == 1)
+        closed_window(flame);
 }
