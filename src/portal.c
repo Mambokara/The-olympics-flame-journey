@@ -67,5 +67,4 @@ void get_portal_in_struct(portal_t *portal)
 void display_portal(flame_t *flame)
 {
     sfRenderWindow_drawSprite(WINDOW, flame->player->runner, NULL);
-    sfSprite_setPosition();
 }
