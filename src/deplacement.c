@@ -7,6 +7,8 @@
 
 #include "../include/structs.h"
 #include "../include/functions.h"
+#include <SFML/Graphics/Sprite.h>
+#include <SFML/Graphics/Types.h>
 
 int check_color_red(sfVector2f po, sfFloatRect re, flame_t *fla)
 {
@@ -16,6 +18,11 @@ int check_color_red(sfVector2f po, sfFloatRect re, flame_t *fla)
 
     if ((colo.r == 255 && colo.g == 0 && colo.b == 0) ||
         (colo2.r == 255 && colo2.g == 0 && colo2.b == 0)) {
+        return 1;
+    }
+    if ((colo.r == 0 && colo.g == 0 && colo.b == 255) ||
+        (colo2.r == 0 && colo2.g == 0 && colo2.b == 255)) {
+        sfSprite_setPosition(fla->player->runner, (sfVector2f){100, 1000});
         return 1;
     }
     return 0;
@@ -67,6 +74,11 @@ int check_coll_left(flame_t *flame)
         sfFloatRect_contains(&rect, center_view.x, center_view.y) == sfTrue){
         return 1;
     }
+    if (((color.r == 0 && color.g == 0 && color.b == 255) ||
+        (color2.r == 0 && color2.g == 0 && color2.b == 255))){
+        sfSprite_setPosition(flame->player->runner, (sfVector2f){100, 1000});
+        return 1;
+    }
     return 0;
 }
 
@@ -83,8 +95,12 @@ int check_coll_right(flame_t *flame)
     color2 = sfImage_getPixel(flame->undermap, center_view.x + rect.width,
                     center_view.y);
     if (((color.r == 255 && color.g == 0 && color.b == 0) ||
-        (color2.r == 255 && color.g == 0 && color.b == 0)) &&
-        sfFloatRect_contains(&rect, center_view.x, center_view.y) == sfTrue){
+        (color2.r == 255 && color2.g == 0 && color2.b == 0))){
+        return 1;
+    }
+    if (((color.r == 0 && color.g == 0 && color.b == 255) ||
+        (color2.r == 0 && color2.g == 0 && color2.b == 255))){
+        sfSprite_setPosition(flame->player->runner, (sfVector2f){100, 1000});
         return 1;
     }
     return 0;
