@@ -8,7 +8,38 @@
 #include "../include/structs.h"
 #include "../include/functions.h"
 #include <SFML/Graphics/Color.h>
+#include <SFML/Graphics/Sprite.h>
 #include <SFML/Graphics/View.h>
+#include <SFML/System/Vector2.h>
+#include <stdio.h>
+
+void jump_player(flame_t *fla, float deltaTime, sfVector2f *velocity,
+    int jump_height)
+{
+    sfVector2f po = sfSprite_getPosition(fla->player->runner);
+    const sfFloatRect re = sfSprite_getGlobalBounds(fla->player->runner);
+    sfColor colo = sfImage_getPixel(fla->undermap, (po.x), (po.y + re.height));
+    static float pos = 0;
+    static int up = 0;
+
+    if (fla->player->is_jumping == 1) {
+        if (up != 1) {
+            velocity->y -= 700 * deltaTime;
+            pos -= 700 * deltaTime;
+            up = (pos <= jump_height) ? 1 : 0;
+        } else
+            velocity->y += 700 * deltaTime;
+        po.y += velocity->y;
+        if (colo.r == 255 && colo.g == 0 && colo.b == 0) {
+            up = 0;
+            pos = 0;
+            fla->player->is_jumping = 0;
+            velocity->y = 0;
+        }
+    }
+    sfSprite_move(fla->player->runner, (sfVector2f){0, velocity->y});
+    sfView_setCenter(fla->view, sfSprite_getPosition(fla->player->runner));
+}
 
 int check_coll_left(flame_t *flame)
 {
