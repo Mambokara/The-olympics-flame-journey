@@ -49,9 +49,9 @@ void analyse_events(flame_t *flame)
             case sfEvtMouseButtonPressed:
                 is_pressed(flame);
                 is_pause_pressed(flame);
-            case sfEvtResized:
-                update_resolution(flame, event);
-                break;
+            // case sfEvtResized:
+            //     update_resolution(flame, event);
+            //     break;
             default:
                 break;
         }
@@ -75,8 +75,8 @@ void draw(flame_t *flame)
     if (flame->player->can_move == 1) {
         sfRenderWindow_drawSprite(WINDOW, flame->map, NULL);
         sfRenderWindow_drawSprite(WINDOW, PLAYER, NULL);
-        sfRenderWindow_setView(WINDOW, VIEW);
     }
+    sfRenderWindow_setView(WINDOW, VIEW);
     sfRenderWindow_drawSprite(WINDOW, flame->back, NULL);
     display_menu(flame);
     display_pause_menu(flame);

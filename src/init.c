@@ -44,6 +44,7 @@ static sfView *init_view(player_t *player)
 {
     sfView *view = sfView_create();
 
+    sfView_setSize(view, (sfVector2f){1920, 1080});
     sfView_setCenter(view, sfSprite_getPosition(player->runner));
     return view;
 }
@@ -72,5 +73,6 @@ flame_t *init_flame(void)
     flame->pause_menu = init_pause_menu();
     flame->game_win = sfRenderWindow_create(mode, "Flame",
         sfClose | sfResize | sfDefaultStyle, NULL);
+    sfRenderWindow_setView(WINDOW, VIEW);
     return flame;
 }
