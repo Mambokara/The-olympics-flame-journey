@@ -17,12 +17,13 @@
 
 // INIT FUNCTIONS
 
-static sfTexture *get_texture(void);
+static sfTexture *get_texture(char *str);
 static sfSprite *setup_sprite(sfTexture *texture, sfVector2f pos);
 static player_t *init_player(void);
 static sfView *init_view(player_t *player);
-static flame_t *init_flame(void);
+flame_t *init_flame(void);
 
 // MOVE FUNCTIONS
 
 int move_player(flame_t *flame, int side);
+void check_gravity(flame_t *flame);
