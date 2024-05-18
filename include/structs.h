@@ -11,12 +11,7 @@
     #include <stdlib.h>
     #include <stdio.h>
     #include <stdbool.h>
-    #define MOVE_SPEED 0.5
-    #define LEFT 0
-    #define RIGHT 1
-    #define WINDOW flame->game_win
-    #define PLAYER flame->player->runner
-    #define VIEW flame->view
+    #include "macros.h"
 
 typedef struct player_s {
     sfSprite *runner;
@@ -27,7 +22,9 @@ typedef struct player_s {
 } player_t;
 
 typedef struct flame_s {
+    sfImage *undermap;
     player_t *player;
+    sfSprite *map;
     sfView *view;
     sfRenderWindow *game_win;
 } flame_t;
