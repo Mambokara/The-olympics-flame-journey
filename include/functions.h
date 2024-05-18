@@ -32,6 +32,7 @@ void display_menu(flame_t *flame);
 
 /* !MENU FUNCTION */
 
+void closed_window(flame_t *flame);
 void over_text(flame_t *flame);
 void is_pressed(flame_t *flame);
 settings_t *init_settings(void);
