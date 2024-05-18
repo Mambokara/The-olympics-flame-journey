@@ -17,8 +17,19 @@
 #include <SFML/Window/Keyboard.h>
 #include <stdio.h>
 
+sfVector2f get_universal_mouse_position(flame_t*flame)
+{
+    sfVector2i mouse = sfMouse_getPositionRenderWindow(WINDOW);
+    sfView const *view = sfRenderWindow_getView(WINDOW);
+    sfVector2u window_size = sfRenderWindow_getSize(WINDOW);
+
+    return sfRenderWindow_mapPixelToCoords(WINDOW, mouse, view);
+}
+
 void close_detect(sfRenderWindow *window, sfEvent *event, flame_t *flame)
 {
+    if (flame->status != IN_GAME && flame->status != PAUSE_MENU)
+        return;
     if (event->key.code == sfKeyEscape) {
         flame->pause_menu->is_displayed =
             (flame->pause_menu->is_displayed == 0) ? 1 : 0;
@@ -75,8 +86,8 @@ void draw(flame_t *flame)
     if (flame->player->can_move == 1) {
         sfRenderWindow_drawSprite(WINDOW, flame->map, NULL);
         sfRenderWindow_drawSprite(WINDOW, PLAYER, NULL);
-        sfRenderWindow_setView(WINDOW, VIEW);
     }
+    sfRenderWindow_setView(WINDOW, VIEW);
     sfRenderWindow_drawSprite(WINDOW, flame->back, NULL);
     display_menu(flame);
     display_pause_menu(flame);
