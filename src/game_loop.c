@@ -27,9 +27,10 @@ static void update_resolution(flame_t *flame)
     sfVector2u size_new = sfRenderWindow_getSize(WINDOW);
     float scalex = (float)size_new.x / SETTINGS->resolution.x;
     float scaley = (float)size_new.y / SETTINGS->resolution.y;
-
-    sfVector2f scaled = {SETTINGS->resolution.x * scalex, SETTINGS->resolution.y * scaley};
-    sfVector2f center = {(scaled.x + SETTINGS->resolution.x) / 2, (scaled.y + SETTINGS->resolution.y) / 2};
+    sfVector2f scaled = {SETTINGS->resolution.x * scalex,
+        SETTINGS->resolution.y * scaley};
+    sfVector2f center = {(scaled.x + SETTINGS->resolution.x) / 2, (scaled.y
+        + SETTINGS->resolution.y) / 2};
 
     sfView_setCenter(VIEW, center);
     sfView_setSize(VIEW, scaled);
@@ -60,7 +61,7 @@ void update(flame_t *flame)
     return;
 }
 
-void draw(flame_t *flame) 
+void draw(flame_t *flame)
 {
     sfRenderWindow_clear(WINDOW, sfWhite);
     sfRenderWindow_drawSprite(WINDOW, flame->back, NULL);
@@ -70,7 +71,7 @@ void draw(flame_t *flame)
 }
 
 void game_loop(flame_t *flame)
-{ 
+{
     while (sfRenderWindow_isOpen(WINDOW)) {
         analyse_events(flame);
         update(flame);

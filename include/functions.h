@@ -31,4 +31,3 @@ sfText *create_text(char *str, sfFont *font, sfVector2f position,
 sfSprite *create_sprite(sfVector2f pos, char *file, sfVector2f scale);
 sfRectangleShape *create_rectangle(sfVector2f size, sfVector2f pos,
     sfColor outline, sfColor fill);
-

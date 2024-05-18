@@ -19,16 +19,18 @@ int coord_portal(player_t *player, portal_t *portal)
         return 0;
     }
 }
+
 void attribute_number_portal(portal_t *portal)
 {
-   for (int i = 0; i < portal->nbr_portal; i++) {
-    portal->portal_pos[i]->id = i;
-   }
+    for (int i = 0; i < portal->nbr_portal; i++) {
+        portal->portal_pos[i]->id = i;
+    }
 }
 
 void teleport(player_t *player, portal_t *portal, int i)
 {
-    if (sfKeyboard_isKeyPressed(sfKeyF) == sfTrue && coord_portal(player, portal) == 1) {
+    if (sfKeyboard_isKeyPressed(sfKeyF) == sfTrue &&
+        coord_portal(player, portal) == 1) {
         player->pos.x = portal->portal_pos[i]->pos_tp.x;
         player->pos.y = portal->portal_pos[i]->pos_tp.y;
     }
