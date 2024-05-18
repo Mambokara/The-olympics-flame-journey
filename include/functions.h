@@ -55,3 +55,7 @@ void display_pause_menu(flame_t *flame);
 void is_pause_pressed(flame_t *flame);
 void over_pause_text(flame_t *flame);
 void move_pause_menu(flame_t *flame, sfVector2f move);
+char *my_strcat(char *dest, char *src);
+int my_strlen(char const *str);
+void display_credits(flame_t *flame);
+
