@@ -34,12 +34,18 @@ void analyse_events(flame_t *flame)
 
 void update(flame_t *flame)
 {
+    if (sfKeyboard_isKeyPressed(sfKeyQ))
+        move_player(flame, LEFT);
+    if (sfKeyboard_isKeyPressed(sfKeyD))
+        move_player(flame, RIGHT);
     return;
 }
 
 void draw(flame_t *flame)
 {
     sfRenderWindow_clear(WINDOW, sfWhite);
+    sfRenderWindow_drawSprite(WINDOW, PLAYER , NULL);
+    sfRenderWindow_setView(WINDOW, VIEW);
     sfRenderWindow_display(WINDOW);
     return;
 }
