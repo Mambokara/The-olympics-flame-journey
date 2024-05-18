@@ -6,6 +6,7 @@
 */
 #include "../include/structs.h"
 #include <SFML/Graphics.h>
+#include "../include/functions.h"
 
 int coord_portal(player_t *player, portal_t *portal)
 {
@@ -34,4 +35,18 @@ void teleport(player_t *player, portal_t *portal, int i)
         player->pos.x = portal->portal_pos[i]->pos_tp.x;
         player->pos.y = portal->portal_pos[i]->pos_tp.y;
     }
+}
+
+void create_portal(portal_t *portal)
+{
+    sfVector2f test = {0.0};
+    sfVector2f test2 = {2.2};
+
+    create_sprite_portal(portal, test , PORTAL, test2);
+    create_sprite_portal(portal, test , PORTAL, test2);
+}
+
+void link_portal(portal_t *portal, int src, int dest)
+{
+    portal->portal_pos[src]->pos_tp = portal->portal_pos[dest]->pos;
 }
