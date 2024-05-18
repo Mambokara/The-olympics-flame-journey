@@ -10,6 +10,7 @@
 
 void display_menu(flame_t *flame)
 {
+    over_text(flame);
     sfRenderWindow_drawText(WINDOW, flame->menu->credit, NULL);
     sfRenderWindow_drawText(WINDOW, flame->menu->option, NULL);
     sfRenderWindow_drawText(WINDOW, flame->menu->play, NULL);
