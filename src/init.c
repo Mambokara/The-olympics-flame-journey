@@ -8,6 +8,7 @@
 #include "../include/structs.h"
 #include "../include/functions.h"
 #include <SFML/Graphics/Types.h>
+#include <SFML/System/Vector2.h>
 
 static sfTexture *get_texture(char *str)
 {
@@ -29,7 +30,7 @@ static sfSprite *setup_sprite(sfTexture *texture, sfVector2f pos)
 static player_t *init_player(void)
 {
     player_t *player = malloc(sizeof(player_t));
-    sfVector2f position = {100, 100};
+    sfVector2f position = {100, 1000};
 
     player->can_move = 0;
     player->is_jumping = false;
@@ -45,7 +46,7 @@ static sfView *init_view(player_t *player)
     sfView *view = sfView_create();
 
     sfView_setSize(view, (sfVector2f){1920, 1080});
-    sfView_setCenter(view, sfSprite_getPosition(player->runner));
+    sfView_setCenter(view, (sfVector2f){960, 540});
     return view;
 }
 
