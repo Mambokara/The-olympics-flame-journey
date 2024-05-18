@@ -51,6 +51,13 @@ typedef struct menu_s {
     sfText *credit;
 } menu_t;
 
+typedef struct pause_menu_s {
+    int is_displayed;
+    sfText *quit;
+    sfText *resume;
+    sfText *main_menu;
+} pause_menu_t;
+
 typedef struct flame_s {
     sfImage *undermap;
     player_t *player;
@@ -59,5 +66,6 @@ typedef struct flame_s {
     sfRenderWindow *game_win;
     settings_t *settings;
     menu_t *menu;
+    pause_menu_t *pause_menu;
     sfSprite *back;
 } flame_t;
