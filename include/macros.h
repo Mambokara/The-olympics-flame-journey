@@ -16,3 +16,7 @@
     #define VIEW flame->view
     #define MAP "assets/main_menu_background.jpg"
     #define UNDERMAP "assets/back_map.png"
+    #define WINDOW flame->game_win
+    #define SETTINGS flame->settings
+    #define POURCENT_MAP map->size
+    #define VIEW flame->view
