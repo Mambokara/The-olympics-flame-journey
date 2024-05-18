@@ -49,6 +49,20 @@ static sfView *init_view(player_t *player)
     return view;
 }
 
+static sfText *create_fps(void)
+{
+    sfText *text = sfText_create();
+    sfFont *font = sfFont_createFromFile("./assets/Pixellari.ttf");
+
+    sfText_setFont(text, font);
+    sfText_setCharacterSize(text, 30);
+    sfText_setFillColor(text, sfWhite);
+    sfText_setOutlineThickness(text, 5);
+    sfText_setString(text, "0 FPS");
+    sfText_setPosition(text, (sfVector2f){0, 1040});
+    return text;
+}
+
 sfImage *init_undermap(void)
 {
     sfImage *undermap = sfImage_createFromFile(UNDERMAP);
@@ -74,6 +88,7 @@ flame_t *init_flame(void)
     flame->pause_menu = init_pause_menu();
     flame->game_win = sfRenderWindow_create(mode, "Flame",
         sfClose | sfResize | sfDefaultStyle, NULL);
+    flame->fps = create_fps();
     sfRenderWindow_setView(WINDOW, VIEW);
     return flame;
 }

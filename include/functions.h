@@ -58,4 +58,7 @@ void move_pause_menu(flame_t *flame, sfVector2f move);
 char *my_strcat(char *dest, char *src);
 int my_strlen(char const *str);
 void display_credits(flame_t *flame);
+void display_framerate(flame_t *flame);
+char *my_revstr(char *str);
+char *nbr_to_str(int nb);
 

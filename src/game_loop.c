@@ -99,6 +99,7 @@ void draw(flame_t *flame)
     }
     sfRenderWindow_setView(WINDOW, VIEW);
     display_pause_menu(flame);
+    display_framerate(flame);
     sfRenderWindow_display(WINDOW);
     return;
 }
@@ -108,6 +109,7 @@ void game_loop(flame_t *flame)
     sfClock* clock = sfClock_create();
     float deltaTime = 0;
     sfVector2f velocity = {0.0f, 0.0f};
+    flame->clock = sfClock_create();
 
     while (sfRenderWindow_isOpen(WINDOW)) {
         deltaTime = sfTime_asSeconds(sfClock_restart(clock));

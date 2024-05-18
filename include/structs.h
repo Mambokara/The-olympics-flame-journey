@@ -91,4 +91,6 @@ typedef struct flame_s {
     menu_t *menu;
     pause_menu_t *pause_menu;
     sfSprite *back;
+    sfClock *clock;
+    sfText *fps;
 } flame_t;
