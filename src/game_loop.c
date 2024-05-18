@@ -47,7 +47,7 @@ void analyse_events(flame_t *flame)
                 close_detect(WINDOW, event, flame);
                 break;
             case sfEvtMouseButtonPressed:
-                is_pressed(flame);
+                menu_pressed(flame);
                 is_pause_pressed(flame);
             // case sfEvtResized:
             //     update_resolution(flame, event);

@@ -10,7 +10,7 @@
 
 char *make_str(void)
 {
-   char *str = "Developers:\n- Ewan.schaffhauser@epitech.eu\n\n";
+   char *str = "Developers :\n- Ewan.schaffhauser@epitech.eu\n\n";
     str = my_strcat(str, "- Corentin.bergaentzle@epitech.eu\n\n");
     str = my_strcat(str, "- Nathan.callegari@epitech.eu\n\n");
     str = my_strcat(str, "- Matteo.milin@epitech.eu\n\n");
@@ -19,11 +19,25 @@ char *make_str(void)
     return str;
 }
 
+option_t *init_option(sfFont *font)
+{
+    option_t *opt = malloc(sizeof(option_t));
+
+    opt->back = create_rectangle((sfVector2f) {600, 900}, (sfVector2f) {650, 100}, sfBlack, sfColor_fromRGB(80, 80, 80));
+    opt->fps = create_text("fps :", font,(sfVector2f) {720, 120}, 50);
+    opt->fps30 = create_text("30", font,(sfVector2f) {900, 120}, 50);
+    opt->fps60 = create_text("60", font,(sfVector2f) {1000, 120}, 50);
+    opt->fps90 = create_text("90", font,(sfVector2f) {1100, 120}, 50);
+
+    return opt;
+}
+
 menu_t *init_menu(void)
 {
     menu_t *menu = malloc(sizeof(menu_t));
     sfFont *font = sfFont_createFromFile("./assets/Pixellari.ttf");
 
+    menu->opt = init_option(font);
     menu->condic = 0;
     menu->condio = 0;
     menu->condip = 0;

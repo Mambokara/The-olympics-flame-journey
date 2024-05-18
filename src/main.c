@@ -19,6 +19,7 @@ int main(void)
 {
     flame_t *flame = init_flame();
 
+    sfRenderWindow_setFramerateLimit(WINDOW, flame->frame);
     game_loop(flame);
     return 0;
 }

@@ -19,4 +19,8 @@ void display_menu(flame_t *flame)
        display_credits(flame);
     if (flame->menu->condiq == 1)
         closed_window(flame);
+    if (flame->menu->condio == 1) {
+        button_option(flame);
+        display_option(flame);
+    }
 }

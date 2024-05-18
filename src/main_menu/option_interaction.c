@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2024
 ** Jamalakitou
 ** File description:
-** button_over
+** option_interaction
 */
 
 #include "../../include/functions.h"
@@ -26,24 +26,28 @@ static void change_color(sfText *text, bool condi)
     }
 }
 
-void over_text(flame_t *flame)
+void button_fps(flame_t *flame)
 {
     sfVector2i mouse = sfMouse_getPositionRenderWindow(WINDOW);
 
-    if (is_over(flame->menu->credit, mouse))
-        change_color(flame->menu->credit, true);
-    else
-        change_color(flame->menu->credit, false);
-    if (is_over(flame->menu->option, mouse))
-        change_color(flame->menu->option, true);
-    else
-        change_color(flame->menu->option, false);
-    if (is_over(flame->menu->play, mouse))
-        change_color(flame->menu->play, true);
-    else
-        change_color(flame->menu->play, false);
-    if (is_over(flame->menu->quit, mouse))
-        change_color(flame->menu->quit, true);
-    else
-        change_color(flame->menu->quit, false);
+    if (is_over(flame->menu->opt->fps30, mouse)) {
+        change_color(flame->menu->opt->fps30, true);
+    } else {
+        change_color(flame->menu->opt->fps30, false);
+    }
+    if (is_over(flame->menu->opt->fps60, mouse)) {
+        change_color(flame->menu->opt->fps60, true);
+    } else {
+        change_color(flame->menu->opt->fps60, false);
+    }
+    if (is_over(flame->menu->opt->fps90, mouse)) {
+        change_color(flame->menu->opt->fps90, true);
+    } else {
+        change_color(flame->menu->opt->fps90, false);
+    }
+}
+
+void button_option(flame_t *flame)
+{
+    button_fps(flame);
 }

@@ -44,7 +44,17 @@ typedef struct settings_s {
 typedef struct map_s {
     int size;
 } map_t;
+
+typedef struct option_s {
+    sfRectangleShape *back;
+    sfText *fps;
+    sfText *fps30;
+    sfText *fps60;
+    sfText *fps90;
+} option_t;
+
 typedef struct menu_s {
+    option_t *opt;
     sfText *quit;
     sfText *option;
     sfText *play;
@@ -75,4 +85,5 @@ typedef struct flame_s {
     menu_t *menu;
     pause_menu_t *pause_menu;
     sfSprite *back;
+    int frame;
 } flame_t;

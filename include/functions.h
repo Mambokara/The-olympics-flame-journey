@@ -58,4 +58,6 @@ void move_pause_menu(flame_t *flame, sfVector2f move);
 char *my_strcat(char *dest, char *src);
 int my_strlen(char const *str);
 void display_credits(flame_t *flame);
-
+void display_option(flame_t *flame);
+void button_option(flame_t *flame);
+void menu_pressed(flame_t *flame);
