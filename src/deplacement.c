@@ -38,6 +38,8 @@ void jump_player(flame_t *fla, float deltaTime, sfVector2f *velocity,
         }
     }
     sfSprite_move(fla->player->runner, (sfVector2f){0, velocity->y});
+    sfText_move(fla->fps, (sfVector2f){0, velocity->y});
+    move_pause_menu(fla, (sfVector2f){0, velocity->y});
     sfView_setCenter(fla->view, sfSprite_getPosition(fla->player->runner));
 }
 
@@ -88,6 +90,7 @@ int move_player(flame_t *flame, int side)
             return 0;
         sfSprite_move(flame->player->runner, (sfVector2f){-MOVE_SPEED, 0});
         move_pause_menu(flame, (sfVector2f){-MOVE_SPEED, 0});
+        sfText_move(flame->fps, (sfVector2f){-MOVE_SPEED, 0});
         flame->player->pos = sfSprite_getPosition(flame->player->runner);
         sfView_setCenter(flame->view, flame->player->pos);
     } else {
@@ -95,6 +98,7 @@ int move_player(flame_t *flame, int side)
             return 0;
         sfSprite_move(flame->player->runner, (sfVector2f){MOVE_SPEED, 0});
         move_pause_menu(flame, (sfVector2f){MOVE_SPEED, 0});
+        sfText_move(flame->fps, (sfVector2f){MOVE_SPEED, 0});
         flame->player->pos = sfSprite_getPosition(flame->player->runner);
         sfView_setCenter(flame->view, flame->player->pos);
     }

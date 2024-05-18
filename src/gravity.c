@@ -30,6 +30,7 @@ void check_gravity(flame_t *flame)
         return;
     }
     sfSprite_move(flame->player->runner, (sfVector2f){0, 1});
+    sfText_move(flame->fps, (sfVector2f){0, 1});
     move_pause_menu(flame, (sfVector2f){0, 1});
     sfView_move(flame->view, (sfVector2f){0, 1});
 }
