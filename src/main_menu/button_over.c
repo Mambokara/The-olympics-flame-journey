@@ -8,14 +8,14 @@
 #include "../../include/functions.h"
 #include "../../include/structs.h"
 
-static sfBool is_over(sfText *text, sfVector2i mouse)
+static sfBool is_over(sfText *text, sfVector2f mouse)
 {
     const sfFloatRect frect = sfText_getGlobalBounds(text);
 
     return (sfFloatRect_contains(&frect, mouse.x, mouse.y));
 }
 
-static sfBool is_overrect(sfRectangleShape *rect, sfVector2i mouse)
+static sfBool is_overrect(sfRectangleShape *rect, sfVector2f mouse)
 {
     const sfFloatRect frect = sfRectangleShape_getGlobalBounds(rect);
 
@@ -25,7 +25,7 @@ static sfBool is_overrect(sfRectangleShape *rect, sfVector2i mouse)
 
 void is_pressed(flame_t *flame)
 {
-    sfVector2i mouse = sfMouse_getPositionRenderWindow(WINDOW);
+    sfVector2f mouse = get_universal_mouse_position(flame);
 
     if (is_over(flame->menu->credit, mouse)) {
         flame->menu->condic = 1;
@@ -64,7 +64,7 @@ static void change_color(sfText *text, bool condi)
 
 void over_text(flame_t *flame)
 {
-    sfVector2i mouse = sfMouse_getPositionRenderWindow(WINDOW);
+    sfVector2f mouse = get_universal_mouse_position(flame); 
 
     if (is_over(flame->menu->credit, mouse))
         change_color(flame->menu->credit, true);
