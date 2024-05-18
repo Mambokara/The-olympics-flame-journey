@@ -22,6 +22,16 @@ typedef struct player_s {
     bool is_jumping;
 } player_t;
 
+typedef struct portal_pos_s {
+    sfVector2f pos;
+    sfVector2f pos_tp;
+    int id;
+} portal_pos_t;
+
+typedef struct portal_s {
+    portal_pos_t **portal_pos;
+    int nbr_portal;
+} portal_t;
 typedef struct flame_s {
     player_t *player;
     sfRenderWindow *game_win;
