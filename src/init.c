@@ -31,6 +31,7 @@ static player_t *init_player(void)
     player_t *player = malloc(sizeof(player_t));
     sfVector2f position = {960, 540};
 
+    player->can_move = 0;
     player->is_jumping = false;
     player->is_reversed = false;
     player->pos = position;
@@ -60,11 +61,17 @@ flame_t *init_flame(void)
     sfVideoMode mode = {1920, 1080, 32};
     sfTexture *texture = get_texture(UNDERMAP);
 
+    flame->back = create_sprite((sfVector2f) {0, 0}, "./assets/background.png",
+        (sfVector2f) {1, 1});
     flame->player = init_player();
     flame->view = init_view(flame->player);
     flame->map = setup_sprite(texture, (sfVector2f){0, 0});
     flame->undermap = init_undermap();
+    flame->settings = init_settings();
+    flame->menu = init_menu();
     flame->game_win = sfRenderWindow_create(mode, "Flame",
         sfClose | sfResize | sfDefaultStyle, NULL);
+    flame->view = sfView_createFromRect((sfFloatRect){0, 0, 1920, 1080});
+   sfRenderWindow_setView(WINDOW, VIEW);
     return flame;
 }
