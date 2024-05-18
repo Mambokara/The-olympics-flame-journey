@@ -15,5 +15,14 @@
 
 #include "./structs.h"
 
+// INIT FUNCTIONS
+
+static sfTexture *get_texture(void);
+static sfSprite *setup_sprite(sfTexture *texture, sfVector2f pos);
+static player_t *init_player(void);
+static sfView *init_view(player_t *player);
+static flame_t *init_flame(void);
+
 // MOVE FUNCTIONS
-int move_player(player_t *player, int side);
+
+int move_player(flame_t *flame, int side);
