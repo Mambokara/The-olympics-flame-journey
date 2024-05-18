@@ -4,7 +4,7 @@
 ** File description:
 ** pourcent_map
 */
-#include "../../include/structs.h"
+#include "../include/structs.h"
 
 int get_pourcent_map(player_t *player, map_t *map)
 {
