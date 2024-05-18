@@ -20,8 +20,8 @@ sfSprite *create_sprite(sfVector2f pos, char *file, sfVector2f scale)
     return sprite;
 }
 
-
-sfSprite *create_sprite_portal(portal_t *portal, sfVector2f pos, char *file, sfVector2f scale)
+sfSprite *create_sprite_portal(portal_t *portal, sfVector2f pos,
+    char *file, sfVector2f scale)
 {
     static int counter = 0;
     sfTexture *texture = sfTexture_createFromFile(file, NULL);

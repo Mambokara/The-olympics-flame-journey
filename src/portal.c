@@ -42,8 +42,8 @@ void create_portal(portal_t *portal)
     sfVector2f test = {0.0};
     sfVector2f test2 = {2.2};
 
-    create_sprite_portal(portal, test , PORTAL, test2);
-    create_sprite_portal(portal, test , PORTAL, test2);
+    create_sprite_portal(portal, test, PORTAL, test2);
+    create_sprite_portal(portal, test, PORTAL, test2);
 }
 
 void link_portal(portal_t *portal, int src, int dest)
