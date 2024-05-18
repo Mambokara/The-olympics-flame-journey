@@ -30,11 +30,16 @@ sfVector2f get_universal_mouse_position(flame_t*flame)
 
 void close_detect(sfRenderWindow *window, sfEvent *event, flame_t *flame)
 {
-    if (flame->status != IN_GAME && flame->status != PAUSE_MENU)
+    if (flame->status == MAIN_MENU)
         return;
     if (event->key.code == sfKeyEscape) {
-        flame->pause_menu->is_displayed =
-            (flame->pause_menu->is_displayed == 0) ? 1 : 0;
+        if (flame->pause_menu->is_displayed == 0) {
+            flame->pause_menu->is_displayed = 1;
+            flame->buffer = flame->status;
+        } else {
+            flame->pause_menu->is_displayed = 0;
+            flame->status = flame->buffer;
+        }
     }
 }
 
@@ -72,6 +77,8 @@ void analyse_events(flame_t *flame)
 
 void update(flame_t *flame, float deltaTime, sfVector2f velocity)
 {
+    if (flame->status != IN_GAME)
+        return;
     if (flame->player->can_move == 1 && flame->pause_menu->is_displayed == 0) {
         check_gravity(flame);
         if (sfKeyboard_isKeyPressed(sfKeySpace) &&
@@ -89,14 +96,17 @@ void update(flame_t *flame, float deltaTime, sfVector2f velocity)
 void draw(flame_t *flame)
 {
     sfRenderWindow_clear(WINDOW, sfWhite);
-    if (flame->player->can_move == 1) {
+    if (flame->status == IN_GAME) {
         sfRenderWindow_drawSprite(WINDOW, flame->map, NULL);
         sfRenderWindow_drawSprite(WINDOW, PLAYER, NULL);
     }
-    if (flame->player->can_move == 0) {
+    if (flame->status == MAIN_MENU) {
         sfRenderWindow_drawSprite(WINDOW, flame->back, NULL);
         display_menu(flame);
     }
+    if (flame->status == LEVEL_SELECTION || flame->buffer == LEVEL_SELECTION) {
+        sfRenderWindow_drawSprite(WINDOW, flame->world->map, NULL);
+    }                             
     sfRenderWindow_setView(WINDOW, VIEW);
     display_pause_menu(flame);
     display_framerate(flame);
