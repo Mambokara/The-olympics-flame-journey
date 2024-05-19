@@ -23,10 +23,8 @@ void check_gravity(flame_t *flame)
         return;
     }
     center_view = sfView_getCenter(flame->view);
-    printf("%f ---------> %f", center_view.x, center_view.y);
     color = sfImage_getPixel(flame->undermap, center_view.x,
                     center_view.y + rect.height);
-    printf("%d -> %d -> %d\n", color.r, color.g, color.b);
     color2 = sfImage_getPixel(flame->undermap, center_view.x + rect.width,
                     center_view.y + rect.height);
     if (((color.r == 255 && color.g == 0 && color.b == 0) ||
