@@ -7,19 +7,19 @@
 #include "../include/structs.h"
 #include "../include/functions.h"
 
-static coord_portal(player_t *player, portal_t *portal)
-{
-    
-}
+// static coord_portal(player_t *player, portal_t *portal)
+// {
 
-static void teleport(player_t *player, portal_t *portal, int i)
-{
-    if (coord_portal(player, portal) == 1) {
-        player->pos.x = portal->portal_pos[i]->pos_tp.x;
-        player->pos.y = portal->portal_pos[i]->pos_tp.y;
-        sfSprite_setPosition(player->runner, player->pos);
-    }
-}
+// }
+
+// static void teleport(player_t *player, portal_t *portal, int i)
+// {
+//     if (coord_portal(player, portal) == 1) {
+//         player->pos.x = portal->portal_pos[i]->pos_tp.x;
+//         player->pos.y = portal->portal_pos[i]->pos_tp.y;
+//         sfSprite_setPosition(player->runner, player->pos);
+//     }
+// }
 
 static portal_pos_t **fill_struct_portal_lvl2(void)
 {

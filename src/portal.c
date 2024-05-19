@@ -31,7 +31,7 @@ static void teleport(player_t *player, portal_t *portal, int i)
     }
 }
 
-static void link_portal(portal_t *portal, int src, int dest)
+void link_portal(portal_t *portal, int src, int dest)
 {
     portal->portal_pos[src]->pos_tp = portal->portal_pos[dest]->pos;
 }
