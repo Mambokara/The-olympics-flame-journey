@@ -137,7 +137,6 @@ typedef struct flame_s {
     w_map_t *world;
     player_t *player;
     sfView *view;
-    portal_t *portal;
     sfRenderWindow *game_win;
     settings_t *settings;
     menu_t *menu;

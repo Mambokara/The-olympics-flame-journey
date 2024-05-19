@@ -84,6 +84,9 @@ void update(flame_t *flame, float deltaTime, sfVector2f velocity)
             move_player(flame, RIGHT);
         jump_player(flame, deltaTime, &velocity, -200);
     }
+    for (int i = 0; CURRENT_LVL->portal->portal_pos[i] != NULL; i++) {
+        teleport(flame->player, CURRENT_LVL->portal, i, flame);
+    }
     return;
 }
 
@@ -115,7 +118,6 @@ void draw(flame_t *flame)
     sfRenderWindow_setView(WINDOW, VIEW);
     display_pause_menu(flame);
     display_framerate(flame);
-    draw_rectangle(flame);
     display_music(flame);
     sfRenderWindow_display(WINDOW);
     return;
