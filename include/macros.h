@@ -26,3 +26,4 @@
     #define VIEW flame->view
     #define MAX_PARTICLES 1000
     #define CURRENT_LVL flame->levels[flame->current_level]
+    #define POSITION flame->world->start

@@ -47,7 +47,7 @@ static world_point_t *three_p(w_map_t *world)
     world_point_t *three = malloc(sizeof(world_point_t));
 
     three->lock = sfSprite_copy(world->lock);
-    sfSprite_setPosition(three->lock, (sfVector2f){600, 800});
+    sfSprite_setPosition(three->lock, (sfVector2f){1185, 605});
     three->up = NULL;
     three->left = NULL;
     three->id = 3;
@@ -64,7 +64,7 @@ static world_point_t *four_p(w_map_t *world)
     world_point_t *four = malloc(sizeof(world_point_t));
 
     four->lock = sfSprite_copy(world->lock);
-    sfSprite_setPosition(four->lock, (sfVector2f){600, 800});
+    sfSprite_setPosition(four->lock, (sfVector2f){1388, 287});
     four->up = NULL;
     four->left = NULL;
     four->id = 4;
@@ -81,7 +81,7 @@ static world_point_t *five_p(w_map_t *world)
     world_point_t *five = malloc(sizeof(world_point_t));
 
     five->lock = sfSprite_copy(world->lock);
-    sfSprite_setPosition(five->lock, (sfVector2f){600, 800});
+    sfSprite_setPosition(five->lock, (sfVector2f){1028, 56});
     five->up = NULL;
     five->left = NULL;
     five->id = 5;
@@ -98,7 +98,7 @@ static world_point_t *six_p(w_map_t *world)
     world_point_t *six = malloc(sizeof(world_point_t));
 
     six->lock = sfSprite_copy(world->lock);
-    sfSprite_setPosition(six->lock, (sfVector2f){600, 800});
+    sfSprite_setPosition(six->lock, (sfVector2f){733, 742});
     six->up = NULL;
     six->left = NULL;
     six->id = 6;
@@ -116,7 +116,7 @@ static world_point_t *seven_p(w_map_t *world)
     world_point_t *seven = malloc(sizeof(world_point_t));
 
     seven->lock = sfSprite_copy(world->lock);
-    sfSprite_setPosition(seven->lock, (sfVector2f){600, 800});
+    sfSprite_setPosition(seven->lock, (sfVector2f){633, 452});
     seven->up = NULL;
     seven->left = NULL;
     seven->id = 7;
@@ -133,7 +133,7 @@ static world_point_t *eight_p(w_map_t *world)
     world_point_t *eight = malloc(sizeof(world_point_t));
 
     eight->lock = sfSprite_copy(world->lock);
-    sfSprite_setPosition(eight->lock, (sfVector2f){600, 800});
+    sfSprite_setPosition(eight->lock, (sfVector2f){977, 271});
     eight->up = NULL;
     eight->left = NULL;
     eight->id = 8;

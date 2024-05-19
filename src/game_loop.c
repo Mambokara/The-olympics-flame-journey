@@ -137,6 +137,7 @@ void draw(flame_t *flame)
     }
     if (flame->status == LEVEL_SELECTION || flame->buffer == LEVEL_SELECTION) {
         sfRenderWindow_drawSprite(WINDOW, flame->world->map, NULL);
+        draw_lock(flame);
         sfRenderWindow_drawSprite(WINDOW, flame->player->runner, NULL);
     }
     sfRenderWindow_setView(WINDOW, VIEW);
