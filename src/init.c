@@ -77,8 +77,15 @@ sound_t *init_sound(void)
     sound_t *sound = malloc(sizeof(sound_t));
 
     sound->sound = 0;
+    sound->music = sfMusic_createFromFile("./assets/french_music.ogg");
     return sound;
 }
+
+// succes_t *init_succes(void)
+// {
+
+
+// }
 
 flame_t *init_flame(int window)
 {
@@ -104,6 +111,7 @@ flame_t *init_flame(int window)
     flame->status = MAIN_MENU;
     flame->buffer = MAIN_MENU;
     flame->screen = window;
+    // flame->scs = init_succes();
     flame->sound = init_sound();
     flame->back = create_sprite((sfVector2f) {0, 0}, "./assets/background.png",
         (sfVector2f) {1, 1});

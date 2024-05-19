@@ -83,6 +83,8 @@ typedef struct option_s {
     sfText *res2;
     sfText *res3;
     int res_window;
+    sfText *save;
+    sfRectangleShape *s_quare;
 } option_t;
 
 typedef struct menu_s {
@@ -115,12 +117,18 @@ typedef struct level_s {
 } level_t;
 
 typedef struct sound_s {
-    int sound;
+    float sound;
+    sfMusic* music;
 } sound_t;
+
+typedef struct succes_s {
+
+} succes_t;
 
 typedef struct flame_s {
     enum game_status status;
     enum game_status buffer;
+    succes_t *scs;
     sound_t *sound;
     w_map_t *world;
     sfImage *undermap;

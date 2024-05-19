@@ -22,7 +22,7 @@ int check_color_red(sfVector2f po, sfFloatRect re, flame_t *fla)
     }
     if ((colo.r == 0 && colo.g == 0 && colo.b == 255) ||
         (colo2.r == 0 && colo2.g == 0 && colo2.b == 255)) {
-        sfSprite_setPosition(fla->player->runner, (sfVector2f){100, 1000});
+        sfSprite_setPosition(fla->player->runner, fla->player->respawn);
         return 1;
     }
     return 0;
@@ -76,7 +76,7 @@ int check_coll_left(flame_t *flame)
     }
     if (((color.r == 0 && color.g == 0 && color.b == 255) ||
         (color2.r == 0 && color2.g == 0 && color2.b == 255))){
-        sfSprite_setPosition(flame->player->runner, (sfVector2f){100, 1000});
+        sfSprite_setPosition(flame->player->runner, flame->player->respawn);
         return 1;
     }
     return 0;
@@ -100,8 +100,12 @@ int check_coll_right(flame_t *flame)
     }
     if (((color.r == 0 && color.g == 0 && color.b == 255) ||
         (color2.r == 0 && color2.g == 0 && color2.b == 255))){
-        sfSprite_setPosition(flame->player->runner, (sfVector2f){100, 1000});
+        sfSprite_setPosition(flame->player->runner, flame->player->respawn);
         return 1;
+    }
+    if (((color.r == 229 && color.g == 255 && color.b == 0) ||
+        (color2.r == 229 && color2.g == 255 && color2.b == 0))){
+        flame->player->respawn = center_view;
     }
     return 0;
 }

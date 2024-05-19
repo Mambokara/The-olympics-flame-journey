@@ -10,6 +10,7 @@
 #include <SFML/Graphics/Color.h>
 #include <SFML/Graphics/RectangleShape.h>
 #include <SFML/Graphics/RenderWindow.h>
+#include <SFML/Graphics/Sprite.h>
 #include <SFML/Graphics/Types.h>
 #include <SFML/Graphics/View.h>
 #include <SFML/System/Types.h>
@@ -87,13 +88,21 @@ void update(flame_t *flame, float deltaTime, sfVector2f velocity)
         if (sfKeyboard_isKeyPressed(sfKeySpace) &&
             flame->player->is_jumping == 0)
             flame->player->is_jumping = 1;
-        if (sfKeyboard_isKeyPressed(sfKeyQ))
+        if (sfKeyboard_isKeyPressed(sfKeyQ)) {
             move_player(flame, LEFT);
+        }
         if (sfKeyboard_isKeyPressed(sfKeyD))
             move_player(flame, RIGHT);
         jump_player(flame, deltaTime, &velocity, -200);
     }
     return;
+}
+
+void make_musique(flame_t *flame)
+{
+    sfMusic_setLoop(flame->sound->music, sfTrue);
+    sfMusic_play(flame->sound->music);
+    sfMusic_setVolume(flame->sound->music, 50.0f);
 }
 
 void draw(flame_t *flame)
@@ -104,6 +113,8 @@ void draw(flame_t *flame)
         sfRenderWindow_drawSprite(WINDOW, PLAYER, NULL);
     }
     if (flame->status == MAIN_MENU) {
+        sfView_setCenter(flame->view, (sfVector2f){960, 540});
+        sfSprite_setPosition(PLAYER, flame->player->respawn);
         sfRenderWindow_drawSprite(WINDOW, flame->back, NULL);
         display_menu(flame);
     }
@@ -122,11 +133,14 @@ void game_loop(int window)
     flame_t *flame = init_flame(window);
     sfClock* clock = sfClock_create();
     float deltaTime = 0;
+    flame->player->respawn = (sfVector2f){100, 1000};
     sfVector2f velocity = {0.0f, 0.0f};
 
     flame->clock = sfClock_create();
     flame->player->anim_clock = sfClock_create();
+    make_musique(flame);
     sfRenderWindow_setFramerateLimit(WINDOW, flame->frame);
+    // sfRenderWindow_setFramerateLimit(WINDOW, 300);
     while (sfRenderWindow_isOpen(WINDOW)) {
         deltaTime = sfTime_asSeconds(sfClock_restart(clock));
         analyse_events(flame);

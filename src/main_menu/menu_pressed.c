@@ -85,13 +85,17 @@ void is_option_pressed(flame_t *flame, sfVector2f mouse)
 
 void is_sound_pressed(flame_t *flame, sfVector2f mouse)
 {
+    float currentVolume = sfMusic_getVolume(flame->sound->music);
+
     if (is_oversp(flame->menu->opt->more, mouse)) {
-        flame->sound->sound += 1;
+        if (currentVolume < 100.0f)
+            sfMusic_setVolume(flame->sound->music, currentVolume + 10.0f);
         sfSprite_setColor(flame->menu->opt->more, sfGreen);
     } else
         sfSprite_setColor(flame->menu->opt->more, sfColor_fromRGB(255, 255, 255));
     if (is_oversp(flame->menu->opt->less, mouse)) {
-        flame->sound->sound -= 1;
+        if (currentVolume > 0.0f)
+            sfMusic_setVolume(flame->sound->music, currentVolume - 10.0f);
         sfSprite_setColor(flame->menu->opt->less, sfRed);
     } else
         sfSprite_setColor(flame->menu->opt->less, sfColor_fromRGB(255, 255, 255));
@@ -125,15 +129,21 @@ void is_resolution_pressed(flame_t *flame, sfVector2f mouse)
     }
 }
 
+void is_save_pressed(flame_t *flame, sfVector2f mouse)
+{
+    if (is_overrect(flame->menu->opt->s_quare, mouse))
+        sfRenderWindow_drawSprite(flame->game_win, flame->menu->opt->check, NULL);
+}
+
 void menu_pressed(flame_t *flame)
 {
     sfVector2f mouse = get_universal_mouse_position(flame);
-    printf("%d\n", flame->menu->opt->res_window);
     is_menu_pressed(flame);
     if (flame->menu->condio == 1) {
         is_option_pressed(flame, mouse);
         is_sound_pressed(flame, mouse);
         is_fullscreen_pressed(flame, mouse);
         is_resolution_pressed(flame, mouse);
+        is_save_pressed(flame, mouse);
     }
 }

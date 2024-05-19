@@ -98,6 +98,14 @@ void button_fullscreen(flame_t *flame, sfVector2f mouse)
         sfRectangleShape_setOutlineColor(flame->menu->opt->square, sfBlack);
 }
 
+void button_save(flame_t *flame, sfVector2f mouse)
+{
+    if (is_overrect(flame->menu->opt->s_quare, mouse))
+        sfRectangleShape_setOutlineColor(flame->menu->opt->s_quare, sfWhite);
+    else
+        sfRectangleShape_setOutlineColor(flame->menu->opt->s_quare, sfBlack);
+}
+
 void button_option(flame_t *flame)
 {
     sfVector2f mouse = get_universal_mouse_position(flame);
@@ -106,4 +114,5 @@ void button_option(flame_t *flame)
     button_sound(flame, mouse);
     button_fullscreen(flame, mouse);
     button_resolution(flame, mouse);
+    button_save(flame, mouse);
 }
