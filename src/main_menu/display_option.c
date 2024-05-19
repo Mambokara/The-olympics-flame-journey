@@ -25,12 +25,9 @@ void display_option(flame_t *flame)
     sfRenderWindow_drawText(WINDOW, flame->menu->opt->res1, NULL);
     sfRenderWindow_drawText(WINDOW, flame->menu->opt->res2, NULL);
     sfRenderWindow_drawText(WINDOW, flame->menu->opt->res3, NULL);
-<<<<<<< HEAD
     sfRenderWindow_drawText(WINDOW, flame->menu->opt->save, NULL);
-=======
     if (flame->status != SETTING)
         return;
->>>>>>> f899ea2 ([+] Fix enum struct link states)
     if (flame->menu->opt->res_window == 1)
         resolution_window(flame, 10);
     if (flame->menu->opt->res_window == 2)
