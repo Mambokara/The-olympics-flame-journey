@@ -112,11 +112,12 @@ typedef struct level_s {
     sfSprite *ground;
     sfSprite *background;
     sfImage *undermap;
-    sfMusic *music;
+    sfVector2f checkpoint;
     portal_t *portal;
 } level_t;
 
 typedef struct sound_s {
+    sfText *text;
     float sound;
     sfMusic* music;
 } sound_t;
@@ -142,13 +143,13 @@ typedef struct flame_s {
     enum game_status status;
     enum game_status buffer;
     particles_t *parts;
+    sfSprite *checkpoint;
+    int current_level;
+    level_t **levels;
     succes_t *scs;
     sound_t *sound;
     w_map_t *world;
     player_t *player;
-    sfImage *undermap;
-    sfSprite *background_city;
-    sfSprite *map;
     sfView *view;
     portal_t *portal;
     sfRenderWindow *game_win;

@@ -20,16 +20,15 @@
 #include <stdio.h>
 #include <time.h>
 
-sfVector2f get_universal_mouse_position(flame_t*flame)
+sfVector2f get_universal_mouse_position(flame_t *flame)
 {
     sfVector2i mouse = sfMouse_getPositionRenderWindow(WINDOW);
     sfView const *view = sfRenderWindow_getView(WINDOW);
-    sfVector2u window_size = sfRenderWindow_getSize(WINDOW);
 
     return sfRenderWindow_mapPixelToCoords(WINDOW, mouse, view);
 }
 
-void key_detect(sfRenderWindow *window, sfEvent *event, flame_t *flame)
+void key_detect(sfEvent *event, flame_t *flame)
 {
     if (flame->status == MAIN_MENU || flame->buffer == MAIN_MENU)
         return;
@@ -49,16 +48,6 @@ void key_detect(sfRenderWindow *window, sfEvent *event, flame_t *flame)
     }
 }
 
-static void update_resolution(flame_t *flame, sfEvent *event)
-{
-    sfVector2u size_new = sfRenderWindow_getSize(WINDOW);
-    sfVector2f center = sfView_getCenter(VIEW);
-
-    return;
-    sfView_setCenter(VIEW, center);
-    sfRenderWindow_setView(WINDOW, VIEW);
-}
-
 void analyse_events(flame_t *flame)
 {
     sfEvent *event = malloc(sizeof(sfEvent));
@@ -68,14 +57,11 @@ void analyse_events(flame_t *flame)
             case sfEvtClosed:
                 sfRenderWindow_close(WINDOW);
             case sfEvtKeyReleased:
-                key_detect(WINDOW, event, flame);
+                key_detect(event, flame);
                 break;
             case sfEvtMouseButtonPressed:
                 menu_pressed(flame);
                 is_pause_pressed(flame);
-            case sfEvtResized:
-                update_resolution(flame, event);
-                break;
             default:
                 break;
         }
@@ -110,10 +96,13 @@ void make_musique(flame_t *flame)
 
 void draw(flame_t *flame)
 {
+    level_t *level = flame->levels[flame->current_level];
+
     sfRenderWindow_clear(WINDOW, sfBlack);
     display_background(flame);
     if (flame->status == IN_GAME || flame->buffer == IN_GAME) {
-        sfRenderWindow_drawSprite(WINDOW, flame->map, NULL);
+        sfRenderWindow_drawSprite(WINDOW, level->ground, NULL);
+        sfRenderWindow_drawSprite(WINDOW, flame->checkpoint, NULL);
         sfRenderWindow_drawSprite(WINDOW, PLAYER, NULL);
     }
     if (flame->status == MAIN_MENU || flame->buffer == MAIN_MENU) {
@@ -128,6 +117,7 @@ void draw(flame_t *flame)
     sfRenderWindow_setView(WINDOW, VIEW);
     display_pause_menu(flame);
     display_framerate(flame);
+    display_music(flame);
     sfRenderWindow_display(WINDOW);
     return;
 }
@@ -151,16 +141,16 @@ void game_loop(int window)
     flame->clock = sfClock_create();
     flame->player->anim_clock = sfClock_create();
     make_musique(flame);
+    sfSprite_scale(flame->checkpoint, (sfVector2f){0.5, 0.5});
+    sfSprite_setPosition(flame->checkpoint, (sfVector2f){4600, 730});
     set_icon(flame);
-    // sfRenderWindow_setFramerateLimit(WINDOW, flame->frame);
-    // sfRenderWindow_setFramerateLimit(WINDOW, 300);
     while (sfRenderWindow_isOpen(WINDOW)) {
         deltaTime = sfTime_asSeconds(sfClock_restart(clock));
         updateParticles(flame, deltaTime);
         analyse_events(flame);
         update(flame, deltaTime, velocity);
         draw(flame);
-        printf("%d\n", flame->status);
+        // printf("%d\n", flame->status);
     }
     return;
 }

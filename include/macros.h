@@ -8,7 +8,7 @@
 #include "structs.h"
 #pragma once
 
-    #define MOVE_SPEED 0.5
+    #define MOVE_SPEED 1
     #define LEFT 0
     #define RIGHT 1
     #define WINDOW flame->game_win

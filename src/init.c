@@ -7,6 +7,8 @@
 
 #include "../include/structs.h"
 #include "../include/functions.h"
+#include <SFML/Graphics/Sprite.h>
+#include <SFML/Graphics/Texture.h>
 #include <SFML/Graphics/Types.h>
 #include <SFML/System/Vector2.h>
 
@@ -75,9 +77,11 @@ sfImage *init_undermap(void)
 sound_t *init_sound(void)
 {
     sound_t *sound = malloc(sizeof(sound_t));
+    sfFont *font = sfFont_createFromFile("./assets/Pixellari.ttf");
 
     sound->sound = 0;
     sound->music = sfMusic_createFromFile("./assets/french_music.ogg");
+    sound->text = create_text("Music: 0", font, (sfVector2f){10, 980}, 30);
     return sound;
 }
 
@@ -108,6 +112,15 @@ particles_t *init_particles(void)
     return parts;
 }
 
+sfSprite *init_checkpoint()
+{
+    sfTexture *texture = sfTexture_createFromFile("./assets/_b38285a7-5eab-417a-9107-c2c30eff117f-removebg-preview(1).png", NULL);
+    sfSprite *torch = sfSprite_create();
+
+    sfSprite_setTexture(torch, texture, sfFalse);
+    return torch;
+}
+
 flame_t *init_flame(int window)
 {
     flame_t *flame = malloc(sizeof(flame_t));
@@ -133,19 +146,18 @@ flame_t *init_flame(int window)
     flame->status = MAIN_MENU;
     flame->buffer = MAIN_MENU;
     flame->screen = window;
-    // flame->scs = init_succes();
     flame->sound = init_sound();
     flame->back = create_sprite((sfVector2f) {0, 0}, "./assets/background.png",
         (sfVector2f) {1, 1});
     flame->player = init_player();
     flame->view = init_view(flame->player);
-    flame->map = setup_sprite(texture, (sfVector2f){0, 0});
-    flame->background_city = create_sprite((sfVector2f){0, 0}, "./assets/levels/level1_background.png", (sfVector2f){1, 1});
-    flame->undermap = init_undermap();
+    flame->current_level = 0;
+    flame->levels = init_levels();
     flame->settings = init_settings();
     flame->menu = init_menu();
     flame->pause_menu = init_pause_menu();
     flame->world = init_level_selector();
+    flame->checkpoint = init_checkpoint();
     if (window == 0 && window < 10)
         flame->game_win = sfRenderWindow_create(m1920, "Flame",
             sfClose | sfResize | sfDefaultStyle, NULL);
