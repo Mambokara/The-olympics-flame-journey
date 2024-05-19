@@ -130,10 +130,6 @@ portal_t *portal_lvl2(void)
     link_portal(portal, 1, 0);
     link_portal(portal, 2, 0);
     link_portal(portal, 3, 0);
-    printf("%f---%f\n", portal->portal_pos[0]->pos_tp.x, portal->portal_pos[0]->pos_tp.y);
-    printf("%f---%f\n", portal->portal_pos[1]->pos_tp.x, portal->portal_pos[1]->pos_tp.y);
-    printf("%f---%f\n", portal->portal_pos[2]->pos_tp.x, portal->portal_pos[2]->pos_tp.y);
-    printf("%f---%f\n", portal->portal_pos[3]->pos_tp.x, portal->portal_pos[3]->pos_tp.y);
     return portal;
 }
 
