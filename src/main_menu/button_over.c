@@ -23,7 +23,7 @@ static sfBool is_overrect(sfRectangleShape *rect, sfVector2f mouse)
 }
 
 
-void is_pressed(flame_t *flame)
+/*void is_pressed(flame_t *flame)
 {
     sfVector2f mouse = get_universal_mouse_position(flame);
 
@@ -40,6 +40,7 @@ void is_pressed(flame_t *flame)
     } else
         sfText_setOutlineThickness(flame->menu->option, 5);
     if (is_over(flame->menu->play, mouse)) {
+        flame->status = LEVEL_SELECTION;
         sfText_setOutlineThickness(flame->menu->play, 10);
     } else
         sfText_setOutlineThickness(flame->menu->play, 5);
@@ -48,7 +49,7 @@ void is_pressed(flame_t *flame)
         sfText_setOutlineThickness(flame->menu->quit, 10);
     } else
         sfText_setOutlineThickness(flame->menu->quit, 5);
-}
+}*/
 
 static void change_color(sfText *text, bool condi)
 {

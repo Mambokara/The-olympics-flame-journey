@@ -39,6 +39,7 @@ void key_detect(sfRenderWindow *window, sfEvent *event, flame_t *flame)
         if (flame->pause_menu->is_displayed == 0) {
             flame->pause_menu->is_displayed = 1;
             flame->buffer = flame->status;
+            flame->status = PAUSE_MENU;
         } else {
             flame->pause_menu->is_displayed = 0;
             flame->status = flame->buffer;
@@ -146,6 +147,7 @@ void game_loop(int window)
         analyse_events(flame);
         update(flame, deltaTime, velocity);
         draw(flame);
+        printf("%d\n", flame->status);
     }
     return;
 }

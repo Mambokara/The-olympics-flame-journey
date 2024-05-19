@@ -53,7 +53,6 @@ menu_t *init_menu(void)
     menu->opt = init_option(font);
     menu->condic = 0;
     menu->condio = 0;
-    menu->condip = 0;
     menu->condiq = 0;
     menu->back = create_rectangle((sfVector2f) {1300, 900}, (sfVector2f) {350, 100}, sfBlack, sfColor_fromRGB(80, 80, 80));
     menu->lucas = create_text("lucas.andres@epitech.eu", font, (sfVector2f) {1520, 980}, 10);

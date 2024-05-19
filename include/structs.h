@@ -97,7 +97,6 @@ typedef struct menu_s {
     sfText *credit;
     int condic;
     int condio;
-    int condip;
     int condiq;
     sfText *txtcredit;
     sfText *lucas;
