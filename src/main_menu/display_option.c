@@ -12,6 +12,7 @@ void display_option(flame_t *flame)
 {
     sfRenderWindow_drawRectangleShape(WINDOW, flame->menu->opt->back, NULL);
     sfRenderWindow_drawRectangleShape(WINDOW, flame->menu->opt->square, NULL);
+    sfRenderWindow_drawRectangleShape(WINDOW, flame->menu->opt->s_quare, NULL);
     sfRenderWindow_drawSprite(WINDOW, flame->menu->opt->less, NULL);
     sfRenderWindow_drawSprite(WINDOW, flame->menu->opt->more, NULL);
     sfRenderWindow_drawText(WINDOW, flame->menu->opt->fps, NULL);
@@ -24,6 +25,7 @@ void display_option(flame_t *flame)
     sfRenderWindow_drawText(WINDOW, flame->menu->opt->res1, NULL);
     sfRenderWindow_drawText(WINDOW, flame->menu->opt->res2, NULL);
     sfRenderWindow_drawText(WINDOW, flame->menu->opt->res3, NULL);
+    sfRenderWindow_drawText(WINDOW, flame->menu->opt->save, NULL);
     if (flame->menu->opt->res_window == 1)
         resolution_window(flame, 10);
     if (flame->menu->opt->res_window == 2)
