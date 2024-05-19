@@ -9,7 +9,6 @@
     #include <SFML/Graphics.h>
     #include <SFML/Graphics/Types.h>
     #include <SFML/Audio.h>
-#include <SFML/System/Vector2.h>
     #include <stdlib.h>
     #include <stdio.h>
     #include <stdbool.h>
@@ -25,9 +24,32 @@ enum game_status {
     QUIT
 };
 
+enum press {
+    L = 0,
+    R,
+    DOWN,
+    UP,
+    NONE
+};
+
+
+typedef struct world_point_s {
+    struct world_point_s *up;
+    struct world_point_s *down;
+    struct world_point_s *right;
+    struct world_point_s *left;
+    int locked;
+    int id;
+    sfVector2f position;
+    sfSprite *lock;
+} world_point_t;
+
 typedef struct w_map_s {
     sfSprite *map;
-    sfVector2f *level_position;
+    world_point_t *start;
+    world_point_t **stock;
+    sfSprite *lock;
+    enum press button;
 } w_map_t;
 
 typedef struct player_s {

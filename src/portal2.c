@@ -43,7 +43,7 @@ static portal_pos_t **fill_struct_portal_lvl2(void)
     return portal_pos;
 }
 
-static portal_t *fill_struct_portal_lvl1(void)
+static portal_pos_t **fill_struct_portal_lvl1(void)
 {
     portal_pos_t **portal_pos = malloc(sizeof(portal_t *));
 
