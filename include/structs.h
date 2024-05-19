@@ -19,7 +19,9 @@ enum game_status {
     MAIN_MENU = 0,
     IN_GAME,
     PAUSE_MENU,
-    LEVEL_SELECTION
+    LEVEL_SELECTION,
+    CREDIT,
+    SETTING
 };
 
 typedef struct w_map_s {
@@ -66,6 +68,18 @@ typedef struct option_s {
     sfText *fps30;
     sfText *fps60;
     sfText *fps90;
+    sfText *music;
+    sfSprite *more;
+    sfSprite *less;
+    sfText *fullscreen;
+    sfSprite *check;
+    sfRectangleShape *square;
+    int is_check;
+    sfText *res;
+    sfText *res1;
+    sfText *res2;
+    sfText *res3;
+    int res_window;
 } option_t;
 
 typedef struct menu_s {
@@ -97,9 +111,14 @@ typedef struct level_s {
     sfMusic *music;
 } level_t;
 
+typedef struct sound_s {
+    int sound;
+} sound_t;
+
 typedef struct flame_s {
     enum game_status status;
     enum game_status buffer;
+    sound_t *sound;
     w_map_t *world;
     sfImage *undermap;
     player_t *player;
@@ -114,4 +133,5 @@ typedef struct flame_s {
     int frame;
     sfClock *clock;
     sfText *fps;
+    int screen;
 } flame_t;
