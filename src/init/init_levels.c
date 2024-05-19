@@ -13,7 +13,6 @@ level_t *init_level(int id)
     level_t *level = malloc(sizeof(level_t));
     char *file = strdup("./assets/levels/level");
 
-    write(1, "LKJFIULFHIUBF", 14);
     file = strcat(file, nbr_to_str(id));
     file = strcat(file, "_");
     printf(file);
@@ -31,6 +30,7 @@ level_t **init_levels(void)
     for (index = 0; index < 2; index++) {
         levels[index] = init_level(index + 1);
     }
+    levels[0]->portal = portal_lvl2();
     levels[index] = NULL;
     return levels;
 }

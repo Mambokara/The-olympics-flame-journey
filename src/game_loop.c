@@ -128,6 +128,7 @@ void draw(flame_t *flame)
     sfRenderWindow_setView(WINDOW, VIEW);
     display_pause_menu(flame);
     display_framerate(flame);
+    draw_rectangle(flame);
     sfRenderWindow_display(WINDOW);
     return;
 }
@@ -153,7 +154,7 @@ void game_loop(int window)
     make_musique(flame);
     //sfRenderWindow_setFramerateLimit(WINDOW, flame->frame);
     set_icon(flame);
-    // sfRenderWindow_setFramerateLimit(WINDOW, 300);
+    sfRenderWindow_setFramerateLimit(WINDOW, 1500);
     while (sfRenderWindow_isOpen(WINDOW)) {
         deltaTime = sfTime_asSeconds(sfClock_restart(clock));
         analyse_events(flame);

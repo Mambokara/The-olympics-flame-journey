@@ -67,5 +67,6 @@ void get_portal_in_struct(portal_t *portal);
 void full_screen(flame_t *flame, int condi);
 void resolution_window(flame_t *flame, int condi);
 void display_background(flame_t *flame);
-void portal_lvl2(level_t *lvl);
+portal_t*portal_lvl2(void);
 level_t **init_levels(void);
+void draw_rectangle(flame_t * flame);
