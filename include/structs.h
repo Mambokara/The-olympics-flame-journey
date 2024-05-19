@@ -32,7 +32,6 @@ enum press {
     NONE
 };
 
-
 typedef struct world_point_s {
     struct world_point_s *up;
     struct world_point_s *down;
