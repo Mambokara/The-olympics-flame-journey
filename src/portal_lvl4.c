@@ -9,7 +9,7 @@
 #include "../include/functions.h"
 #include "../include/macros.h"
 
-static portal_pos_t **fill_struct_portal_lvl2(void)
+static portal_pos_t **fill_struct_portal_lvl4(void)
 {
     portal_pos_t **portal_pos = malloc(sizeof(portal_t *)*5);
 
@@ -32,7 +32,7 @@ static portal_pos_t **fill_struct_portal_lvl2(void)
     return portal_pos;
 }
 
-static void fill_struct_portal_isteleportor_lvl2(portal_t *portal)
+static void fill_struct_portal_isteleportor_lvl4(portal_t *portal)
 {
     portal->portal_pos[0]->is_teleportor = 1;
     portal->portal_pos[1]->is_teleportor = 0;
@@ -40,7 +40,7 @@ static void fill_struct_portal_isteleportor_lvl2(portal_t *portal)
     portal->portal_pos[3]->is_teleportor = 0;
 }
 
-static void create_rectangle_colision_lvl2(portal_t *portal)
+static void create_rectangle_colision_lvl4(portal_t *portal)
 {
     sfVector2f size = {144, 96};
 
@@ -52,13 +52,13 @@ static void create_rectangle_colision_lvl2(portal_t *portal)
     }
 }
 
-portal_t *portal_lvl2(void)
+portal_t *portal_lvl4(void)
 {
     portal_t *portal = malloc(sizeof(portal_t));
 
-    portal->portal_pos = fill_struct_portal_lvl2();
-    fill_struct_portal_isteleportor_lvl2(portal);
-    create_rectangle_colision_lvl2(portal);
+    portal->portal_pos = fill_struct_portal_lvl4();
+    fill_struct_portal_isteleportor_lvl4(portal);
+    create_rectangle_colision_lvl4(portal);
     link_portal(portal, 0, 1);
     link_portal(portal, 2, 3);
     return portal;
