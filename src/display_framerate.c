@@ -15,6 +15,7 @@ void display_framerate(flame_t *flame)
     static int fps = 0;
     char *fps_text;
     sfTime elapsed;
+    sfVector2f center = sfView_getCenter(VIEW);
 
     if (first == 1) {
         clock = sfClock_create();
@@ -29,5 +30,6 @@ void display_framerate(flame_t *flame)
         sfClock_restart(clock);
     } else
         fps ++;
+    sfText_setPosition(flame->fps, (sfVector2f) {center.x - 1900.0f / 2, center.y + 1000.0f / 2});
     sfRenderWindow_drawText(flame->game_win, flame->fps, NULL);
 }

@@ -9,6 +9,7 @@
     #include <SFML/Graphics.h>
     #include <SFML/Graphics/Types.h>
     #include <SFML/Audio.h>
+#include <SFML/System/Vector2.h>
     #include <stdlib.h>
     #include <stdio.h>
     #include <stdbool.h>
@@ -34,6 +35,7 @@ typedef struct player_s {
     sfTexture *run_tex;
     bool is_reversed;
     sfVector2f pos;
+    sfVector2f respawn;
     bool is_jumping;
 } player_t;
 
