@@ -132,6 +132,14 @@ void draw(flame_t *flame)
     return;
 }
 
+void set_icon(flame_t *flame)
+{
+    sfImage* icon = sfImage_createFromFile("./assets/logo_jam.png");
+    const sfUint8* iconPixels = sfImage_getPixelsPtr(icon);
+    sfVector2u iconSize = sfImage_getSize(icon);
+    sfRenderWindow_setIcon(WINDOW, iconSize.x, iconSize.y, iconPixels);
+}
+
 void game_loop(int window)
 {
     flame_t *flame = init_flame(window);
@@ -144,6 +152,7 @@ void game_loop(int window)
     flame->player->anim_clock = sfClock_create();
     make_musique(flame);
     //sfRenderWindow_setFramerateLimit(WINDOW, flame->frame);
+    set_icon(flame);
     // sfRenderWindow_setFramerateLimit(WINDOW, 300);
     while (sfRenderWindow_isOpen(WINDOW)) {
         deltaTime = sfTime_asSeconds(sfClock_restart(clock));
