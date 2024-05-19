@@ -39,6 +39,8 @@ option_t *init_option(sfFont *font)
     opt->res1 = create_text("1920x1080", font, (sfVector2f) {1000, 420}, 50);
     opt->res2 = create_text("1536x864", font, (sfVector2f) {1000, 520}, 50);
     opt->res3 = create_text("1366x768", font, (sfVector2f) {1000, 620}, 50);
+    opt->save = create_text("Save :", font, (sfVector2f) {720, 720}, 50);
+    opt->s_quare = create_rectangle((sfVector2f) {60, 60}, (sfVector2f) {1060, 720}, sfBlack, sfColor_fromRGB(50, 50, 50));
 
     return opt;
 }

@@ -30,13 +30,16 @@ typedef struct w_map_s {
 } w_map_t;
 
 typedef struct player_s {
+    sfIntRect rect;
     int can_move;
     sfSprite *runner;
-    sfTexture *run_tex;
+    sfTexture *left_tex;
+    sfTexture *right_tex;
     bool is_reversed;
     sfVector2f pos;
     sfVector2f respawn;
     bool is_jumping;
+    sfClock *anim_clock;
 } player_t;
 
 typedef struct portal_pos_s {
@@ -82,6 +85,8 @@ typedef struct option_s {
     sfText *res2;
     sfText *res3;
     int res_window;
+    sfText *save;
+    sfRectangleShape *s_quare;
 } option_t;
 
 typedef struct menu_s {
@@ -115,12 +120,18 @@ typedef struct level_s {
 } level_t;
 
 typedef struct sound_s {
-    int sound;
+    float sound;
+    sfMusic* music;
 } sound_t;
+
+typedef struct succes_s {
+
+} succes_t;
 
 typedef struct flame_s {
     enum game_status status;
     enum game_status buffer;
+    succes_t *scs;
     sound_t *sound;
     w_map_t *world;
     sfImage *undermap;
