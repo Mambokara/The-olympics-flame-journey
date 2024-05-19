@@ -53,7 +53,7 @@ static world_point_t *three_p(w_map_t *world)
     three->id = 3;
     three->right = NULL;
     three->down = NULL;
-    three->locked = 1;
+    three->locked = 0;
     three->position.x = 1220;
     three->position.y = 580;
     return three;
@@ -70,7 +70,7 @@ static world_point_t *four_p(w_map_t *world)
     four->id = 4;
     four->right = NULL;
     four->down = NULL;
-    four->locked = 1;
+    four->locked = 0;
     four->position.x = 1375;
     four->position.y = 228;
     return four;
@@ -87,7 +87,7 @@ static world_point_t *five_p(w_map_t *world)
     five->id = 5;
     five->right = NULL;
     five->down = NULL;
-    five->locked = 1;
+    five->locked = 0;
     five->position.x = 970;
     five->position.y = 35;
     return five;
