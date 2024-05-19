@@ -25,13 +25,22 @@ void is_pause_pressed(flame_t *flame)
         return;
     if (is_over(flame->pause_menu->quit, mouse) && flame->buffer != LEVEL_SELECTION) {
         sfText_setOutlineThickness(flame->pause_menu->quit, 10);
+        flame->buffer = LEVEL_SELECTION;
+        flame->status = LEVEL_SELECTION;
+        sfView_setCenter(VIEW, center);
+        sfSprite_setTexture(flame->checkpoint, flame->torch, sfFalse);
+        sfSprite_setPosition(flame->player->runner, flame->player->respawn);
+        flame->player->respawn = (sfVector2f){100, 1000};
+        flame->pause_menu->is_displayed = 0;
     } else
         sfText_setOutlineThickness(flame->pause_menu->quit, 5);
     if (is_over(flame->pause_menu->main_menu, mouse)) {
         sfView_setCenter(VIEW, center);
         flame->buffer = MAIN_MENU;
         flame->status = MAIN_MENU;
+        sfSprite_setTexture(flame->checkpoint, flame->torch, sfFalse);
         sfSprite_setPosition(flame->player->runner, flame->player->respawn);
+        flame->player->respawn = (sfVector2f){100, 1000};
         flame->pause_menu->is_displayed = 0;
         sfText_setOutlineThickness(flame->pause_menu->main_menu, 10);
     } else
