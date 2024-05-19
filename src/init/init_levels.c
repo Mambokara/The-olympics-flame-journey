@@ -33,9 +33,7 @@ level_t **init_levels(void)
     levels[1]->portal = portal_lvl2();
     levels[2]->portal = portal_lvl3();
     levels[3]->portal = portal_lvl4();
-    // levels[4]->portal = portal_lvl5();
-    // levels[5]->portal = portal_lvl6();
-    // levels[6]->portal = portal_lvl7();
+    levels[4]->portal = portal_lvl5();
     levels[index] = NULL;
     return levels;
 }
