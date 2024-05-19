@@ -60,7 +60,7 @@ static sfText *create_fps(void)
     sfText_setFillColor(text, sfWhite);
     sfText_setOutlineThickness(text, 5);
     sfText_setString(text, "0 FPS");
-    sfText_setPosition(text, (sfVector2f){0, 1040});
+    sfText_setPosition(text, (sfVector2f){10, 1040});
     return text;
 }
 
@@ -71,15 +71,39 @@ sfImage *init_undermap(void)
     return undermap;
 }
 
-flame_t *init_flame(void)
+sound_t *init_sound(void)
+{
+    sound_t *sound = malloc(sizeof(sound_t));
+
+    sound->sound = 0;
+    return sound;
+}
+
+flame_t *init_flame(int window)
 {
     flame_t *flame = malloc(sizeof(flame_t));
-    sfVideoMode mode = {1920, 1080, 32};
+    sfVideoMode m1920 = {1920, 1080, 32};
+    sfVideoMode m1536 = {1536, 864, 32};
+    sfVideoMode m1366 = {1366, 768, 32};
     sfTexture *texture = get_texture(MAP);
 
+    if (window == 10) {
+        flame->game_win = sfRenderWindow_create(m1920, "Flame",
+            sfClose | sfResize | sfDefaultStyle, NULL);
+    }
+    if (window == 11) {
+        flame->game_win = sfRenderWindow_create(m1536, "Flame",
+            sfClose | sfResize | sfDefaultStyle, NULL);
+    }
+    if (window == 12) {
+        flame->game_win = sfRenderWindow_create(m1366, "Flame",
+            sfClose | sfResize | sfDefaultStyle, NULL);
+    }
     flame->frame = 30;
     flame->status = MAIN_MENU;
     flame->buffer = MAIN_MENU;
+    flame->screen = window;
+    flame->sound = init_sound();
     flame->back = create_sprite((sfVector2f) {0, 0}, "./assets/background.png",
         (sfVector2f) {1, 1});
     flame->player = init_player();
@@ -90,8 +114,12 @@ flame_t *init_flame(void)
     flame->menu = init_menu();
     flame->pause_menu = init_pause_menu();
     flame->world = init_level_selector();
-    flame->game_win = sfRenderWindow_create(mode, "Flame",
-        sfClose | sfResize | sfDefaultStyle, NULL);
+    if (window == 0 && window < 10)
+        flame->game_win = sfRenderWindow_create(m1920, "Flame",
+            sfClose | sfResize | sfDefaultStyle, NULL);
+    if (window == 1 && window < 10)
+         flame->game_win = sfRenderWindow_create(m1920, "Flame",
+            sfClose | sfResize | sfFullscreen, NULL);
     flame->fps = create_fps();
     sfRenderWindow_setView(WINDOW, VIEW);
     return flame;
