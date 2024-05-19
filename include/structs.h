@@ -117,6 +117,7 @@ typedef struct level_s {
 } level_t;
 
 typedef struct sound_s {
+    sfText *text;
     float sound;
     sfMusic* music;
 } sound_t;
