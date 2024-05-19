@@ -7,8 +7,11 @@
 
 #include "../include/structs.h"
 #include "../include/functions.h"
+#include <SFML/Config.h>
 #include <SFML/Graphics/Sprite.h>
+#include <SFML/Graphics/Texture.h>
 #include <SFML/Graphics/Types.h>
+#include <stdio.h>
 
 int check_color_red(sfVector2f po, sfFloatRect re, flame_t *fla)
 {
@@ -87,7 +90,7 @@ int check_coll_right(flame_t *flame)
     sfVector2f center_view;
     sfColor color;
     sfColor color2;
-    const sfFloatRect rect = sfSprite_getGlobalBounds(flame->player->runner);
+    sfTexture *text;    const sfFloatRect rect = sfSprite_getGlobalBounds(flame->player->runner);
 
     center_view = sfView_getCenter(flame->view);
     color = sfImage_getPixel(flame->undermap, center_view.x + rect.width,
@@ -105,6 +108,9 @@ int check_coll_right(flame_t *flame)
     }
     if (((color.r == 229 && color.g == 255 && color.b == 0) ||
         (color2.r == 229 && color2.g == 255 && color2.b == 0))){
+        text = sfTexture_createFromFile("assets/_b38285a7-5eab-417a-9107-c2c30eff117f-removebg-preview.png", NULL);
+        sfSprite_setTexture(flame->checkpoint, text, sfFalse);
+        printf("%f, %f\n", center_view.x, center_view.y);
         flame->player->respawn = center_view;
     }
     return 0;
