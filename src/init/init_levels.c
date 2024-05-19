@@ -16,9 +16,7 @@ level_t *init_level(int id)
     file = strcat(file, nbr_to_str(id));
     file = strcat(file, "_");
     level->background = create_sprite((sfVector2f){0, 0}, my_strcat(file, "background.png"), (sfVector2f){1, 1});
-    level->ground = create_sprite((sfVector2f){0, 0}, my_strcat(file, "collision.png"), (sfVector2f){1, 1});
-    // level->ground = create_sprite((sfVector2f){0, 0}, my_strcat(file, "map.png"), (sfVector2f){1, 1});
-    // level->ground = sfImage_createFromFile(my_strcat(file, "collision.png")); 
+    level->ground = create_sprite((sfVector2f){0, 0}, my_strcat(file, "map.png"), (sfVector2f){1, 1});
     level->undermap = sfImage_createFromFile(my_strcat(file, "collision.png")); 
     return level;  
 }
