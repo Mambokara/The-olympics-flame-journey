@@ -13,6 +13,7 @@
 #include <SFML/Graphics/Sprite.h>
 #include <SFML/Graphics/Types.h>
 #include <SFML/Graphics/View.h>
+#include <SFML/System/Time.h>
 #include <SFML/System/Types.h>
 #include <SFML/System/Vector2.h>
 #include <SFML/Window/Event.h>
@@ -30,11 +31,30 @@ sfVector2f get_universal_mouse_position(flame_t *flame)
 
 void key_detect(sfEvent *event, flame_t *flame)
 {
+    switch (event->key.code) {
+        case sfKeyD:
+            flame->world->button = R;
+            break;
+        case sfKeyQ:
+            flame->world->button = L;
+            break;
+        case sfKeyZ:
+            flame->world->button = UP;
+            break;
+        case sfKeyS:
+            flame->world->button = DOWN;
+            break;
+        default:
+            flame->world->button = NONE;
+            break;
+    }
     if (flame->status == MAIN_MENU || flame->buffer == MAIN_MENU)
         return;
     if (event->key.code == sfKeyEnter && flame->status == LEVEL_SELECTION) {
+        flame->current_level = flame->world->start->id - 1;
         flame->status = IN_GAME;
         flame->buffer = IN_GAME;
+        sfSprite_setPosition(PLAYER, (sfVector2f){100, 1000});
     }
     if (event->key.code == sfKeyEscape) {
         if (flame->pause_menu->is_displayed == 0) {
@@ -69,6 +89,8 @@ void analyse_events(flame_t *flame)
 
 void update(flame_t *flame, float deltaTime, sfVector2f velocity)
 {
+    if (flame->status == LEVEL_SELECTION)
+        selection_menu(flame);
     if (flame->status != IN_GAME)
         return;
     if (flame->status == IN_GAME && flame->pause_menu->is_displayed == 0) {
@@ -83,6 +105,9 @@ void update(flame_t *flame, float deltaTime, sfVector2f velocity)
         if (sfKeyboard_isKeyPressed(sfKeyD))
             move_player(flame, RIGHT);
         jump_player(flame, deltaTime, &velocity, -200);
+    }
+    for (int i = 0; CURRENT_LVL->portal->portal_pos[i] != NULL; i++) {
+        teleport(flame->player, CURRENT_LVL->portal, i, flame);
     }
     return;
 }
@@ -103,6 +128,7 @@ void draw(flame_t *flame)
     if (flame->status == IN_GAME || flame->buffer == IN_GAME) {
         sfRenderWindow_drawSprite(WINDOW, level->ground, NULL);
         sfRenderWindow_drawSprite(WINDOW, flame->checkpoint, NULL);
+        drawParticles(flame);
         sfRenderWindow_drawSprite(WINDOW, PLAYER, NULL);
     }
     if (flame->status == MAIN_MENU || flame->buffer == MAIN_MENU) {
@@ -111,6 +137,7 @@ void draw(flame_t *flame)
     }
     if (flame->status == LEVEL_SELECTION || flame->buffer == LEVEL_SELECTION) {
         sfRenderWindow_drawSprite(WINDOW, flame->world->map, NULL);
+        sfRenderWindow_drawSprite(WINDOW, flame->player->runner, NULL);
     }
     sfRenderWindow_setView(WINDOW, VIEW);
     display_pause_menu(flame);
@@ -145,10 +172,10 @@ void game_loop(int window)
     sfRenderWindow_setFramerateLimit(WINDOW, 1500);
     while (sfRenderWindow_isOpen(WINDOW)) {
         deltaTime = sfTime_asSeconds(sfClock_restart(clock));
+        updateParticles(flame, deltaTime);
         analyse_events(flame);
         update(flame, deltaTime, velocity);
         draw(flame);
-        // printf("%d\n", flame->status);
     }
     return;
 }

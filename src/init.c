@@ -85,9 +85,30 @@ sound_t *init_sound(void)
     return sound;
 }
 
+particle_t *add_particle(int i, flame_t *flame)
+{
+    particle_t *part = malloc(sizeof(particle_t));
+    sfVector2f pos = sfView_getCenter(VIEW);
+
+    pos.y += 25;
+    pos.x -= 10;
+    part->pos = pos;
+    part->vel = (sfVector2f){(rand() % 200 - 100) / 10.0f, (rand() % 200 - 100) / 10.0f};
+    part->life = 1.0f;
+}
+
+particles_t *init_particles(flame_t *flame)
+{
+    particles_t *parts = malloc(sizeof(particles_t));
+
+    parts->count = 0;
+    parts->is_part = 0;
+    return parts;
+}
+
 sfSprite *init_checkpoint()
 {
-    sfTexture *texture = sfTexture_createFromFile("./assets/torch_without.png", NULL);
+    sfTexture *texture = sfTexture_createFromFile("./assets/_b38285a7-5eab-417a-9107-c2c30eff117f-removebg-preview(1).png", NULL);
     sfSprite *torch = sfSprite_create();
 
     sfSprite_setTexture(torch, texture, sfFalse);
@@ -130,6 +151,7 @@ flame_t *init_flame(int window)
     flame->pause_menu = init_pause_menu();
     flame->world = init_level_selector();
     flame->checkpoint = init_checkpoint();
+    flame->parts = init_particles(flame);
     if (window == 0 && window < 10)
         flame->game_win = sfRenderWindow_create(m1920, "Flame",
             sfClose | sfResize | sfDefaultStyle, NULL);

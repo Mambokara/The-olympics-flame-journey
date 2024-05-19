@@ -19,7 +19,10 @@
     #define LVL1 "assets/map-1.png"
     #define PORTAL "assets/portal.png"
     #define WMAP "assets/level_selection/level_selection.png"
+    #define LOCK "assets/level_selection/lock.png"
     #define WINDOW flame->game_win
     #define SETTINGS flame->settings
     #define POURCENT_MAP map->size
     #define VIEW flame->view
+    #define MAX_PARTICLES 1000
+    #define CURRENT_LVL flame->levels[flame->current_level]
