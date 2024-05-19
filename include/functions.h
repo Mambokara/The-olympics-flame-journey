@@ -23,13 +23,14 @@ void jump_player(flame_t *flame, float deltaTime, sfVector2f *velocity,
 
 /* Game loop functions */
 
-void game_loop(flame_t *flame);
+void game_loop(int window);
 sfVector2f get_universal_mouse_position(flame_t *flame);
 
 /* Init functions */
 
 w_map_t *init_level_selector(void);
 menu_t *init_menu(void);
+
 void display_menu(flame_t *flame);
 
 /* !MENU FUNCTION */
@@ -45,7 +46,7 @@ sfSprite *create_sprite_portal(portal_t *portal, sfVector2f pos,
     char *file, sfVector2f scale);
 sfRectangleShape *create_rectangle(sfVector2f size, sfVector2f pos,
     sfColor outline, sfColor fill);
-flame_t *init_flame(void);
+flame_t *init_flame(int window);
 pause_menu_t *init_pause_menu(void);
 void display_pause_menu(flame_t *flame);
 void is_pause_pressed(flame_t *flame);
@@ -62,4 +63,5 @@ char *my_revstr(char *str);
 char *nbr_to_str(int nb);
 portal_t *init_portal(void);
 void get_portal_in_struct(portal_t *portal);
-
+void full_screen(flame_t *flame, int condi);
+void resolution_window(flame_t *flame, int condi);
