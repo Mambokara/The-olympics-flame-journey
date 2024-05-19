@@ -106,9 +106,9 @@ void update(flame_t *flame, float deltaTime, sfVector2f velocity)
             move_player(flame, RIGHT);
         jump_player(flame, deltaTime, &velocity, -200);
     }
-    // for (int i = 0; CURRENT_LVL->portal->portal_pos[i] != NULL; i++) {
-    //     teleport(flame->player, CURRENT_LVL->portal, i, flame);
-    // }
+    for (int i = 0; CURRENT_LVL->portal->portal_pos[i] != NULL; i++) {
+        teleport(flame->player, CURRENT_LVL->portal, i, flame);
+    }
     return;
 }
 

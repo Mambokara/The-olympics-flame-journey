@@ -22,7 +22,7 @@ int coord_portal(player_t *player, portal_t *portal, flame_t *flame, int i)
 
 void teleport(player_t *player, portal_t *portal, int i, flame_t *flame)
 {
-    if (coord_portal(player, portal, flame, i) != -1 && portal->portal_pos[i]->id != 0) {
+    if (coord_portal(player, portal, flame, i) != -1 && portal->portal_pos[i]->is_teleportor != 0) {
         player->pos.x = portal->portal_pos[i]->pos_tp.x;
         player->pos.y = portal->portal_pos[i]->pos_tp.y;
         sfSprite_setPosition(player->runner, player->pos);
