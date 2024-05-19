@@ -28,13 +28,17 @@ static portal_pos_t **fill_struct_portal_lvl2(void)
 
 static portal_t *fill_struct_portal_lvl1(void)
 {
-    portal_t *portal = malloc(sizeof(portal_t));
+    portal_pos_t **portal_pos = malloc(sizeof(portal_t *));
 
-    sfVector2f pos_bin_0 = {4128, 810};
-    sfVector2f pos_bin_1 = {5520, 912};
+    sfVector2f pos_bin_0 = {4128, 864};
+    sfVector2f pos_bin_1 = {5520, 960};
 
-    portal->portal_pos[0]->pos = pos_bin_0;
-    portal->portal_pos[1]->pos = pos_bin_1;
+    for (int i = 0; i < 2; i++) {
+        portal_pos[i] = malloc(sizeof(portal_pos_t));
+    }
+    portal_pos[0]->pos = pos_bin_0;
+    portal_pos[1]->pos = pos_bin_1;
+    return portal_pos;
 }
 
 static void fill_struct_portal_isteleportor_lvl2(portal_t *portal)
@@ -45,10 +49,10 @@ static void fill_struct_portal_isteleportor_lvl2(portal_t *portal)
     portal->portal_pos[3]->is_teleportor = 1;
 }
 
-static void fill_struct_portal_isteleportor_lvl1(level_t *lvl)
+static void fill_struct_portal_isteleportor_lvl1(portal_t *portal)
 {
-    lvl->portal->portal_pos[0]->is_teleportor = 0;
-    lvl->portal->portal_pos[1]->is_teleportor = 1;
+    portal->portal_pos[0]->is_teleportor = 0;
+    portal->portal_pos[1]->is_teleportor = 1;
 }
 
 static void create_rectangle_colision_lvl2(portal_t *portal)
@@ -63,14 +67,15 @@ static void create_rectangle_colision_lvl2(portal_t *portal)
     }
 }
 
-static void create_rectangle_colision_lvl1(level_t *lvl)
+static void create_rectangle_colision_lvl1(portal_t *portal)
 {
     sfVector2f scale = {144, 144};
 
     for (int i = 0; i < 2; i++) {
-        sfRectangleShape_setScale(lvl->portal->portal_pos[i]->rect, scale);
-        sfRectangleShape_setPosition(lvl->portal->portal_pos[i]->rect, lvl->portal->portal_pos[i]->pos);
-        sfRectangleShape_setFillColor(lvl->portal->portal_pos[i]->rect, sfWhite);
+        portal->portal_pos[i]->rect = sfRectangleShape_create();
+        sfRectangleShape_setScale(portal->portal_pos[i]->rect, scale);
+        sfRectangleShape_setPosition(portal->portal_pos[i]->rect, portal->portal_pos[i]->pos);
+        sfRectangleShape_setFillColor(portal->portal_pos[i]->rect, sfWhite);
     }
 }
 
@@ -83,11 +88,14 @@ static void create_rectangle_colision_lvl1(level_t *lvl)
 //     }
 // }
 
-portal_t *portal_lvl1(level_t *lvl)
+portal_t *portal_lvl1(void)
 {
-    fill_struct_portal_lvl1();
-    fill_struct_portal_isteleportor_lvl1(lvl);
-    create_rectangle_colision_lvl1(lvl);
+    portal_t *portal = malloc(sizeof(portal_t));
+
+    portal->portal_pos = fill_struct_portal_lvl1();
+    fill_struct_portal_isteleportor_lvl1(portal);
+    create_rectangle_colision_lvl1(portal);
+    return portal;
 }
 
 portal_t *portal_lvl2(void)
