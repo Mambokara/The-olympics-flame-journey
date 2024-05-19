@@ -13,8 +13,8 @@ static portal_pos_t **fill_struct_portal_lvl3(void)
 {
     portal_pos_t **portal_pos = malloc(sizeof(portal_t *)*3);
 
-    sfVector2f pos_bin_0 = {1824, 1008};
-    sfVector2f pos_bin_1 = {3360, 816};
+    sfVector2f pos_bin_0 = {4080, 912};
+    sfVector2f pos_bin_1 = {5280, 768};
 
     for (int i = 0; i < 2; i++) {
         portal_pos[i] = malloc(sizeof(portal_pos_t));
