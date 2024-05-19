@@ -8,14 +8,14 @@
 #include "../../include/functions.h"
 #include "../../include/structs.h"
 
-static sfBool is_over(sfText *text, sfVector2i mouse)
+static sfBool is_over(sfText *text, sfVector2f mouse)
 {
     const sfFloatRect frect = sfText_getGlobalBounds(text);
 
     return (sfFloatRect_contains(&frect, mouse.x, mouse.y));
 }
 
-static sfBool is_overrect(sfRectangleShape *rect, sfVector2i mouse)
+static sfBool is_overrect(sfRectangleShape *rect, sfVector2f mouse)
 {
     const sfFloatRect frect = sfRectangleShape_getGlobalBounds(rect);
 
@@ -24,7 +24,7 @@ static sfBool is_overrect(sfRectangleShape *rect, sfVector2i mouse)
 
 void is_menu_pressed(flame_t *flame)
 {
-    sfVector2i mouse = sfMouse_getPositionRenderWindow(WINDOW);
+    sfVector2f mouse = get_universal_mouse_position(flame);
 
     if (is_over(flame->menu->credit, mouse)) {
         flame->menu->condic = 1;
@@ -44,7 +44,7 @@ void is_menu_pressed(flame_t *flame)
     }
     if (is_over(flame->menu->play, mouse)) {
         sfText_setOutlineThickness(flame->menu->play, 10);
-        flame->player->can_move = 1;
+        flame->status = LEVEL_SELECTION;
     } else
         sfText_setOutlineThickness(flame->menu->play, 5);
     if (is_over(flame->menu->quit, mouse) && flame->menu->condic == 0) {
@@ -56,7 +56,7 @@ void is_menu_pressed(flame_t *flame)
 
 void is_option_pressed(flame_t *flame)
 {
-    sfVector2i mouse = sfMouse_getPositionRenderWindow(WINDOW);
+    sfVector2f mouse = get_universal_mouse_position(flame); 
 
     if (is_over(flame->menu->opt->fps30, mouse)) {
         flame->frame = 30;

@@ -41,9 +41,6 @@ void is_pressed(flame_t *flame)
         sfText_setOutlineThickness(flame->menu->option, 5);
     if (is_over(flame->menu->play, mouse)) {
         sfText_setOutlineThickness(flame->menu->play, 10);
-        flame->player->can_move = 1;
-        flame->buffer = flame->status;
-        flame->status = LEVEL_SELECTION;
     } else
         sfText_setOutlineThickness(flame->menu->play, 5);
     if (is_over(flame->menu->quit, mouse) && flame->menu->condic == 0) {

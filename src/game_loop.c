@@ -81,7 +81,7 @@ void update(flame_t *flame, float deltaTime, sfVector2f velocity)
 {
     if (flame->status != IN_GAME)
         return;
-    if (flame->player->can_move == 1 && flame->pause_menu->is_displayed == 0) {
+    if (flame->status == IN_GAME && flame->pause_menu->is_displayed == 0) {
         check_gravity(flame);
         if (sfKeyboard_isKeyPressed(sfKeySpace) &&
             flame->player->is_jumping == 0)

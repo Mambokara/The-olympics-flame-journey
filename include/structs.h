@@ -18,7 +18,9 @@ enum game_status {
     MAIN_MENU = 0,
     IN_GAME,
     PAUSE_MENU,
-    LEVEL_SELECTION
+    LEVEL_SELECTION,
+    CREDIT,
+    SETTING
 };
 
 typedef struct w_map_s {
