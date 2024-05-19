@@ -95,6 +95,13 @@ void update(flame_t *flame, float deltaTime, sfVector2f velocity)
     return;
 }
 
+void make_musique(flame_t *flame)
+{
+    sfMusic_setLoop(flame->sound->music, sfTrue);
+    sfMusic_play(flame->sound->music);
+    sfMusic_setVolume(flame->sound->music, 50.0f);
+}
+
 void draw(flame_t *flame)
 {
     sfRenderWindow_clear(WINDOW, sfWhite);
@@ -124,6 +131,7 @@ void game_loop(int window)
     sfVector2f velocity = {0.0f, 0.0f};
     flame->clock = sfClock_create();
 
+    make_musique(flame);
     sfRenderWindow_setFramerateLimit(WINDOW, flame->frame);
     while (sfRenderWindow_isOpen(WINDOW)) {
         deltaTime = sfTime_asSeconds(sfClock_restart(clock));
