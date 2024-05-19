@@ -93,7 +93,7 @@ sound_t *init_sound(void)
 
 sfSprite *init_checkpoint()
 {
-    sfTexture *texture = sfTexture_createFromFile("./assets/_b38285a7-5eab-417a-9107-c2c30eff117f-removebg-preview(1).png", NULL);
+    sfTexture *texture = sfTexture_createFromFile("./assets/torch_without.png", NULL);
     sfSprite *torch = sfSprite_create();
 
     sfSprite_setTexture(torch, texture, sfFalse);

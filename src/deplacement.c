@@ -121,7 +121,7 @@ int check_coll_right(flame_t *flame)
     if (((color.r == 229 && color.g == 255 && color.b == 0) ||
         (color2.r == 229 && color2.g == 255 && color2.b == 0)) &&
         flame->player->respawn.x == 100 && flame->player->respawn.y == 1000){
-        text = sfTexture_createFromFile("assets/_b38285a7-5eab-417a-9107-c2c30eff117f-removebg-preview.png", NULL);
+        text = sfTexture_createFromFile("assets/torch_with.png", NULL);
         sfSprite_setTexture(flame->checkpoint, text, sfFalse);
         printf("%f, %f\n", center_view.x, center_view.y - 10);
         center_view.y =center_view.y - 10;
