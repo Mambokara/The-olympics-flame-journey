@@ -8,7 +8,7 @@
 #include "../include/functions.h"
 #include "../include/macros.h"
 
-static coord_portal(player_t *player, portal_t *portal, flame_t *flame, int i)
+static int coord_portal(player_t *player, portal_t *portal, flame_t *flame, int i)
 {
     player->pos = sfView_getCenter(VIEW);
     if(player->pos.x >= portal->portal_pos[i]->pos.x &&
