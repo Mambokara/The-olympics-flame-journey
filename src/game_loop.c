@@ -160,7 +160,7 @@ void game_loop(int window)
         analyse_events(flame);
         update(flame, deltaTime, velocity);
         draw(flame);
-        printf("%d\n", flame->status);
+        // printf("%d\n", flame->status);
     }
     return;
 }

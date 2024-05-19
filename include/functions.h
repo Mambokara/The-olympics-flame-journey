@@ -69,4 +69,5 @@ void resolution_window(flame_t *flame, int condi);
 void display_background(flame_t *flame);
 portal_t*portal_lvl2(void);
 level_t **init_levels(void);
+void link_portal(portal_t *portal, int src, int dest);
 void draw_rectangle(flame_t * flame);
