@@ -68,3 +68,6 @@ void full_screen(flame_t *flame, int condi);
 void resolution_window(flame_t *flame, int condi);
 void display_background(flame_t *flame);
 void portal_lvl2(level_t *lvl);
+void make_particuls(flame_t *flame, float deltaTime);
+void updateParticles(flame_t *flame, float deltaTime);
+void drawParticles(flame_t *flame);

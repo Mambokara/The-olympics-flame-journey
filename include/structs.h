@@ -125,9 +125,23 @@ typedef struct succes_s {
 
 } succes_t;
 
+typedef struct particle_s {
+    sfVector2f pos;
+    sfVector2f vel;
+    sfColor color;
+    float life;
+} particle_t;
+
+typedef struct particles_s {
+    particle_t **part;
+    int count;
+    int is_part;
+} particles_t;
+
 typedef struct flame_s {
     enum game_status status;
     enum game_status buffer;
+    particles_t *parts;
     succes_t *scs;
     sound_t *sound;
     w_map_t *world;

@@ -83,9 +83,30 @@ sound_t *init_sound(void)
 
 // succes_t *init_succes(void)
 // {
-
-
 // }
+
+particle_t *add_particle(int i)
+{
+    particle_t *part = malloc(sizeof(particle_t));
+
+    part->pos = (sfVector2f){400, 300};
+    part->vel = (sfVector2f){(rand() % 200 - 100) / 10.0f, (rand() % 200 - 100) / 10.0f};
+    part->color = sfRed;
+    part->life = 5.0f;
+}
+
+particles_t *init_particles(void)
+{
+    particles_t *parts = malloc(sizeof(particles_t));
+
+    parts->count = 10;
+    parts->is_part = 0;
+    parts->part = malloc(sizeof(particle_t *) * (parts->count + 1));
+    for (int i = 0; i < parts->count; i++)
+        parts->part[i] = add_particle(i);
+    parts->part[parts->count] = NULL;
+    return parts;
+}
 
 flame_t *init_flame(int window)
 {
@@ -108,6 +129,7 @@ flame_t *init_flame(int window)
             sfClose | sfResize | sfDefaultStyle, NULL);
     }
     flame->frame = 30;
+    flame->parts = init_particles();
     flame->status = MAIN_MENU;
     flame->buffer = MAIN_MENU;
     flame->screen = window;

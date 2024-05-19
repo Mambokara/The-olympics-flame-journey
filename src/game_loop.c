@@ -123,6 +123,8 @@ void draw(flame_t *flame)
     if (flame->status == LEVEL_SELECTION || flame->buffer == LEVEL_SELECTION) {
         sfRenderWindow_drawSprite(WINDOW, flame->world->map, NULL);
     }
+    // if (sfKeyboard_isKeyPressed(sfKeyA))
+    drawParticles(flame);
     sfRenderWindow_setView(WINDOW, VIEW);
     display_pause_menu(flame);
     display_framerate(flame);
@@ -150,10 +152,11 @@ void game_loop(int window)
     flame->player->anim_clock = sfClock_create();
     make_musique(flame);
     set_icon(flame);
-    sfRenderWindow_setFramerateLimit(WINDOW, flame->frame);
+    // sfRenderWindow_setFramerateLimit(WINDOW, flame->frame);
     // sfRenderWindow_setFramerateLimit(WINDOW, 300);
     while (sfRenderWindow_isOpen(WINDOW)) {
         deltaTime = sfTime_asSeconds(sfClock_restart(clock));
+        updateParticles(flame, deltaTime);
         analyse_events(flame);
         update(flame, deltaTime, velocity);
         draw(flame);
