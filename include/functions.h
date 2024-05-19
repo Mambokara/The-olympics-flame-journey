@@ -67,14 +67,15 @@ void get_portal_in_struct(portal_t *portal);
 void full_screen(flame_t *flame, int condi);
 void resolution_window(flame_t *flame, int condi);
 void display_background(flame_t *flame);
-portal_t*portal_lvl2(void);
 level_t **init_levels(void);
 void link_portal(portal_t *portal, int src, int dest);
 void draw_rectangle(flame_t * flame);
 void display_music(flame_t *flame);
 void teleport(player_t *player, portal_t *portal, int i, flame_t *flame);
 portal_t *portal_lvl1(void);
+portal_t *portal_lvl2(void);
 portal_t *portal_lvl3(void);
+portal_t *portal_lvl4(void);
 
 void selection_menu(flame_t *flame);
 void draw_lock(flame_t *flame);
