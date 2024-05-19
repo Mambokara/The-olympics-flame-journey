@@ -115,7 +115,6 @@ void draw(flame_t *flame)
     sfRenderWindow_setView(WINDOW, VIEW);
     display_pause_menu(flame);
     display_framerate(flame);
-    draw_rectangle(flame);
     display_music(flame);
     sfRenderWindow_display(WINDOW);
     return;

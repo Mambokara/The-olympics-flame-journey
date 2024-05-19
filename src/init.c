@@ -85,12 +85,6 @@ sound_t *init_sound(void)
     return sound;
 }
 
-// succes_t *init_succes(void)
-// {
-
-
-// }
-
 sfSprite *init_checkpoint()
 {
     sfTexture *texture = sfTexture_createFromFile("./assets/torch_without.png", NULL);
