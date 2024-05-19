@@ -58,7 +58,7 @@ portal_t *portal_lvl7(void)
 
     portal->portal_pos = fill_struct_portal_lvl7();
     fill_struct_portal_isteleportor_lvl7(portal);
-    create_rectangle_colision_lv7(portal);
+    create_rectangle_colision_lvl7(portal);
     link_portal(portal, 0, 1);
     link_portal(portal, 2, 3);
     return portal;

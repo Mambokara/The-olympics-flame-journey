@@ -13,10 +13,10 @@ static portal_pos_t **fill_struct_portal_lvl4(void)
 {
     portal_pos_t **portal_pos = malloc(sizeof(portal_t *)*5);
 
-    sfVector2f pos_bin_0 = {4128, 864};
-    sfVector2f pos_bin_1 = {5520, 960};
-    sfVector2f pos_bin_2 = {6096, 1344};
-    sfVector2f pos_bin_3 = {6960, 1296};
+    sfVector2f pos_bin_0 = {4944, 1296};
+    sfVector2f pos_bin_1 = {5568, 1200};
+    sfVector2f pos_bin_2 = {6576, 1680};
+    sfVector2f pos_bin_3 = {7824, 1728};
 
     for (int i = 0; i < 4; i++) {
         portal_pos[i] = malloc(sizeof(portal_pos_t));
