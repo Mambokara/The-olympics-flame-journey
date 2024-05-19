@@ -87,9 +87,30 @@ sound_t *init_sound(void)
 
 // succes_t *init_succes(void)
 // {
-
-
 // }
+
+particle_t *add_particle(int i, flame_t *flame)
+{
+    particle_t *part = malloc(sizeof(particle_t));
+
+    part->pos = sfSprite_getPosition(flame->player->runner);
+    part->vel = (sfVector2f){(rand() % 200 - 100) / 10.0f, (rand() % 200 - 100) / 10.0f};
+    part->color = sfRed;
+    part->life = 5.0f;
+}
+
+particles_t *init_particles(flame_t *flame)
+{
+    particles_t *parts = malloc(sizeof(particles_t));
+
+    parts->count = 10;
+    parts->is_part = 0;
+    parts->part = malloc(sizeof(particle_t *) * (parts->count + 1));
+    for (int i = 0; i < parts->count; i++)
+        parts->part[i] = add_particle(i, flame);
+    parts->part[parts->count] = NULL;
+    return parts;
+}
 
 sfSprite *init_checkpoint()
 {
@@ -136,6 +157,7 @@ flame_t *init_flame(int window)
     flame->pause_menu = init_pause_menu();
     flame->world = init_level_selector();
     flame->checkpoint = init_checkpoint();
+    flame->parts = init_particles(flame);
     if (window == 0 && window < 10)
         flame->game_win = sfRenderWindow_create(m1920, "Flame",
             sfClose | sfResize | sfDefaultStyle, NULL);

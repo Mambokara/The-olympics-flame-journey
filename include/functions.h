@@ -74,3 +74,7 @@ void draw_rectangle(flame_t * flame);
 void display_music(flame_t *flame);
 void teleport(player_t *player, portal_t *portal, int i, flame_t *flame);
 
+void selection_menu(flame_t *flame);
+void draw_lock(flame_t *flame);
+void drawParticles(flame_t *flame);
+void updateParticles(flame_t *flame, float deltaTime);

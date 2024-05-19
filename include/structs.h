@@ -9,7 +9,6 @@
     #include <SFML/Graphics.h>
     #include <SFML/Graphics/Types.h>
     #include <SFML/Audio.h>
-#include <SFML/System/Vector2.h>
     #include <stdlib.h>
     #include <stdio.h>
     #include <stdbool.h>
@@ -25,9 +24,32 @@ enum game_status {
     QUIT
 };
 
+enum press {
+    L = 0,
+    R,
+    DOWN,
+    UP,
+    NONE
+};
+
+
+typedef struct world_point_s {
+    struct world_point_s *up;
+    struct world_point_s *down;
+    struct world_point_s *right;
+    struct world_point_s *left;
+    int locked;
+    int id;
+    sfVector2f position;
+    sfSprite *lock;
+} world_point_t;
+
 typedef struct w_map_s {
     sfSprite *map;
-    sfVector2f *level_position;
+    world_point_t *start;
+    world_point_t **stock;
+    sfSprite *lock;
+    enum press button;
 } w_map_t;
 
 typedef struct player_s {
@@ -126,9 +148,23 @@ typedef struct succes_s {
 
 } succes_t;
 
+typedef struct particle_s {
+    sfVector2f pos;
+    sfVector2f vel;
+    sfColor color;
+    float life;
+} particle_t;
+
+typedef struct particles_s {
+    particle_t **part;
+    int count;
+    int is_part;
+} particles_t;
+
 typedef struct flame_s {
     enum game_status status;
     enum game_status buffer;
+    particles_t *parts;
     sfSprite *checkpoint;
     int current_level;
     level_t **levels;
