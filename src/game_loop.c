@@ -24,12 +24,11 @@ sfVector2f get_universal_mouse_position(flame_t *flame)
 {
     sfVector2i mouse = sfMouse_getPositionRenderWindow(WINDOW);
     sfView const *view = sfRenderWindow_getView(WINDOW);
-    sfVector2u window_size = sfRenderWindow_getSize(WINDOW);
 
     return sfRenderWindow_mapPixelToCoords(WINDOW, mouse, view);
 }
 
-void key_detect(sfRenderWindow *window, sfEvent *event, flame_t *flame)
+void key_detect(sfEvent *event, flame_t *flame)
 {
     if (flame->status == MAIN_MENU || flame->buffer == MAIN_MENU)
         return;
@@ -49,16 +48,6 @@ void key_detect(sfRenderWindow *window, sfEvent *event, flame_t *flame)
     }
 }
 
-static void update_resolution(flame_t *flame, sfEvent *event)
-{
-    sfVector2u size_new = sfRenderWindow_getSize(WINDOW);
-    sfVector2f center = sfView_getCenter(VIEW);
-
-    return;
-    sfView_setCenter(VIEW, center);
-    sfRenderWindow_setView(WINDOW, VIEW);
-}
-
 void analyse_events(flame_t *flame)
 {
     sfEvent *event = malloc(sizeof(sfEvent));
@@ -68,14 +57,11 @@ void analyse_events(flame_t *flame)
             case sfEvtClosed:
                 sfRenderWindow_close(WINDOW);
             case sfEvtKeyReleased:
-                key_detect(WINDOW, event, flame);
+                key_detect(event, flame);
                 break;
             case sfEvtMouseButtonPressed:
                 menu_pressed(flame);
                 is_pause_pressed(flame);
-            case sfEvtResized:
-                update_resolution(flame, event);
-                break;
             default:
                 break;
         }
@@ -129,6 +115,7 @@ void draw(flame_t *flame)
     display_pause_menu(flame);
     display_framerate(flame);
     draw_rectangle(flame);
+    display_music(flame);
     sfRenderWindow_display(WINDOW);
     return;
 }
