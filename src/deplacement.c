@@ -11,6 +11,7 @@
 #include <SFML/Graphics/Sprite.h>
 #include <SFML/Graphics/Texture.h>
 #include <SFML/Graphics/Types.h>
+#include <SFML/System/Vector2.h>
 #include <stdio.h>
 
 int check_color_red(sfVector2f po, sfFloatRect re, flame_t *fla)
@@ -129,7 +130,8 @@ int check_coll_right(flame_t *flame)
     }
     if (((color.r == 0 && color.g == 255 && color.b == 0) ||
         (color2.r == 0 && color2.g == 255 && color2.b == 0))){
-        // flame->levels[flame->current_level + 1]->locked = false;
+        flame->player->respawn = (sfVector2f){100, 1000};
+        flame->world->stock[flame->current_level + 1]->locked = 0;
         // launch_flame_anim(flame, center_view);
         return 1;
     }
