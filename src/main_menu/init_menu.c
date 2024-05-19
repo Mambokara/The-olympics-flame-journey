@@ -23,11 +23,22 @@ option_t *init_option(sfFont *font)
 {
     option_t *opt = malloc(sizeof(option_t));
 
+    opt->is_check = 0;
     opt->back = create_rectangle((sfVector2f) {600, 900}, (sfVector2f) {650, 100}, sfBlack, sfColor_fromRGB(80, 80, 80));
-    opt->fps = create_text("fps :", font,(sfVector2f) {720, 120}, 50);
+    opt->fps = create_text("Fps :", font,(sfVector2f) {720, 120}, 50);
     opt->fps30 = create_text("30", font,(sfVector2f) {900, 120}, 50);
     opt->fps60 = create_text("60", font,(sfVector2f) {1000, 120}, 50);
     opt->fps90 = create_text("90", font,(sfVector2f) {1100, 120}, 50);
+    opt->music = create_text("Music :", font,(sfVector2f) {720, 220}, 50);
+    opt->more = create_sprite((sfVector2f) {920, 220}, "./assets/more.png", (sfVector2f) {0.5, 0.5});
+    opt->less = create_sprite((sfVector2f) {1100, 220}, "./assets/less.png", (sfVector2f) {0.5, 0.5});
+    opt->fullscreen = create_text("FullScreen :", font,(sfVector2f) {720, 320}, 50);
+    opt->check = create_sprite((sfVector2f) {1050, 320}, "./assets/check.png", (sfVector2f) {0.5, 0.5});
+    opt->square = create_rectangle((sfVector2f) {60, 60}, (sfVector2f) {1060, 320}, sfBlack, sfColor_fromRGB(50, 50, 50));
+    opt->res = create_text("Resolution :", font, (sfVector2f) {720, 420}, 50);
+    opt->res1 = create_text("1920x1080", font, (sfVector2f) {1000, 420}, 50);
+    opt->res2 = create_text("1536x864", font, (sfVector2f) {1000, 520}, 50);
+    opt->res3 = create_text("1366x768", font, (sfVector2f) {1000, 620}, 50);
 
     return opt;
 }
