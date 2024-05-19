@@ -115,6 +115,7 @@ void draw(flame_t *flame)
     sfRenderWindow_setView(WINDOW, VIEW);
     display_pause_menu(flame);
     display_framerate(flame);
+    draw_rectangle(flame);
     display_music(flame);
     sfRenderWindow_display(WINDOW);
     return;
@@ -142,6 +143,7 @@ void game_loop(int window)
     sfSprite_scale(flame->checkpoint, (sfVector2f){0.5, 0.5});
     sfSprite_setPosition(flame->checkpoint, (sfVector2f){4600, 730});
     set_icon(flame);
+    sfRenderWindow_setFramerateLimit(WINDOW, 1500);
     while (sfRenderWindow_isOpen(WINDOW)) {
         deltaTime = sfTime_asSeconds(sfClock_restart(clock));
         analyse_events(flame);
