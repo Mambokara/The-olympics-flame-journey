@@ -109,6 +109,7 @@ int check_coll_right(flame_t *flame)
 int move_player(flame_t *flame, int side)
 {
     if (side == LEFT) {
+        sfSprite_setTexture(flame->player->runner, flame->player->left_tex, sfFalse);
         if (check_coll_left(flame) == 1)
             return 0;
         sfSprite_move(flame->player->runner, (sfVector2f){-MOVE_SPEED, 0});
@@ -117,6 +118,7 @@ int move_player(flame_t *flame, int side)
         flame->player->pos = sfSprite_getPosition(flame->player->runner);
         sfView_setCenter(flame->view, flame->player->pos);
     } else {
+        sfSprite_setTexture(flame->player->runner, flame->player->right_tex, sfFalse);
         if (check_coll_right(flame) == 1)
             return 0;
         sfSprite_move(flame->player->runner, (sfVector2f){MOVE_SPEED, 0});

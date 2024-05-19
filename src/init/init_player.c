@@ -16,6 +16,7 @@ player_t *init_player(void)
     player->is_reversed = false;
     player->pos = position;
     player->runner = NULL;
-    player->run_tex = NULL;
+    player->right_tex = NULL;
+    player->left_tex = NULL;
     return player;
 }

@@ -30,13 +30,16 @@ typedef struct w_map_s {
 } w_map_t;
 
 typedef struct player_s {
+    sfIntRect rect;
     int can_move;
     sfSprite *runner;
-    sfTexture *run_tex;
+    sfTexture *left_tex;
+    sfTexture *right_tex;
     bool is_reversed;
     sfVector2f pos;
     sfVector2f respawn;
     bool is_jumping;
+    sfClock *anim_clock;
 } player_t;
 
 typedef struct portal_pos_s {

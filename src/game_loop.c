@@ -82,6 +82,7 @@ void update(flame_t *flame, float deltaTime, sfVector2f velocity)
     if (flame->status != IN_GAME)
         return;
     if (flame->status == IN_GAME && flame->pause_menu->is_displayed == 0) {
+        animate_flame(flame);
         check_gravity(flame);
         if (sfKeyboard_isKeyPressed(sfKeySpace) &&
             flame->player->is_jumping == 0)
@@ -122,8 +123,9 @@ void game_loop(int window)
     sfClock* clock = sfClock_create();
     float deltaTime = 0;
     sfVector2f velocity = {0.0f, 0.0f};
-    flame->clock = sfClock_create();
 
+    flame->clock = sfClock_create();
+    flame->player->anim_clock = sfClock_create();
     sfRenderWindow_setFramerateLimit(WINDOW, flame->frame);
     while (sfRenderWindow_isOpen(WINDOW)) {
         deltaTime = sfTime_asSeconds(sfClock_restart(clock));

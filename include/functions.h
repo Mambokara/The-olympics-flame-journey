@@ -20,6 +20,7 @@ int move_player(flame_t *flame, int side);
 void check_gravity(flame_t *flame);
 void jump_player(flame_t *flame, float deltaTime, sfVector2f *velocity,
     int jump_height);
+void animate_flame(flame_t *flame);
 
 /* Game loop functions */
 

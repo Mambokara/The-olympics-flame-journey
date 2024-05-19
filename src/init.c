@@ -36,8 +36,9 @@ static player_t *init_player(void)
     player->is_jumping = false;
     player->is_reversed = false;
     player->pos = position;
-    player->run_tex = get_texture("assets/player_texture.png");
-    player->runner = setup_sprite(player->run_tex, position);
+    player->right_tex = get_texture("assets/spritesheet_right.png");
+    player->left_tex = get_texture("assets/spritesheet_left.png");
+    player->runner = setup_sprite(player->right_tex, position);
     return player;
 }
 
