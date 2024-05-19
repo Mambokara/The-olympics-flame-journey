@@ -23,3 +23,4 @@
     #define SETTINGS flame->settings
     #define POURCENT_MAP map->size
     #define VIEW flame->view
+    #define MAX_PARTICLES 1000

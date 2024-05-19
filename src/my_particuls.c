@@ -8,33 +8,52 @@
 #include "../include/functions.h"
 #include "../include/structs.h"
 
-void updateParticles(flame_t *flame, float deltaTime)
-{
-    for (size_t i = 0; i < flame->parts->count; i++) {
-        flame->parts->part[i]->life -= deltaTime;
-        if (flame->parts->part[i]->life > 0) {
-            flame->parts->part[i]->pos.x += flame->parts->part[i]->vel.x * deltaTime;
-            flame->parts->part[i]->pos.y += flame->parts->part[i]->vel.y * deltaTime;
-            float alpha = flame->parts->part[i]->life / 5.0f * 255;
-            flame->parts->part[i]->color.a = (sfUint8)alpha;
-        } else {
-            flame->parts->part[i]->pos = (sfVector2f){400, 300};
-            flame->parts->part[i]->vel = (sfVector2f){(rand() % 200 - 100) / 10.0f, (rand() % 200 - 100) / 10.0f};
-            flame->parts->part[i]->life = 5.0f;
+void emitParticle(particles_t *parts, sfVector2f pos, sfVector2f velocity) {
+    if (parts->count < MAX_PARTICLES) {
+        particle_t *particle = &parts->part[parts->count];
+        int red = 255;
+        int green = rand() % 256;
+        int blue = 0;
+
+        particle->color = sfColor_fromRGB(red, green, blue);
+        particle->pos = pos;
+        particle->vel = velocity;
+        particle->life = 0.3f;
+        parts->count++;
+    }
+}
+
+void updateParticles(flame_t *flame, float deltaTime) {
+    sfVector2f velocity = {0.0f, 0.0f};
+    sfVector2f pos = sfView_getCenter(VIEW);
+
+    pos.x += 24;
+    pos.y += 26;
+    emitParticle(flame->parts, pos, velocity);
+    for (int i = 0; i < flame->parts->count; i++) {
+        particle_t *particle = &flame->parts->part[i];
+        particle->pos.x += particle->vel.x * deltaTime;
+        particle->pos.y += particle->vel.y * deltaTime;
+        float alpha = particle->life * 255;
+        particle->color.a = (sfUint8)alpha;
+        particle->life -= deltaTime * 2.0f;
+        if (particle->life <= 0) {
+            flame->parts->part[i] = flame->parts->part[flame->parts->count - 1];
+            flame->parts->count--;
         }
     }
 }
 
-void drawParticles(flame_t *flame)
-{
-    for (size_t i = 0; i < flame->parts->count; i++) {
-        if (flame->parts->part[i]->life > 0) {
-            sfCircleShape* shape = sfCircleShape_create();
-            sfCircleShape_setRadius(shape, 10.0f);
-            sfCircleShape_setFillColor(shape, flame->parts->part[i]->color);
-            sfCircleShape_setPosition(shape, flame->parts->part[i]->pos);
-            sfRenderWindow_drawCircleShape(WINDOW, shape, NULL);
-            sfCircleShape_destroy(shape);
-        }
+void drawParticles(flame_t *flame) {
+    for (int i = 0; i < flame->parts->count; i++) {
+        particle_t *particle = &flame->parts->part[i];
+        sfCircleShape *shape = sfCircleShape_create();
+        sfCircleShape_setRadius(shape, 10.0f);
+        sfCircleShape_setFillColor(shape, particle->color);
+        sfCircleShape_setPosition(shape, particle->pos);
+        sfRenderWindow_drawCircleShape(WINDOW, shape, NULL);
+        sfCircleShape_destroy(shape);
     }
 }
+
+

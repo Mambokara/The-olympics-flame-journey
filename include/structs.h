@@ -134,7 +134,7 @@ typedef struct particle_s {
 } particle_t;
 
 typedef struct particles_s {
-    particle_t **part;
+    particle_t part[MAX_PARTICLES];
     int count;
     int is_part;
 } particles_t;
