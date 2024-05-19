@@ -116,13 +116,15 @@ void draw(flame_t *flame)
     return;
 }
 
-void game_loop(flame_t *flame)
+void game_loop(int window)
 {
+    flame_t *flame = init_flame(window);
     sfClock* clock = sfClock_create();
     float deltaTime = 0;
     sfVector2f velocity = {0.0f, 0.0f};
     flame->clock = sfClock_create();
 
+    sfRenderWindow_setFramerateLimit(WINDOW, flame->frame);
     while (sfRenderWindow_isOpen(WINDOW)) {
         deltaTime = sfTime_asSeconds(sfClock_restart(clock));
         analyse_events(flame);
