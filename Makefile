@@ -13,7 +13,7 @@ OBJ		=	$(SRC:.c=.o)
 
 CSFML_FLAGS    = -lcsfml-graphics -lcsfml-window -lcsfml-system -lcsfml-audio
 
-CFLAGS += -g
+CFLAGS += -g -Wall -Wextra -W
 
 all:
 	$(MAKE) -k --shuffle -j $(shell nproc) $(NAME)

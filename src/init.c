@@ -122,7 +122,6 @@ flame_t *init_flame(int window)
     flame->undermap = init_undermap();
     flame->settings = init_settings();
     flame->menu = init_menu();
-    flame->portal = init_portal();
     flame->pause_menu = init_pause_menu();
     flame->world = init_level_selector();
     if (window == 0 && window < 10)

@@ -6,6 +6,7 @@
 */
 #include "../../include/structs.h"
 #include "../../include/functions.h"
+#include <SFML/Graphics/View.h>
 
 static sfBool is_over(sfText *text, sfVector2f mouse)
 {
@@ -17,16 +18,20 @@ static sfBool is_over(sfText *text, sfVector2f mouse)
 void is_pause_pressed(flame_t *flame)
 {
     sfVector2f mouse = get_universal_mouse_position(flame);
+    sfVector2f center = {960, 540};
 
+    if (flame->status != PAUSE_MENU)
+        return;
     if (is_over(flame->pause_menu->quit, mouse) && flame->buffer != LEVEL_SELECTION) {
         sfText_setOutlineThickness(flame->pause_menu->quit, 10);
     } else
         sfText_setOutlineThickness(flame->pause_menu->quit, 5);
-    if (is_over(flame->pause_menu->main_menu, mouse) && flame->pause_menu->is_displayed == 1) {
-        sfText_setOutlineThickness(flame->pause_menu->main_menu, 10);
-        flame->pause_menu->is_displayed = 0;
-        flame->status = MAIN_MENU;
+    if (is_over(flame->pause_menu->main_menu, mouse)) {
+        sfView_setCenter(VIEW, center);
         flame->buffer = MAIN_MENU;
+        flame->status = MAIN_MENU;
+        flame->pause_menu->is_displayed = 0;
+        sfText_setOutlineThickness(flame->pause_menu->main_menu, 10);
     } else
         sfText_setOutlineThickness(flame->pause_menu->main_menu, 5);
     if (is_over(flame->pause_menu->resume, mouse)) {

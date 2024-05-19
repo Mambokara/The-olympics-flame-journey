@@ -31,14 +31,17 @@ sfVector2f get_universal_mouse_position(flame_t*flame)
 
 void key_detect(sfRenderWindow *window, sfEvent *event, flame_t *flame)
 {
-    if (flame->status == MAIN_MENU)
+    if (flame->status == MAIN_MENU || flame->buffer == MAIN_MENU)
         return;
-    if (event->key.code == sfKeyEnter && flame->status == LEVEL_SELECTION)
+    if (event->key.code == sfKeyEnter && flame->status == LEVEL_SELECTION) {
         flame->status = IN_GAME;
+        flame->buffer = IN_GAME;
+    }
     if (event->key.code == sfKeyEscape) {
         if (flame->pause_menu->is_displayed == 0) {
             flame->pause_menu->is_displayed = 1;
             flame->buffer = flame->status;
+            flame->status = PAUSE_MENU;
         } else {
             flame->pause_menu->is_displayed = 0;
             flame->status = flame->buffer;
@@ -113,9 +116,7 @@ void draw(flame_t *flame)
         sfRenderWindow_drawSprite(WINDOW, flame->map, NULL);
         sfRenderWindow_drawSprite(WINDOW, PLAYER, NULL);
     }
-    if (flame->status == MAIN_MENU) {
-        sfView_setCenter(flame->view, (sfVector2f){960, 540});
-        sfSprite_setPosition(PLAYER, flame->player->respawn);
+    if (flame->status == MAIN_MENU || flame->buffer == MAIN_MENU) {
         sfRenderWindow_drawSprite(WINDOW, flame->back, NULL);
         display_menu(flame);
     }
@@ -147,6 +148,7 @@ void game_loop(int window)
         analyse_events(flame);
         update(flame, deltaTime, velocity);
         draw(flame);
+        printf("%d\n", flame->status);
     }
     return;
 }
