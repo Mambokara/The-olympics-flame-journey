@@ -43,6 +43,7 @@ typedef struct portal_pos_s {
     sfVector2f pos;
     sfVector2f pos_tp;
     sfRectangleShape *rect;
+    int is_teleportor;
     int id;
 } portal_pos_t;
 
@@ -126,6 +127,7 @@ typedef struct flame_s {
     player_t *player;
     sfSprite *map;
     sfView *view;
+    portal_t *portal;
     sfRenderWindow *game_win;
     settings_t *settings;
     menu_t *menu;

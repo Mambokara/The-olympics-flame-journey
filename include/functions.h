@@ -65,3 +65,4 @@ portal_t *init_portal(void);
 void get_portal_in_struct(portal_t *portal);
 void full_screen(flame_t *flame, int condi);
 void resolution_window(flame_t *flame, int condi);
+void portal_lvl2(level_t *lvl);
