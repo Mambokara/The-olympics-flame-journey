@@ -8,13 +8,6 @@
 #include <SFML/Graphics.h>
 #include "../include/functions.h"
 
-portal_t *init_portal(void)
-{
-    portal_t *portal = malloc(sizeof(portal_t));
-
-    portal->nbr_portal = 0;
-}
-
 static int coord_portal(player_t *player, portal_t *portal)
 {
     for (int i = 0; i < portal->nbr_portal; i++) {
@@ -23,16 +16,9 @@ static int coord_portal(player_t *player, portal_t *portal)
             portal->portal_pos[i]->pos.y + 10 || player->pos.y <
             portal->portal_pos[i]->pos.y - 10)) {
             return 1;
-        } else {
+    } else {
             return 0;
         }
-    }
-}
-
-static void attribute_number_portal(portal_t *portal)
-{
-    for (int i = 0; i < portal->nbr_portal; i++) {
-        portal->portal_pos[i]->id = i;
     }
 }
 
@@ -45,7 +31,7 @@ static void teleport(player_t *player, portal_t *portal, int i)
     }
 }
 
-static void link_portal(portal_t *portal, int src, int dest)
+void link_portal(portal_t *portal, int src, int dest)
 {
     portal->portal_pos[src]->pos_tp = portal->portal_pos[dest]->pos;
 }
