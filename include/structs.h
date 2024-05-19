@@ -131,8 +131,9 @@ typedef struct flame_s {
     succes_t *scs;
     sound_t *sound;
     w_map_t *world;
-    sfImage *undermap;
     player_t *player;
+    sfImage *undermap;
+    sfSprite *background_city;
     sfSprite *map;
     sfView *view;
     sfRenderWindow *game_win;

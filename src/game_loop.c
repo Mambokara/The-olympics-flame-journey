@@ -107,7 +107,8 @@ void make_musique(flame_t *flame)
 
 void draw(flame_t *flame)
 {
-    sfRenderWindow_clear(WINDOW, sfWhite);
+    sfRenderWindow_clear(WINDOW, sfBlack);
+    display_background(flame);
     if (flame->status == IN_GAME || flame->buffer == IN_GAME) {
         sfRenderWindow_drawSprite(WINDOW, flame->map, NULL);
         sfRenderWindow_drawSprite(WINDOW, PLAYER, NULL);
