@@ -38,6 +38,7 @@ typedef struct player_s {
 typedef struct portal_pos_s {
     sfVector2f pos;
     sfVector2f pos_tp;
+    sfRectangleShape *rect;
     int id;
 } portal_pos_t;
 
@@ -93,6 +94,7 @@ typedef struct level_s {
     sfSprite *background;
     sfImage *undermap;
     sfMusic *music;
+    portal_t *portal;
 } level_t;
 
 typedef struct flame_s {
@@ -106,7 +108,6 @@ typedef struct flame_s {
     sfRenderWindow *game_win;
     settings_t *settings;
     menu_t *menu;
-    portal_t *portal;
     pause_menu_t *pause_menu;
     sfSprite *back;
     int frame;
