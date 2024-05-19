@@ -164,6 +164,7 @@ typedef struct flame_s {
     enum game_status status;
     enum game_status buffer;
     particles_t *parts;
+    sfTexture *torch;
     sfSprite *checkpoint;
     int current_level;
     level_t **levels;

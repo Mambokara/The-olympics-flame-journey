@@ -106,11 +106,12 @@ particles_t *init_particles(flame_t *flame)
     return parts;
 }
 
-sfSprite *init_checkpoint()
+sfSprite *init_checkpoint(flame_t *flame)
 {
     sfTexture *texture = sfTexture_createFromFile("./assets/torch_without.png", NULL);
     sfSprite *torch = sfSprite_create();
 
+    flame->torch = texture;
     sfSprite_setTexture(torch, texture, sfFalse);
     return torch;
 }
@@ -150,7 +151,7 @@ flame_t *init_flame(int window)
     flame->menu = init_menu();
     flame->pause_menu = init_pause_menu();
     flame->world = init_level_selector();
-    flame->checkpoint = init_checkpoint();
+    flame->checkpoint = init_checkpoint(flame);
     flame->parts = init_particles(flame);
     if (window == 0 && window < 10)
         flame->game_win = sfRenderWindow_create(m1920, "Flame",
