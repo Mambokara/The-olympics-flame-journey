@@ -26,9 +26,9 @@ option_t *init_option(sfFont *font)
     opt->is_check = 0;
     opt->back = create_rectangle((sfVector2f) {600, 900}, (sfVector2f) {650, 100}, sfBlack, sfColor_fromRGB(80, 80, 80));
     opt->fps = create_text("Fps :", font,(sfVector2f) {720, 120}, 50);
-    opt->fps30 = create_text("30", font,(sfVector2f) {900, 120}, 50);
-    opt->fps60 = create_text("60", font,(sfVector2f) {1000, 120}, 50);
-    opt->fps90 = create_text("90", font,(sfVector2f) {1100, 120}, 50);
+    opt->fps30 = create_text("600", font,(sfVector2f) {900, 120}, 50);
+    opt->fps60 = create_text("700", font,(sfVector2f) {1000, 120}, 50);
+    opt->fps90 = create_text("800", font,(sfVector2f) {1100, 120}, 50);
     opt->music = create_text("Music :", font,(sfVector2f) {720, 220}, 50);
     opt->more = create_sprite((sfVector2f) {920, 220}, "./assets/more.png", (sfVector2f) {0.5, 0.5});
     opt->less = create_sprite((sfVector2f) {1100, 220}, "./assets/less.png", (sfVector2f) {0.5, 0.5});

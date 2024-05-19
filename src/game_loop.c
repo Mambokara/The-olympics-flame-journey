@@ -169,7 +169,7 @@ void game_loop(int window)
     sfSprite_scale(flame->checkpoint, (sfVector2f){0.5, 0.5});
     sfSprite_setPosition(flame->checkpoint, (sfVector2f){4600, 730});
     set_icon(flame);
-    sfRenderWindow_setFramerateLimit(WINDOW, 1500);
+    sfRenderWindow_setFramerateLimit(WINDOW, 600);
     while (sfRenderWindow_isOpen(WINDOW)) {
         deltaTime = sfTime_asSeconds(sfClock_restart(clock));
         updateParticles(flame, deltaTime);

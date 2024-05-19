@@ -69,19 +69,19 @@ void is_menu_pressed(flame_t *flame)
 void is_option_pressed(flame_t *flame, sfVector2f mouse)
 {
     if (is_over(flame->menu->opt->fps30, mouse)) {
-        sfRenderWindow_setFramerateLimit(WINDOW, 30);
+        sfRenderWindow_setFramerateLimit(WINDOW, 600);
         sfText_setOutlineThickness(flame->menu->opt->fps30, 10);
     } else {
         sfText_setOutlineThickness(flame->menu->opt->fps30, 5);
     }
     if (is_over(flame->menu->opt->fps60, mouse)) {
-        sfRenderWindow_setFramerateLimit(WINDOW, 60);
+        sfRenderWindow_setFramerateLimit(WINDOW, 700);
         sfText_setOutlineThickness(flame->menu->opt->fps60, 10);
     } else {
         sfText_setOutlineThickness(flame->menu->opt->fps60, 5);
     }
     if (is_over(flame->menu->opt->fps90, mouse)) {
-        sfRenderWindow_setFramerateLimit(WINDOW, 90);
+        sfRenderWindow_setFramerateLimit(WINDOW, 800);
         sfText_setOutlineThickness(flame->menu->opt->fps90, 10);
     } else {
         sfText_setOutlineThickness(flame->menu->opt->fps90, 5);
