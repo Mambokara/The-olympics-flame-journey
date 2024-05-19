@@ -110,6 +110,7 @@ void draw(flame_t *flame)
     sfRenderWindow_clear(WINDOW, sfWhite);
     if (flame->status == IN_GAME || flame->buffer == IN_GAME) {
         sfRenderWindow_drawSprite(WINDOW, flame->map, NULL);
+        sfRenderWindow_drawSprite(WINDOW, flame->checkpoint, NULL);
         sfRenderWindow_drawSprite(WINDOW, PLAYER, NULL);
     }
     if (flame->status == MAIN_MENU) {
@@ -139,7 +140,9 @@ void game_loop(int window)
     flame->clock = sfClock_create();
     flame->player->anim_clock = sfClock_create();
     make_musique(flame);
-    sfRenderWindow_setFramerateLimit(WINDOW, flame->frame);
+    sfSprite_scale(flame->checkpoint, (sfVector2f){0.5, 0.5});
+    sfSprite_setPosition(flame->checkpoint, (sfVector2f){4600, 730});
+    // sfRenderWindow_setFramerateLimit(WINDOW, flame->frame);
     // sfRenderWindow_setFramerateLimit(WINDOW, 300);
     while (sfRenderWindow_isOpen(WINDOW)) {
         deltaTime = sfTime_asSeconds(sfClock_restart(clock));
