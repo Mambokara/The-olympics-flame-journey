@@ -128,6 +128,7 @@ void draw(flame_t *flame)
     if (flame->status == IN_GAME || flame->buffer == IN_GAME) {
         sfRenderWindow_drawSprite(WINDOW, level->ground, NULL);
         sfRenderWindow_drawSprite(WINDOW, flame->checkpoint, NULL);
+        drawParticles(flame);
         sfRenderWindow_drawSprite(WINDOW, PLAYER, NULL);
     }
     if (flame->status == MAIN_MENU || flame->buffer == MAIN_MENU) {
@@ -138,7 +139,6 @@ void draw(flame_t *flame)
         sfRenderWindow_drawSprite(WINDOW, flame->world->map, NULL);
         sfRenderWindow_drawSprite(WINDOW, flame->player->runner, NULL);
     }
-    drawParticles(flame);
     sfRenderWindow_setView(WINDOW, VIEW);
     display_pause_menu(flame);
     display_framerate(flame);
