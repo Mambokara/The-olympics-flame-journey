@@ -8,13 +8,6 @@
 #include <SFML/Graphics.h>
 #include "../include/functions.h"
 
-portal_t *init_portal(void)
-{
-    portal_t *portal = malloc(sizeof(portal_t));
-
-    portal->nbr_portal = 0;
-}
-
 static int coord_portal(player_t *player, portal_t *portal)
 {
     for (int i = 0; i < portal->nbr_portal; i++) {
