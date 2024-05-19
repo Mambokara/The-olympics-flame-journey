@@ -20,7 +20,7 @@
 #include <stdio.h>
 #include <time.h>
 
-sfVector2f get_universal_mouse_position(flame_t*flame)
+sfVector2f get_universal_mouse_position(flame_t *flame)
 {
     sfVector2i mouse = sfMouse_getPositionRenderWindow(WINDOW);
     sfView const *view = sfRenderWindow_getView(WINDOW);
