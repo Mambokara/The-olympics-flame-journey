@@ -7,6 +7,8 @@
 
 #include "../include/structs.h"
 #include "../include/functions.h"
+#include <SFML/Graphics/Sprite.h>
+#include <SFML/Graphics/Texture.h>
 #include <SFML/Graphics/Types.h>
 #include <SFML/System/Vector2.h>
 
@@ -87,6 +89,15 @@ sound_t *init_sound(void)
 
 // }
 
+sfSprite *init_checkpoint()
+{
+    sfTexture *texture = sfTexture_createFromFile("./assets/_b38285a7-5eab-417a-9107-c2c30eff117f-removebg-preview(1).png", NULL);
+    sfSprite *torch = sfSprite_create();
+
+    sfSprite_setTexture(torch, texture, sfFalse);
+    return torch;
+}
+
 flame_t *init_flame(int window)
 {
     flame_t *flame = malloc(sizeof(flame_t));
@@ -124,6 +135,7 @@ flame_t *init_flame(int window)
     flame->portal = init_portal();
     flame->pause_menu = init_pause_menu();
     flame->world = init_level_selector();
+    flame->checkpoint = init_checkpoint();
     if (window == 0 && window < 10)
         flame->game_win = sfRenderWindow_create(m1920, "Flame",
             sfClose | sfResize | sfDefaultStyle, NULL);
