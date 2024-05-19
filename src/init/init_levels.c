@@ -26,13 +26,13 @@ level_t **init_levels(void)
     level_t **levels = malloc(sizeof(level_t *) * 9);
     int index = 0;
 
-    for (index = 0; index < 3; index++) {
+    for (index = 0; index < 4; index++) {
         levels[index] = init_level(index + 1);
     }
     levels[0]->portal = portal_lvl1();
     levels[1]->portal = portal_lvl2();
     levels[2]->portal = portal_lvl3();
-    // levels[3]->portal = portal_lvl4();
+    levels[3]->portal = portal_lvl4();
     levels[index] = NULL;
     return levels;
 }
