@@ -21,7 +21,8 @@ enum game_status {
     PAUSE_MENU,
     LEVEL_SELECTION,
     CREDIT,
-    SETTING
+    SETTING,
+    QUIT
 };
 
 typedef struct w_map_s {
@@ -45,6 +46,8 @@ typedef struct player_s {
 typedef struct portal_pos_s {
     sfVector2f pos;
     sfVector2f pos_tp;
+    sfRectangleShape *rect;
+    int is_teleportor;
     int id;
 } portal_pos_t;
 
@@ -93,10 +96,6 @@ typedef struct menu_s {
     sfText *option;
     sfText *play;
     sfText *credit;
-    int condic;
-    int condio;
-    int condip;
-    int condiq;
     sfText *txtcredit;
     sfText *lucas;
     sfRectangleShape *back;
@@ -113,7 +112,8 @@ typedef struct level_s {
     sfSprite *ground;
     sfSprite *background;
     sfImage *undermap;
-    sfMusic *music;
+    sfVector2f checkpoint;
+    portal_t *portal;
 } level_t;
 
 typedef struct sound_s {
@@ -129,17 +129,17 @@ typedef struct flame_s {
     enum game_status status;
     enum game_status buffer;
     sfSprite *checkpoint;
+    int current_level;
+    level_t **levels;
     succes_t *scs;
     sound_t *sound;
     w_map_t *world;
-    sfImage *undermap;
     player_t *player;
-    sfSprite *map;
     sfView *view;
+    portal_t *portal;
     sfRenderWindow *game_win;
     settings_t *settings;
     menu_t *menu;
-    portal_t *portal;
     pause_menu_t *pause_menu;
     sfSprite *back;
     int frame;

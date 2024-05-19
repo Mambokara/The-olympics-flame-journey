@@ -15,11 +15,13 @@ void display_menu(flame_t *flame)
     sfRenderWindow_drawText(WINDOW, flame->menu->option, NULL);
     sfRenderWindow_drawText(WINDOW, flame->menu->play, NULL);
     sfRenderWindow_drawText(WINDOW, flame->menu->quit, NULL);
-    if (flame->menu->condic == 1)
+    if (flame->status == MAIN_MENU)
+        return;
+    if (flame->status == CREDIT)
        display_credits(flame);
-    if (flame->menu->condiq == 1)
+    if (flame->status == QUIT)
         closed_window(flame);
-    if (flame->menu->condio == 1) {
+    if (flame->status == SETTING) {
         button_option(flame);
         display_option(flame);
     }

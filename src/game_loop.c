@@ -20,7 +20,7 @@
 #include <stdio.h>
 #include <time.h>
 
-sfVector2f get_universal_mouse_position(flame_t*flame)
+sfVector2f get_universal_mouse_position(flame_t *flame)
 {
     sfVector2i mouse = sfMouse_getPositionRenderWindow(WINDOW);
     sfView const *view = sfRenderWindow_getView(WINDOW);
@@ -31,14 +31,17 @@ sfVector2f get_universal_mouse_position(flame_t*flame)
 
 void key_detect(sfRenderWindow *window, sfEvent *event, flame_t *flame)
 {
-    if (flame->status == MAIN_MENU)
+    if (flame->status == MAIN_MENU || flame->buffer == MAIN_MENU)
         return;
-    if (event->key.code == sfKeyEnter && flame->status == LEVEL_SELECTION)
+    if (event->key.code == sfKeyEnter && flame->status == LEVEL_SELECTION) {
         flame->status = IN_GAME;
+        flame->buffer = IN_GAME;
+    }
     if (event->key.code == sfKeyEscape) {
         if (flame->pause_menu->is_displayed == 0) {
             flame->pause_menu->is_displayed = 1;
             flame->buffer = flame->status;
+            flame->status = PAUSE_MENU;
         } else {
             flame->pause_menu->is_displayed = 0;
             flame->status = flame->buffer;
@@ -107,15 +110,16 @@ void make_musique(flame_t *flame)
 
 void draw(flame_t *flame)
 {
-    sfRenderWindow_clear(WINDOW, sfWhite);
+    level_t *level = flame->levels[flame->current_level];
+
+    sfRenderWindow_clear(WINDOW, sfBlack);
+    display_background(flame);
     if (flame->status == IN_GAME || flame->buffer == IN_GAME) {
-        sfRenderWindow_drawSprite(WINDOW, flame->map, NULL);
+        sfRenderWindow_drawSprite(WINDOW, level->ground, NULL);
         sfRenderWindow_drawSprite(WINDOW, flame->checkpoint, NULL);
         sfRenderWindow_drawSprite(WINDOW, PLAYER, NULL);
     }
-    if (flame->status == MAIN_MENU) {
-        sfView_setCenter(flame->view, (sfVector2f){960, 540});
-        sfSprite_setPosition(PLAYER, flame->player->respawn);
+    if (flame->status == MAIN_MENU || flame->buffer == MAIN_MENU) {
         sfRenderWindow_drawSprite(WINDOW, flame->back, NULL);
         display_menu(flame);
     }
@@ -127,6 +131,14 @@ void draw(flame_t *flame)
     display_framerate(flame);
     sfRenderWindow_display(WINDOW);
     return;
+}
+
+void set_icon(flame_t *flame)
+{
+    sfImage* icon = sfImage_createFromFile("./assets/logo_jam.png");
+    const sfUint8* iconPixels = sfImage_getPixelsPtr(icon);
+    sfVector2u iconSize = sfImage_getSize(icon);
+    sfRenderWindow_setIcon(WINDOW, iconSize.x, iconSize.y, iconPixels);
 }
 
 void game_loop(int window)
@@ -142,13 +154,13 @@ void game_loop(int window)
     make_musique(flame);
     sfSprite_scale(flame->checkpoint, (sfVector2f){0.5, 0.5});
     sfSprite_setPosition(flame->checkpoint, (sfVector2f){4600, 730});
-    // sfRenderWindow_setFramerateLimit(WINDOW, flame->frame);
-    // sfRenderWindow_setFramerateLimit(WINDOW, 300);
+    set_icon(flame);
     while (sfRenderWindow_isOpen(WINDOW)) {
         deltaTime = sfTime_asSeconds(sfClock_restart(clock));
         analyse_events(flame);
         update(flame, deltaTime, velocity);
         draw(flame);
+        // printf("%d\n", flame->status);
     }
     return;
 }

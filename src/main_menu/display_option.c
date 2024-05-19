@@ -26,6 +26,8 @@ void display_option(flame_t *flame)
     sfRenderWindow_drawText(WINDOW, flame->menu->opt->res2, NULL);
     sfRenderWindow_drawText(WINDOW, flame->menu->opt->res3, NULL);
     sfRenderWindow_drawText(WINDOW, flame->menu->opt->save, NULL);
+    if (flame->status != SETTING)
+        return;
     if (flame->menu->opt->res_window == 1)
         resolution_window(flame, 10);
     if (flame->menu->opt->res_window == 2)
