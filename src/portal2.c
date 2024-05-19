@@ -7,6 +7,11 @@
 #include "../include/structs.h"
 #include "../include/functions.h"
 
+static coord_portal(player_t *player, portal_t *portal)
+{
+    
+}
+
 static void teleport(player_t *player, portal_t *portal, int i)
 {
     if (coord_portal(player, portal) == 1) {

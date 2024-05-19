@@ -129,6 +129,7 @@ typedef struct succes_s {
 typedef struct flame_s {
     enum game_status status;
     enum game_status buffer;
+    sfSprite *checkpoint;
     int current_level;
     level_t **levels;
     succes_t *scs;

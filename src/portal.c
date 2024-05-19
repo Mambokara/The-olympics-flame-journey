@@ -31,23 +31,9 @@ static void teleport(player_t *player, portal_t *portal, int i)
     }
 }
 
-static void create_portal(portal_t *portal)
-{
-    sfVector2f test = {4120,800};
-    sfVector2f scale = {1,1};
-
-    create_sprite_portal(portal, test, PORTAL, scale);
-    create_sprite_portal(portal, test, PORTAL, scale);
-}
-
-void link_portal(portal_t *portal, int src, int dest)
+static void link_portal(portal_t *portal, int src, int dest)
 {
     portal->portal_pos[src]->pos_tp = portal->portal_pos[dest]->pos;
-}
-
-void get_portal_in_struct(portal_t *portal)
-{
-    create_portal(portal);
 }
 
 void display_portal(flame_t *flame)

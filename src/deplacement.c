@@ -7,8 +7,11 @@
 
 #include "../include/structs.h"
 #include "../include/functions.h"
+#include <SFML/Config.h>
 #include <SFML/Graphics/Sprite.h>
+#include <SFML/Graphics/Texture.h>
 #include <SFML/Graphics/Types.h>
+#include <stdio.h>
 
 int check_color_red(sfVector2f po, sfFloatRect re, flame_t *fla)
 {
@@ -76,6 +79,10 @@ int check_coll_left(flame_t *flame)
         sfFloatRect_contains(&rect, center_view.x, center_view.y) == sfTrue){
         return 1;
     }
+    if (((color.r == 255 && color.g == 174 && color.b == 174) ||
+        (color2.r == 255 && color2.g == 174 && color2.b == 174))){
+        return 1;
+    }
     if (((color.r == 0 && color.g == 0 && color.b == 255) ||
         (color2.r == 0 && color2.g == 0 && color2.b == 255))){
         sfSprite_setPosition(flame->player->runner, flame->player->respawn);
@@ -89,6 +96,7 @@ int check_coll_right(flame_t *flame)
     sfVector2f center_view;
     sfColor color;
     sfColor color2;
+    sfTexture *text;
     const sfFloatRect rect = sfSprite_getGlobalBounds(flame->player->runner);
     level_t *level = flame->levels[flame->current_level];
 
@@ -101,14 +109,29 @@ int check_coll_right(flame_t *flame)
         (color2.r == 255 && color2.g == 0 && color2.b == 0))){
         return 1;
     }
+    if (((color.r == 255 && color.g == 174 && color.b == 174) ||
+        (color2.r == 255 && color2.g == 174 && color2.b == 174))){
+        return 1;
+    }
     if (((color.r == 0 && color.g == 0 && color.b == 255) ||
         (color2.r == 0 && color2.g == 0 && color2.b == 255))){
         sfSprite_setPosition(flame->player->runner, flame->player->respawn);
         return 1;
     }
     if (((color.r == 229 && color.g == 255 && color.b == 0) ||
-        (color2.r == 229 && color2.g == 255 && color2.b == 0))){
+        (color2.r == 229 && color2.g == 255 && color2.b == 0)) &&
+        flame->player->respawn.x == 100 && flame->player->respawn.y == 1000){
+        text = sfTexture_createFromFile("assets/_b38285a7-5eab-417a-9107-c2c30eff117f-removebg-preview.png", NULL);
+        sfSprite_setTexture(flame->checkpoint, text, sfFalse);
+        printf("%f, %f\n", center_view.x, center_view.y - 10);
+        center_view.y =center_view.y - 10;
         flame->player->respawn = center_view;
+    }
+    if (((color.r == 0 && color.g == 255 && color.b == 0) ||
+        (color2.r == 0 && color2.g == 255 && color2.b == 0))){
+        // flame->levels[flame->current_level + 1]->locked = false;
+        // launch_flame_anim(flame, center_view);
+        return 1;
     }
     return 0;
 }
