@@ -15,8 +15,6 @@ static sfBool is_over(sfText *text, sfVector2f mouse)
     return (sfFloatRect_contains(&frect, mouse.x, mouse.y));
 }
 
-<<<<<<< HEAD
-=======
 static sfBool is_oversp(sfSprite *text, sfVector2f mouse)
 {
     const sfFloatRect frect = sfSprite_getGlobalBounds(text);
@@ -24,7 +22,6 @@ static sfBool is_oversp(sfSprite *text, sfVector2f mouse)
     return (sfFloatRect_contains(&frect, mouse.x, mouse.y));
 }
 
->>>>>>> c8295f2 ([+] add fullscreen function and change fps function)
 static sfBool is_overrect(sfRectangleShape *rect, sfVector2f mouse)
 {
     const sfFloatRect frect = sfRectangleShape_getGlobalBounds(rect);
@@ -66,11 +63,6 @@ void is_menu_pressed(flame_t *flame)
 
 void is_option_pressed(flame_t *flame, sfVector2f mouse)
 {
-<<<<<<< HEAD
-    sfVector2f mouse = get_universal_mouse_position(flame); 
-=======
->>>>>>> c8295f2 ([+] add fullscreen function and change fps function)
-
     if (is_over(flame->menu->opt->fps30, mouse)) {
         sfRenderWindow_setFramerateLimit(WINDOW, 30);
         sfText_setOutlineThickness(flame->menu->opt->fps30, 10);
