@@ -6,6 +6,7 @@
 */
 #include "../../include/structs.h"
 #include "../../include/functions.h"
+#include <SFML/Graphics/Sprite.h>
 #include <SFML/Graphics/View.h>
 
 static sfBool is_over(sfText *text, sfVector2f mouse)
@@ -30,6 +31,7 @@ void is_pause_pressed(flame_t *flame)
         sfView_setCenter(VIEW, center);
         flame->buffer = MAIN_MENU;
         flame->status = MAIN_MENU;
+        sfSprite_setPosition(flame->player->runner, flame->player->respawn);
         flame->pause_menu->is_displayed = 0;
         sfText_setOutlineThickness(flame->pause_menu->main_menu, 10);
     } else
