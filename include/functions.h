@@ -71,6 +71,8 @@ level_t **init_levels(void);
 void link_portal(portal_t *portal, int src, int dest);
 void draw_rectangle(flame_t * flame);
 void display_music(flame_t *flame);
+int load(flame_t *flame);
+int save(flame_t *flame);
 void teleport(player_t *player, portal_t *portal, int i, flame_t *flame);
 portal_t *portal_lvl1(void);
 portal_t *portal_lvl2(void);

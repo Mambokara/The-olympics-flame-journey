@@ -153,6 +153,7 @@ flame_t *init_flame(int window)
     flame->world = init_level_selector();
     flame->checkpoint = init_checkpoint(flame);
     flame->parts = init_particles(flame);
+    load(flame);
     if (window == 0 && window < 10)
         flame->game_win = sfRenderWindow_create(m1920, "Flame",
             sfClose | sfResize | sfDefaultStyle, NULL);

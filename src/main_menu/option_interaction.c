@@ -100,8 +100,10 @@ void button_fullscreen(flame_t *flame, sfVector2f mouse)
 
 void button_save(flame_t *flame, sfVector2f mouse)
 {
-    if (is_overrect(flame->menu->opt->s_quare, mouse))
+    if (is_overrect(flame->menu->opt->s_quare, mouse)) {
+        save(flame);
         sfRectangleShape_setOutlineColor(flame->menu->opt->s_quare, sfWhite);
+    }
     else
         sfRectangleShape_setOutlineColor(flame->menu->opt->s_quare, sfBlack);
 }
