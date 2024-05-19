@@ -127,7 +127,8 @@ void draw(flame_t *flame)
     display_background(flame);
     if (flame->status == IN_GAME || flame->buffer == IN_GAME) {
         sfRenderWindow_drawSprite(WINDOW, level->ground, NULL);
-        sfRenderWindow_drawSprite(WINDOW, flame->checkpoint, NULL);
+        if (flame->current_level == 1)
+            sfRenderWindow_drawSprite(WINDOW, flame->checkpoint, NULL);
         drawParticles(flame);
         sfRenderWindow_drawSprite(WINDOW, PLAYER, NULL);
     }
