@@ -8,10 +8,23 @@
 #pragma once
     #include <SFML/Graphics.h>
     #include <SFML/Graphics/Types.h>
+    #include <SFML/Audio.h>
     #include <stdlib.h>
     #include <stdio.h>
     #include <stdbool.h>
     #include "macros.h"
+
+enum game_status {
+    MAIN_MENU = 0,
+    IN_GAME,
+    PAUSE_MENU,
+    LEVEL_SELECTION
+};
+
+typedef struct w_map_s {
+    sfSprite *map;
+    sfVector2f *level_position;
+} w_map_t;
 
 typedef struct player_s {
     int can_move;
@@ -75,7 +88,17 @@ typedef struct pause_menu_s {
     sfText *main_menu;
 } pause_menu_t;
 
+typedef struct level_s {
+    sfSprite *ground;
+    sfSprite *background;
+    sfImage *undermap;
+    sfMusic *music;
+} level_t;
+
 typedef struct flame_s {
+    enum game_status status;
+    enum game_status buffer;
+    w_map_t *world;
     sfImage *undermap;
     player_t *player;
     sfSprite *map;
@@ -83,7 +106,10 @@ typedef struct flame_s {
     sfRenderWindow *game_win;
     settings_t *settings;
     menu_t *menu;
+    portal_t *portal;
     pause_menu_t *pause_menu;
     sfSprite *back;
     int frame;
+    sfClock *clock;
+    sfText *fps;
 } flame_t;

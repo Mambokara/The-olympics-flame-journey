@@ -12,16 +12,36 @@
 #include <SFML/Graphics/RenderWindow.h>
 #include <SFML/Graphics/Types.h>
 #include <SFML/Graphics/View.h>
+#include <SFML/System/Types.h>
 #include <SFML/System/Vector2.h>
 #include <SFML/Window/Event.h>
 #include <SFML/Window/Keyboard.h>
 #include <stdio.h>
+#include <time.h>
 
-void close_detect(sfRenderWindow *window, sfEvent *event, flame_t *flame)
+sfVector2f get_universal_mouse_position(flame_t*flame)
 {
+    sfVector2i mouse = sfMouse_getPositionRenderWindow(WINDOW);
+    sfView const *view = sfRenderWindow_getView(WINDOW);
+    sfVector2u window_size = sfRenderWindow_getSize(WINDOW);
+
+    return sfRenderWindow_mapPixelToCoords(WINDOW, mouse, view);
+}
+
+void key_detect(sfRenderWindow *window, sfEvent *event, flame_t *flame)
+{
+    if (flame->status == MAIN_MENU)
+        return;
+    if (event->key.code == sfKeyEnter && flame->status == LEVEL_SELECTION)
+        flame->status = IN_GAME;
     if (event->key.code == sfKeyEscape) {
-        flame->pause_menu->is_displayed =
-            (flame->pause_menu->is_displayed == 0) ? 1 : 0;
+        if (flame->pause_menu->is_displayed == 0) {
+            flame->pause_menu->is_displayed = 1;
+            flame->buffer = flame->status;
+        } else {
+            flame->pause_menu->is_displayed = 0;
+            flame->status = flame->buffer;
+        }
     }
 }
 
@@ -44,27 +64,33 @@ void analyse_events(flame_t *flame)
             case sfEvtClosed:
                 sfRenderWindow_close(WINDOW);
             case sfEvtKeyReleased:
-                close_detect(WINDOW, event, flame);
+                key_detect(WINDOW, event, flame);
                 break;
             case sfEvtMouseButtonPressed:
                 menu_pressed(flame);
                 is_pause_pressed(flame);
-            // case sfEvtResized:
-            //     update_resolution(flame, event);
-            //     break;
+            case sfEvtResized:
+                update_resolution(flame, event);
+                break;
             default:
                 break;
         }
 }
 
-void update(flame_t *flame)
+void update(flame_t *flame, float deltaTime, sfVector2f velocity)
 {
+    if (flame->status != IN_GAME)
+        return;
     if (flame->player->can_move == 1 && flame->pause_menu->is_displayed == 0) {
         check_gravity(flame);
+        if (sfKeyboard_isKeyPressed(sfKeySpace) &&
+            flame->player->is_jumping == 0)
+            flame->player->is_jumping = 1;
         if (sfKeyboard_isKeyPressed(sfKeyQ))
             move_player(flame, LEFT);
         if (sfKeyboard_isKeyPressed(sfKeyD))
             move_player(flame, RIGHT);
+        jump_player(flame, deltaTime, &velocity, -200);
     }
     return;
 }
@@ -72,23 +98,35 @@ void update(flame_t *flame)
 void draw(flame_t *flame)
 {
     sfRenderWindow_clear(WINDOW, sfWhite);
-    if (flame->player->can_move == 1) {
+    if (flame->status == IN_GAME || flame->buffer == IN_GAME) {
         sfRenderWindow_drawSprite(WINDOW, flame->map, NULL);
         sfRenderWindow_drawSprite(WINDOW, PLAYER, NULL);
     }
+    if (flame->status == MAIN_MENU) {
+        sfRenderWindow_drawSprite(WINDOW, flame->back, NULL);
+        display_menu(flame);
+    }
+    if (flame->status == LEVEL_SELECTION || flame->buffer == LEVEL_SELECTION) {
+        sfRenderWindow_drawSprite(WINDOW, flame->world->map, NULL);
+    }
     sfRenderWindow_setView(WINDOW, VIEW);
-    sfRenderWindow_drawSprite(WINDOW, flame->back, NULL);
-    display_menu(flame);
     display_pause_menu(flame);
+    display_framerate(flame);
     sfRenderWindow_display(WINDOW);
     return;
 }
 
 void game_loop(flame_t *flame)
 {
+    sfClock* clock = sfClock_create();
+    float deltaTime = 0;
+    sfVector2f velocity = {0.0f, 0.0f};
+    flame->clock = sfClock_create();
+
     while (sfRenderWindow_isOpen(WINDOW)) {
+        deltaTime = sfTime_asSeconds(sfClock_restart(clock));
         analyse_events(flame);
-        update(flame);
+        update(flame, deltaTime, velocity);
         draw(flame);
     }
     return;

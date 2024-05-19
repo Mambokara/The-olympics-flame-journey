@@ -8,6 +8,7 @@
 #include "../include/structs.h"
 #include "../include/functions.h"
 #include <SFML/Graphics/Types.h>
+#include <SFML/System/Vector2.h>
 
 static sfTexture *get_texture(char *str)
 {
@@ -29,7 +30,7 @@ static sfSprite *setup_sprite(sfTexture *texture, sfVector2f pos)
 static player_t *init_player(void)
 {
     player_t *player = malloc(sizeof(player_t));
-    sfVector2f position = {960, 540};
+    sfVector2f position = {100, 1000};
 
     player->can_move = 0;
     player->is_jumping = false;
@@ -45,8 +46,22 @@ static sfView *init_view(player_t *player)
     sfView *view = sfView_create();
 
     sfView_setSize(view, (sfVector2f){1920, 1080});
-    sfView_setCenter(view, sfSprite_getPosition(player->runner));
+    sfView_setCenter(view, (sfVector2f){960, 540});
     return view;
+}
+
+static sfText *create_fps(void)
+{
+    sfText *text = sfText_create();
+    sfFont *font = sfFont_createFromFile("./assets/Pixellari.ttf");
+
+    sfText_setFont(text, font);
+    sfText_setCharacterSize(text, 30);
+    sfText_setFillColor(text, sfWhite);
+    sfText_setOutlineThickness(text, 5);
+    sfText_setString(text, "0 FPS");
+    sfText_setPosition(text, (sfVector2f){0, 1040});
+    return text;
 }
 
 sfImage *init_undermap(void)
@@ -60,9 +75,11 @@ flame_t *init_flame(void)
 {
     flame_t *flame = malloc(sizeof(flame_t));
     sfVideoMode mode = {1920, 1080, 32};
-    sfTexture *texture = get_texture(UNDERMAP);
+    sfTexture *texture = get_texture(MAP);
 
     flame->frame = 30;
+    flame->status = MAIN_MENU;
+    flame->buffer = MAIN_MENU;
     flame->back = create_sprite((sfVector2f) {0, 0}, "./assets/background.png",
         (sfVector2f) {1, 1});
     flame->player = init_player();
@@ -71,9 +88,12 @@ flame_t *init_flame(void)
     flame->undermap = init_undermap();
     flame->settings = init_settings();
     flame->menu = init_menu();
+    flame->portal = init_portal();
     flame->pause_menu = init_pause_menu();
+    flame->world = init_level_selector();
     flame->game_win = sfRenderWindow_create(mode, "Flame",
         sfClose | sfResize | sfDefaultStyle, NULL);
+    flame->fps = create_fps();
     sfRenderWindow_setView(WINDOW, VIEW);
     return flame;
 }

@@ -7,7 +7,7 @@
 #include "../../include/structs.h"
 #include "../../include/functions.h"
 
-static sfBool is_over(sfText *text, sfVector2i mouse)
+static sfBool is_over(sfText *text, sfVector2f mouse)
 {
     const sfFloatRect frect = sfText_getGlobalBounds(text);
 
@@ -16,9 +16,9 @@ static sfBool is_over(sfText *text, sfVector2i mouse)
 
 void is_pause_pressed(flame_t *flame)
 {
-    sfVector2i mouse = sfMouse_getPositionRenderWindow(WINDOW);
+    sfVector2f mouse = get_universal_mouse_position(flame);
 
-    if (is_over(flame->pause_menu->quit, mouse)) {
+    if (is_over(flame->pause_menu->quit, mouse) && flame->buffer != LEVEL_SELECTION) {
         sfText_setOutlineThickness(flame->pause_menu->quit, 10);
     } else
         sfText_setOutlineThickness(flame->pause_menu->quit, 5);
@@ -27,6 +27,7 @@ void is_pause_pressed(flame_t *flame)
     } else
         sfText_setOutlineThickness(flame->pause_menu->main_menu, 5);
     if (is_over(flame->pause_menu->resume, mouse)) {
+        flame->status = flame->buffer;
         flame->pause_menu->is_displayed = 0;
     } else
         sfText_setOutlineThickness(flame->pause_menu->resume, 5);
@@ -45,13 +46,14 @@ static void change_color(sfText *text, bool condi)
 
 void over_pause_text(flame_t *flame)
 {
-    sfVector2i mouse = sfMouse_getPositionRenderWindow(WINDOW);
+    sfVector2f mouse = get_universal_mouse_position(flame);
+    sfColor grey = sfColor_fromRGB(84, 84, 84);
 
     if (is_over(flame->pause_menu->main_menu, mouse))
         change_color(flame->pause_menu->main_menu, true);
     else
         change_color(flame->pause_menu->main_menu, false);
-    if (is_over(flame->pause_menu->quit, mouse))
+    if (is_over(flame->pause_menu->quit, mouse) && flame->buffer != LEVEL_SELECTION)
         change_color(flame->pause_menu->quit, true);
     else
         change_color(flame->pause_menu->quit, false);
@@ -59,4 +61,8 @@ void over_pause_text(flame_t *flame)
         change_color(flame->pause_menu->resume, true);
     else
         change_color(flame->pause_menu->resume, false);
+    if (flame->buffer == LEVEL_SELECTION) {
+        sfText_setColor(flame->pause_menu->quit, grey);
+        return;
+    }
 }

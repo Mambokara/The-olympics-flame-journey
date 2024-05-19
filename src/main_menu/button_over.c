@@ -8,11 +8,49 @@
 #include "../../include/functions.h"
 #include "../../include/structs.h"
 
-static sfBool is_over(sfText *text, sfVector2i mouse)
+static sfBool is_over(sfText *text, sfVector2f mouse)
 {
     const sfFloatRect frect = sfText_getGlobalBounds(text);
 
     return (sfFloatRect_contains(&frect, mouse.x, mouse.y));
+}
+
+static sfBool is_overrect(sfRectangleShape *rect, sfVector2f mouse)
+{
+    const sfFloatRect frect = sfRectangleShape_getGlobalBounds(rect);
+
+    return (sfFloatRect_contains(&frect, mouse.x, mouse.y));
+}
+
+
+void is_pressed(flame_t *flame)
+{
+    sfVector2f mouse = get_universal_mouse_position(flame);
+
+    if (is_over(flame->menu->credit, mouse)) {
+        flame->menu->condic = 1;
+        sfText_setOutlineThickness(flame->menu->credit, 10);
+    } else {
+        if (!is_overrect(flame->menu->back, mouse))
+            flame->menu->condic = 0;
+        sfText_setOutlineThickness(flame->menu->credit, 5);
+    }
+    if (is_over(flame->menu->option, mouse)) {
+        sfText_setOutlineThickness(flame->menu->option, 10);
+    } else
+        sfText_setOutlineThickness(flame->menu->option, 5);
+    if (is_over(flame->menu->play, mouse)) {
+        sfText_setOutlineThickness(flame->menu->play, 10);
+        flame->player->can_move = 1;
+        flame->buffer = flame->status;
+        flame->status = LEVEL_SELECTION;
+    } else
+        sfText_setOutlineThickness(flame->menu->play, 5);
+    if (is_over(flame->menu->quit, mouse) && flame->menu->condic == 0) {
+        flame->menu->condiq = 1;
+        sfText_setOutlineThickness(flame->menu->quit, 10);
+    } else
+        sfText_setOutlineThickness(flame->menu->quit, 5);
 }
 
 static void change_color(sfText *text, bool condi)
@@ -28,7 +66,7 @@ static void change_color(sfText *text, bool condi)
 
 void over_text(flame_t *flame)
 {
-    sfVector2i mouse = sfMouse_getPositionRenderWindow(WINDOW);
+    sfVector2f mouse = get_universal_mouse_position(flame); 
 
     if (is_over(flame->menu->credit, mouse))
         change_color(flame->menu->credit, true);
