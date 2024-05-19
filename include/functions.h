@@ -76,6 +76,9 @@ portal_t *portal_lvl1(void);
 portal_t *portal_lvl2(void);
 portal_t *portal_lvl3(void);
 portal_t *portal_lvl4(void);
+portal_t *portal_lvl5(void);
+portal_t *portal_lvl6(void);
+portal_t *portal_lvl7(void);
 
 void selection_menu(flame_t *flame);
 void draw_lock(flame_t *flame);
