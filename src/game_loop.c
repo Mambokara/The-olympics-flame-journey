@@ -112,7 +112,6 @@ void draw(flame_t *flame)
     if (flame->status == LEVEL_SELECTION || flame->buffer == LEVEL_SELECTION) {
         sfRenderWindow_drawSprite(WINDOW, flame->world->map, NULL);
     }
-    // if (sfKeyboard_isKeyPressed(sfKeyA))
     drawParticles(flame);
     sfRenderWindow_setView(WINDOW, VIEW);
     display_pause_menu(flame);

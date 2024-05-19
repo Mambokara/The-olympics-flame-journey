@@ -13,7 +13,6 @@ void updateParticles(flame_t *flame, float deltaTime)
     for (size_t i = 0; i < flame->parts->count; i++) {
         flame->parts->part[i]->life -= deltaTime;
         if (flame->parts->part[i]->life > 0) {
-            flame->parts->part[i]->pos = sfSprite_getPosition(flame->player->runner);
             flame->parts->part[i]->pos.x += flame->parts->part[i]->vel.x * deltaTime;
             flame->parts->part[i]->pos.y += flame->parts->part[i]->vel.y * deltaTime;
             float alpha = flame->parts->part[i]->life / 5.0f * 255;
