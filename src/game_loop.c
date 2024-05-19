@@ -110,10 +110,12 @@ void make_musique(flame_t *flame)
 
 void draw(flame_t *flame)
 {
+    level_t *level = flame->levels[flame->current_level];
+
     sfRenderWindow_clear(WINDOW, sfBlack);
     display_background(flame);
     if (flame->status == IN_GAME || flame->buffer == IN_GAME) {
-        sfRenderWindow_drawSprite(WINDOW, flame->map, NULL);
+        sfRenderWindow_drawSprite(WINDOW, level->ground, NULL);
         sfRenderWindow_drawSprite(WINDOW, PLAYER, NULL);
     }
     if (flame->status == MAIN_MENU || flame->buffer == MAIN_MENU) {
@@ -141,7 +143,7 @@ void game_loop(int window)
     flame->clock = sfClock_create();
     flame->player->anim_clock = sfClock_create();
     make_musique(flame);
-    sfRenderWindow_setFramerateLimit(WINDOW, flame->frame);
+    //sfRenderWindow_setFramerateLimit(WINDOW, flame->frame);
     // sfRenderWindow_setFramerateLimit(WINDOW, 300);
     while (sfRenderWindow_isOpen(WINDOW)) {
         deltaTime = sfTime_asSeconds(sfClock_restart(clock));

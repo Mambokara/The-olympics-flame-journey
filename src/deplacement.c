@@ -12,8 +12,9 @@
 
 int check_color_red(sfVector2f po, sfFloatRect re, flame_t *fla)
 {
-    sfColor colo = sfImage_getPixel(fla->undermap, (po.x), (po.y + re.height));
-    sfColor colo2 = sfImage_getPixel(fla->undermap, (po.x + re.width),
+    level_t *level = fla->levels[fla->current_level];
+    sfColor colo = sfImage_getPixel(level->undermap, (po.x), (po.y + re.height));
+    sfColor colo2 = sfImage_getPixel(level->undermap, (po.x + re.width),
         (po.y + re.height));
 
     if ((colo.r == 255 && colo.g == 0 && colo.b == 0) ||
@@ -63,11 +64,12 @@ int check_coll_left(flame_t *flame)
     sfColor color;
     sfColor color2;
     const sfFloatRect rect = sfSprite_getGlobalBounds(flame->player->runner);
+    level_t *level = flame->levels[flame->current_level];
 
     center_view = sfView_getCenter(flame->view);
-    color = sfImage_getPixel(flame->undermap, center_view.x,
+    color = sfImage_getPixel(level->undermap, center_view.x,
                     center_view.y + rect.height - 1);
-    color2 = sfImage_getPixel(flame->undermap, center_view.x,
+    color2 = sfImage_getPixel(level->undermap, center_view.x,
                     center_view.y);
     if (((color.r == 255 && color.g == 0 && color.b == 0) ||
         (color2.r == 255 && color.g == 0 && color.b == 0)) &&
@@ -88,11 +90,12 @@ int check_coll_right(flame_t *flame)
     sfColor color;
     sfColor color2;
     const sfFloatRect rect = sfSprite_getGlobalBounds(flame->player->runner);
+    level_t *level = flame->levels[flame->current_level];
 
     center_view = sfView_getCenter(flame->view);
-    color = sfImage_getPixel(flame->undermap, center_view.x + rect.width,
+    color = sfImage_getPixel(level->undermap, center_view.x + rect.width,
                     center_view.y + rect.height - 1);
-    color2 = sfImage_getPixel(flame->undermap, center_view.x + rect.width,
+    color2 = sfImage_getPixel(level->undermap, center_view.x + rect.width,
                     center_view.y);
     if (((color.r == 255 && color.g == 0 && color.b == 0) ||
         (color2.r == 255 && color2.g == 0 && color2.b == 0))){

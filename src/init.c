@@ -117,9 +117,8 @@ flame_t *init_flame(int window)
         (sfVector2f) {1, 1});
     flame->player = init_player();
     flame->view = init_view(flame->player);
-    flame->map = setup_sprite(texture, (sfVector2f){0, 0});
-    flame->background_city = create_sprite((sfVector2f){0, 0}, "./assets/levels/level1_background.png", (sfVector2f){1, 1});
-    flame->undermap = init_undermap();
+    flame->current_level = 0;
+    flame->levels = init_levels();
     flame->settings = init_settings();
     flame->menu = init_menu();
     flame->pause_menu = init_pause_menu();
