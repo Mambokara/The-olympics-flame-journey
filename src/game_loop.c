@@ -51,8 +51,10 @@ void key_detect(sfEvent *event, flame_t *flame)
     if (flame->status == MAIN_MENU || flame->buffer == MAIN_MENU)
         return;
     if (event->key.code == sfKeyEnter && flame->status == LEVEL_SELECTION) {
+        flame->current_level = flame->world->start->id - 1;
         flame->status = IN_GAME;
         flame->buffer = IN_GAME;
+        sfSprite_setPosition(PLAYER, (sfVector2f){100, 1000});
     }
     if (event->key.code == sfKeyEscape) {
         if (flame->pause_menu->is_displayed == 0) {
@@ -104,6 +106,9 @@ void update(flame_t *flame, float deltaTime, sfVector2f velocity)
             move_player(flame, RIGHT);
         jump_player(flame, deltaTime, &velocity, -200);
     }
+    for (int i = 0; CURRENT_LVL->portal->portal_pos[i] != NULL; i++) {
+        teleport(flame->player, CURRENT_LVL->portal, i, flame);
+    }
     return;
 }
 
@@ -137,7 +142,6 @@ void draw(flame_t *flame)
     sfRenderWindow_setView(WINDOW, VIEW);
     display_pause_menu(flame);
     display_framerate(flame);
-    draw_rectangle(flame);
     display_music(flame);
     sfRenderWindow_display(WINDOW);
     return;

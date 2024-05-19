@@ -32,7 +32,6 @@ enum press {
     NONE
 };
 
-
 typedef struct world_point_s {
     struct world_point_s *up;
     struct world_point_s *down;
@@ -173,7 +172,6 @@ typedef struct flame_s {
     w_map_t *world;
     player_t *player;
     sfView *view;
-    portal_t *portal;
     sfRenderWindow *game_win;
     settings_t *settings;
     menu_t *menu;

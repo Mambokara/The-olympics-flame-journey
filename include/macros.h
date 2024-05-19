@@ -24,3 +24,4 @@
     #define SETTINGS flame->settings
     #define POURCENT_MAP map->size
     #define VIEW flame->view
+    #define CURRENT_LVL flame->levels[flame->current_level]

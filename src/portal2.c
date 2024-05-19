@@ -6,24 +6,32 @@
 */
 #include "../include/structs.h"
 #include "../include/functions.h"
+#include "../include/macros.h"
 
-// static coord_portal(player_t *player, portal_t *portal)
-// {
+static int coord_portal(player_t *player, portal_t *portal, flame_t *flame, int i)
+{
+    player->pos = sfView_getCenter(VIEW);
+    if(player->pos.x >= portal->portal_pos[i]->pos.x &&
+        player->pos.x <= portal->portal_pos[i]->pos.x + 144 &&
+        player->pos.y >= portal->portal_pos[i]->pos.y && player->pos.y <=
+        portal->portal_pos[i]->pos.y + 96) {
+        return i;
+    }
+    return -1;
+}
 
-// }
-
-// static void teleport(player_t *player, portal_t *portal, int i)
-// {
-//     if (coord_portal(player, portal) == 1) {
-//         player->pos.x = portal->portal_pos[i]->pos_tp.x;
-//         player->pos.y = portal->portal_pos[i]->pos_tp.y;
-//         sfSprite_setPosition(player->runner, player->pos);
-//     }
-// }
+void teleport(player_t *player, portal_t *portal, int i, flame_t *flame)
+{
+    if (coord_portal(player, portal, flame, i) != -1 && portal->portal_pos[i]->id != 0) {
+        player->pos.x = portal->portal_pos[i]->pos_tp.x;
+        player->pos.y = portal->portal_pos[i]->pos_tp.y;
+        sfSprite_setPosition(player->runner, player->pos);
+    }
+}
 
 static portal_pos_t **fill_struct_portal_lvl2(void)
 {
-    portal_pos_t **portal_pos = malloc(sizeof(portal_t *));
+    portal_pos_t **portal_pos = malloc(sizeof(portal_t *)*5);
 
     sfVector2f pos_bin_0 = {4128, 864};
     sfVector2f pos_bin_1 = {5520, 960};
@@ -37,6 +45,7 @@ static portal_pos_t **fill_struct_portal_lvl2(void)
     portal_pos[1]->pos = pos_bin_1;
     portal_pos[2]->pos = pos_bin_2;
     portal_pos[3]->pos = pos_bin_3;
+    portal_pos[4] =  NULL;
     for (int i = 0; i < 4; i++) {
         portal_pos[i]->id = i;
     }
@@ -55,6 +64,7 @@ static portal_pos_t **fill_struct_portal_lvl1(void)
     }
     portal_pos[0]->pos = pos_bin_0;
     portal_pos[1]->pos = pos_bin_1;
+    portal_pos[2] =  NULL;
     for (int i = 0; i < 2; i++) {
         portal_pos[i]->id = i;
     }
@@ -120,10 +130,6 @@ portal_t *portal_lvl2(void)
     link_portal(portal, 1, 0);
     link_portal(portal, 2, 0);
     link_portal(portal, 3, 0);
-    printf("%f---%f\n", portal->portal_pos[0]->pos_tp.x, portal->portal_pos[0]->pos_tp.y);
-    printf("%f---%f\n", portal->portal_pos[1]->pos_tp.x, portal->portal_pos[1]->pos_tp.y);
-    printf("%f---%f\n", portal->portal_pos[2]->pos_tp.x, portal->portal_pos[2]->pos_tp.y);
-    printf("%f---%f\n", portal->portal_pos[3]->pos_tp.x, portal->portal_pos[3]->pos_tp.y);
     return portal;
 }
 
