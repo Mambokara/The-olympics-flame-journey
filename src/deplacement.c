@@ -11,6 +11,7 @@
 #include <SFML/Graphics/Sprite.h>
 #include <SFML/Graphics/Texture.h>
 #include <SFML/Graphics/Types.h>
+#include <SFML/Graphics/View.h>
 #include <SFML/System/Vector2.h>
 #include <stdio.h>
 
@@ -130,9 +131,14 @@ int check_coll_right(flame_t *flame)
     }
     if (((color.r == 0 && color.g == 255 && color.b == 0) ||
         (color2.r == 0 && color2.g == 255 && color2.b == 0))){
+        flame->buffer = LEVEL_SELECTION;
+        flame->status = LEVEL_SELECTION;
+        flame->player->can_move = 0;
+        sfSprite_setTexture(flame->checkpoint, flame->torch, sfFalse);
         flame->player->respawn = (sfVector2f){100, 1000};
+        sfSprite_setPosition(flame->player->runner, (sfVector2f){960, 540});
+        sfView_setCenter(VIEW, (sfVector2f){960, 540});
         flame->world->stock[flame->current_level + 1]->locked = 0;
-        // launch_flame_anim(flame, center_view);
         return 1;
     }
     return 0;
