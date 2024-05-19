@@ -13,7 +13,7 @@
 int save(flame_t *flame)
 {
     int counter = 48;
-    int fd = open("./ofj.save", O_WRONLY | O_CREAT, 0777);
+    int fd = open("./.ofj.save", O_WRONLY | O_CREAT, 0666);
 
     for (int i = 0; i < 8; i++) {
         if (flame->world->stock[i]->locked == 0) {
@@ -26,7 +26,7 @@ int save(flame_t *flame)
 
 int load(flame_t *flame)
 {
-    int fd = open("./ofj.save", O_RDWR, 0777);
+    int fd = open("./.ofj.save", O_RDWR, 0777);
     char *infos = malloc(sizeof(char) * 10);
 
     if (fd == - 1) {
