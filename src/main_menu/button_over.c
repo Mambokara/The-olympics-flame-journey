@@ -22,35 +22,6 @@ static sfBool is_overrect(sfRectangleShape *rect, sfVector2f mouse)
     return (sfFloatRect_contains(&frect, mouse.x, mouse.y));
 }
 
-
-/*void is_pressed(flame_t *flame)
-{
-    sfVector2f mouse = get_universal_mouse_position(flame);
-
-    if (is_over(flame->menu->credit, mouse)) {
-        flame->menu->condic = 1;
-        sfText_setOutlineThickness(flame->menu->credit, 10);
-    } else {
-        if (!is_overrect(flame->menu->back, mouse))
-            flame->menu->condic = 0;
-        sfText_setOutlineThickness(flame->menu->credit, 5);
-    }
-    if (is_over(flame->menu->option, mouse)) {
-        sfText_setOutlineThickness(flame->menu->option, 10);
-    } else
-        sfText_setOutlineThickness(flame->menu->option, 5);
-    if (is_over(flame->menu->play, mouse)) {
-        flame->status = LEVEL_SELECTION;
-        sfText_setOutlineThickness(flame->menu->play, 10);
-    } else
-        sfText_setOutlineThickness(flame->menu->play, 5);
-    if (is_over(flame->menu->quit, mouse) && flame->menu->condic == 0) {
-        flame->menu->condiq = 1;
-        sfText_setOutlineThickness(flame->menu->quit, 10);
-    } else
-        sfText_setOutlineThickness(flame->menu->quit, 5);
-}*/
-
 static void change_color(sfText *text, bool condi)
 {
     if (condi) {

@@ -21,7 +21,8 @@ enum game_status {
     PAUSE_MENU,
     LEVEL_SELECTION,
     CREDIT,
-    SETTING
+    SETTING,
+    QUIT
 };
 
 typedef struct w_map_s {
@@ -95,9 +96,6 @@ typedef struct menu_s {
     sfText *option;
     sfText *play;
     sfText *credit;
-    int condic;
-    int condio;
-    int condiq;
     sfText *txtcredit;
     sfText *lucas;
     sfRectangleShape *back;

@@ -33,29 +33,34 @@ void is_menu_pressed(flame_t *flame)
 {
     sfVector2f mouse = get_universal_mouse_position(flame);
 
-    if (is_over(flame->menu->credit, mouse)) {
-        flame->menu->condic = 1;
+    if (flame->status != MAIN_MENU && flame->buffer != MAIN_MENU)
+        return;
+    if (is_over(flame->menu->credit, mouse) && flame->status == MAIN_MENU) {
+        flame->buffer = flame->status;
+        flame->status = CREDIT;
         sfText_setOutlineThickness(flame->menu->credit, 10);
     } else {
         if (!is_overrect(flame->menu->back, mouse))
-            flame->menu->condic = 0;
+            flame->status = MAIN_MENU;
         sfText_setOutlineThickness(flame->menu->credit, 5);
     }
-    if (is_over(flame->menu->option, mouse)) {
-        flame->menu->condio = 1;
+    if (is_over(flame->menu->option, mouse) && flame->status == MAIN_MENU) {
+        flame->buffer = flame->status;
+        flame->status = SETTING;
         sfText_setOutlineThickness(flame->menu->option, 10);
     } else {
         if (!is_overrect(flame->menu->opt->back, mouse))
-            flame->menu->condio = 0;
+            flame->status = MAIN_MENU;
         sfText_setOutlineThickness(flame->menu->option, 5);
     }
-    if (is_over(flame->menu->play, mouse)) {
+    if (is_over(flame->menu->play, mouse) && flame->status == MAIN_MENU) {
         sfText_setOutlineThickness(flame->menu->play, 10);
+        flame->buffer = LEVEL_SELECTION;
         flame->status = LEVEL_SELECTION;
     } else
         sfText_setOutlineThickness(flame->menu->play, 5);
-    if (is_over(flame->menu->quit, mouse) && flame->menu->condic == 0) {
-        flame->menu->condiq = 1;
+    if (is_over(flame->menu->quit, mouse) && flame->status == MAIN_MENU) {
+        flame->status = QUIT;
         sfText_setOutlineThickness(flame->menu->quit, 10);
     } else
         sfText_setOutlineThickness(flame->menu->quit, 5);
@@ -139,7 +144,7 @@ void menu_pressed(flame_t *flame)
 {
     sfVector2f mouse = get_universal_mouse_position(flame);
     is_menu_pressed(flame);
-    if (flame->menu->condio == 1) {
+    if (flame->status == SETTING) {
         is_option_pressed(flame, mouse);
         is_sound_pressed(flame, mouse);
         is_fullscreen_pressed(flame, mouse);

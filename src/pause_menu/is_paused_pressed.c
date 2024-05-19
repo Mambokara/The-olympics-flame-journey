@@ -28,9 +28,10 @@ void is_pause_pressed(flame_t *flame)
         sfText_setOutlineThickness(flame->pause_menu->quit, 5);
     if (is_over(flame->pause_menu->main_menu, mouse)) {
         sfView_setCenter(VIEW, center);
+        flame->buffer = MAIN_MENU;
         flame->status = MAIN_MENU;
-        sfText_setOutlineThickness(flame->pause_menu->main_menu, 10);
         flame->pause_menu->is_displayed = 0;
+        sfText_setOutlineThickness(flame->pause_menu->main_menu, 10);
     } else
         sfText_setOutlineThickness(flame->pause_menu->main_menu, 5);
     if (is_over(flame->pause_menu->resume, mouse)) {
