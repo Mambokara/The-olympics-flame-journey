@@ -31,7 +31,7 @@ void teleport(player_t *player, portal_t *portal, int i, flame_t *flame)
 
 static portal_pos_t **fill_struct_portal_lvl1(void)
 {
-    portal_pos_t **portal_pos = malloc(sizeof(portal_t *));
+    portal_pos_t **portal_pos = malloc(sizeof(portal_t *)*3);
 
     sfVector2f pos_bin_0 = {1824, 1008};
     sfVector2f pos_bin_1 = {3360, 816};
@@ -76,7 +76,6 @@ portal_t *portal_lvl1(void)
     link_portal(portal, 0, 1);
     return portal;
 }
-
 
 void draw_rectangle(flame_t *flame)
 {
